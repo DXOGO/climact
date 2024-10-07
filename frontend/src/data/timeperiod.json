@@ -1,0 +1,50 @@
+[
+    {
+        "scenario": "Historical",
+        "period": [
+            {
+                "label": "1995-2014",
+                "id": "wrfout_historical_TEMPS"
+            }
+        ]
+    },
+    {
+        "scenario": "Future SSP2-4.5",
+        "period": [
+            {
+                "label": "2046-2065",
+                "id": "wrfout_ssp245_2046_2065_TEMPS"
+            },
+            {
+                "label": "2081-2100",
+                "id": "wrfout_ssp245_2081_2100_TEMPS"
+            }
+        ]
+    },
+    {
+        "scenario": "Future SSP3-7.0",
+        "period": [
+            {
+                "label": "2046-2065",
+                "id": "wrfout_ssp370_2046_2065_TEMPS"
+            },
+            {
+                "label": "2081-2100",
+                "id": "wrfout_ssp370_2081_2100_TEMPS"
+            }
+        ]
+    },
+    {
+        "scenario": "Future SSP5-8.5",
+        "period": [
+            {
+                "label": "2046-2065",
+                "id": "wrfout_ssp585_2046_2065_TEMPS"
+            },
+            {
+                "label": "2081-2100",
+                "id": "wrfout_ssp585_2081_2100_TEMPS"
+            }
+        ]
+    }
+]

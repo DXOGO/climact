@@ -1,0 +1,28 @@
+.variableSubmenu {
+    color: #9EAAB9;
+    font-size: 18px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.variableItem {
+    padding: 12px 10px;
+    cursor: pointer;
+}
+
+.variableTemp {
+    padding: 0px 10px 10px 10px;
+    cursor: pointer;
+}
+
+.variableName {
+    display: flex;
+    font-weight: 500;
+}
+
+.variableOptions {
+    margin-top: 10px;
+    /* Space between variable name and options */
+    background-color: #25292C;
+    border-radius: 5px;
+}

@@ -1,0 +1,31 @@
+.container {
+    padding: 0px 20px 0px 10px;
+}
+
+.subheading {
+    color: #9EAAB9;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
+.optionGroup {
+    margin-bottom: 30px;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+.backTitle {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 10px;
+}
+

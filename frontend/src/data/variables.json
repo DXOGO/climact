@@ -1,0 +1,204 @@
+[
+    {
+        "name": "Temperature",
+        "options": [
+            {
+                "id": "T2MEAN",
+                "label": "Mean"
+            },
+            {
+                "id": "T2MIN",
+                "label": "Minimum"
+            },
+            {
+                "id": "T2MAX",
+                "label": "Maximum"
+            },
+            {
+                "id": "VERY_HOT_DAYS",
+                "label": "Number of very hot days (Tmax > 40°C) per year"
+            },
+            {
+                "id": "HOT_DAYS",
+                "label": "Number of hot days (Tmax > 30°C) per year"
+            },
+            {
+                "id": "TROPICAL_NIGHTS",
+                "label": "Number of tropical nights (Tmin > 20°C) per year"
+            },
+            {
+                "id": "COLD_DAYS",
+                "label": "Number of cold days (Tmin < 0°C) per year"
+            }
+        ]
+    },
+    {
+        "name": "Heat waves",
+        "options": [
+            {
+                "id": "HWN",
+                "label": "Average number per year"
+            },
+            {
+                "id": "HWI",
+                "label": "Average intensity per year"
+            },
+            {
+                "id": "HWD",
+                "label": "Average duration per year"
+            },
+            {
+                "id": "HWDI",
+                "label": "Heat Wave duration index (HWDI)"
+            }
+        ]
+    },
+    {
+        "name": "Precipitation",
+        "options": [
+            {
+                "id": "PRCPTOT",
+                "label": "Annual total"
+            },
+            {
+                "id": "R50MM",
+                "label": "Number of extreme precipitation days (Pr>50 mm) per year"
+            },
+            {
+                "id": "R20MM",
+                "label": "Number of very heavy precipitation days (Pr>20 mm) per year"
+            },
+            {
+                "id": "R10MM",
+                "label": "Number of very wet days (Pr > 10mm) per year"
+            },
+            {
+                "id": "R1MM",
+                "label": "Number of wet days (Pr > 1mm) per year"
+            },
+            {
+                "id": "R0MM",
+                "label": "Number of dry days (Pr < 1mm) per year"
+            },
+            {
+                "id": "RX1day",
+                "label": "RX1day (annual maximum 1-day Pr)"
+            },
+            {
+                "id": "RX5day",
+                "label": "RX5day (annual maximum 5-day Pr)"
+            },
+            {
+                "id": "CWD",
+                "label": "CWD (consecutive wet days)"
+            },
+            {
+                "id": "CCD",
+                "label": "CCD (consecutive dry days)"
+            },
+            {
+                "id": "LDP",
+                "label": "Longest dry period (Pr < 1mm)"
+            }
+        ]
+    },
+    {
+        "name": "Climate classification",
+        "options": [
+            {
+                "id": "KO",
+                "label": "Koppen climate classification"
+            },
+            {
+                "id": "KT",
+                "label": "Koppen-Trewartha climate classification"
+            }
+        ]
+    },
+    {
+        "name": "Thermal discomfort",
+        "options": [
+            {
+                "id": "TDI",
+                "label": "thom Discomfort index (TDI)"
+            },
+            {
+                "id": "UTCI",
+                "label": "Universal Thermal Climate Index (UTCI)"
+            }
+        ]
+    },
+    {
+        "name": "Air quality",
+        "options": [
+            {
+                "id": "PM2.5",
+                "label": "PM2.5"
+            },
+            {
+                "id": "PM10",
+                "label": "PM10"
+            },
+            {
+                "id": "O3",
+                "label": "O3"
+            },
+            {
+                "id": "NO2",
+                "label": "NO2"
+            },
+            {
+                "id": "SO2",
+                "label": "SO2"
+            },
+            {
+                "id": "CO",
+                "label": "CO"
+            }
+        ],
+        "info": "Average number of days per year with pollutants concentrations above EU limits"
+    },
+    {
+        "name": "Agriculture",
+        "options": [
+            {
+                "id": "DI",
+                "label": "Drought index (DI)"
+            },
+            {
+                "id": "UNEP",
+                "label": "Aridity index (UNEP)"
+            }            
+        ]
+    },
+    {
+        "name": "Renewable energies",
+        "options": [
+            {
+                "id": "WIND",
+                "label": "Annual wind energy resource (MW/m2 at 100m above ground)"
+            },
+            {
+                "id": "SOLAR",
+                "label": "Annual solar energy resource (MWh/m2)"
+            }
+        ]
+    },
+    {
+        "name": "Fire risk index (FWI)",
+        "options": [
+            {
+                "id": "HFWI",
+                "label": "Number of days with high FWI per year"
+            },
+            {
+                "id": "VHFWI",
+                "label": "Number of days with very high FWI per year"
+            },
+            {
+                "id": "EFWI",
+                "label": "Number of days with extreme FWI per year"
+            }
+        ]
+    }
+]

@@ -1,0 +1,20 @@
+.leaflet-control-zoom {
+  border: none !important;
+}
+
+.leaflet-container {
+  background-color: #25292C !important;
+}
+
+.leaflet-control-attribution {
+  margin-right: 10px !important;
+  background-color: #171A1C !important;
+  padding: 4px 8px !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  display: none !important;
+}
+
+.leaflet-tile {
+  image-rendering: auto !important; /* or 'smooth', depending on browser support */
+}

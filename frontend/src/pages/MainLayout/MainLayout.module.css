@@ -1,0 +1,159 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  padding: 15px 25px 25px 25px;
+  /* height: calc(100vh - 120px);
+  width: calc(100vw - 50px); */
+  min-height: 720px;
+  max-height: 1080px;
+  max-width: 1920px;
+  margin: 0 auto;
+  height: 100vh; 
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.leftColumn,
+.middleColumn,
+.topRightBox,
+.bottomRightBox {
+  background-color: #25292C;
+  border-radius: 10px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.leftColumn {
+  width: 28%;
+  flex-basis: 28%;
+  min-width: 340px
+}
+
+.middleColumn {
+  width: 30%;
+  flex-basis: 30%;
+  min-width: 360px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  flex-basis: 38%;
+  width: 38%;
+  min-width: 400px;
+}
+
+.topRightBox,
+.bottomRightBox {
+  flex-basis: calc(50% - 12.5px);
+}
+
+/* @media (max-width: 1200px) {
+    .leftColumn,
+    .middleColumn,
+    .rightColumn {
+      min-width: 100%;
+    }
+    
+    .rightColumn {
+      flex-direction: row;
+    }
+    
+    .topRightBox,
+    .bottomRightBox {
+      flex-basis: calc(50% - 12.5px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .rightColumn {
+      flex-direction: column;
+    }
+    
+    .topRightBox,
+    .bottomRightBox {
+      flex-basis: 100%;
+    }
+  } */
+
+.menuOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 10px 0px 10px 0px;
+  padding: 10px;
+  background-color: #25292C;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.menuOptionText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menuOption:hover {
+  background-color: rgba(23, 26, 28, 0.4);
+  /* #171A1C with 40% opacity */
+}
+
+.title {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.subtext {
+  margin: 0;
+  color: #aaa;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtext p {
+  margin: 0;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  background-color: #25292C;
+  border-radius: 10px;
+  height:100%;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0px 20px 0px;
+  padding: 5px 5px 5px 0px;
+}
+
+.backTitle {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 6px;
+  font-family: 'Epilogue';
+}
+
+.backButton:hover {
+  background-color: rgba(23, 26, 28, 0.4);
+  /* #171A1C with 40% opacity */
+}
