@@ -4,7 +4,7 @@
         "period": [
             {
                 "label": "1995-2014",
-                "id": "wrfout_historical_TEMPS"
+                "id": "hist"
             }
         ]
     },
@@ -13,11 +13,11 @@
         "period": [
             {
                 "label": "2046-2065",
-                "id": "wrfout_ssp245_2046_2065_TEMPS"
+                "id": "ssp245_2046_2065"
             },
             {
                 "label": "2081-2100",
-                "id": "wrfout_ssp245_2081_2100_TEMPS"
+                "id": "ssp245_2081_2100"
             }
         ]
     },
@@ -26,11 +26,11 @@
         "period": [
             {
                 "label": "2046-2065",
-                "id": "wrfout_ssp370_2046_2065_TEMPS"
+                "id": "ssp370_2046_2065"
             },
             {
                 "label": "2081-2100",
-                "id": "wrfout_ssp370_2081_2100_TEMPS"
+                "id": "ssp370_2081_2100"
             }
         ]
     },
@@ -39,11 +39,11 @@
         "period": [
             {
                 "label": "2046-2065",
-                "id": "wrfout_ssp585_2046_2065_TEMPS"
+                "id": "ssp585_2046_2065"
             },
             {
                 "label": "2081-2100",
-                "id": "wrfout_ssp585_2081_2100_TEMPS"
+                "id": "ssp585_2081_2100"
             }
         ]
     }

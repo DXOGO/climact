@@ -12,12 +12,12 @@ const initialState = {
     timePeriod: persisterTimePeriod ? JSON.parse(persisterTimePeriod) : {
         scenario: 'Future SSP2-4.5',
         period: '2046-2065',
-        id: 'wrfout_ssp245_2046_2065_TEMPS'
+        id: 'ssp245_2046_2065'
     },
     variable: persistedVariable ? JSON.parse(persistedVariable) : {
         name: 'Temperature',
         option: 'Mean',
-        id: 'T2MEAN'
+        id: 'Tmed'
     },
     temporalMean: 'Annual',
 };

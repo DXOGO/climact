@@ -11,13 +11,10 @@ const LeafletMap = () => {
   const timePeriod = useSelector((state) => state.timePeriod);
   const variable = useSelector((state) => state.variable);
 
-  // let scenario;
-  // if (timePeriod.id.includes('ssp')) { scenario = 'ssp'; } else { scenario = 'historical';}
-
-  const variableKey = `${variable.id}-${timePeriod.id}`;
+  const variableKey = `${variable.id}_${timePeriod.id}`;
 
   // WMS URL for the selected dataset
-  const wmsUrl = `http://localhost:80/thredds/wms/cesamAll/TMAX_TMEAN_TMIN/${timePeriod.id}.nc`;
+  const wmsUrl = `http://localhost:80/thredds/wms/cesamAll/${timePeriod.id}.nc`;
 
   // Get selected variable layer information
   const selectedLayerInfo = getInfo(variable.id);
@@ -35,19 +32,19 @@ const LeafletMap = () => {
 
         {variable.id && (
           <WMSTileLayer
-            INTERPOLATION="bilinear"
             key={variable.id}
             url={wmsUrl}
-            layers={variable.id}
-            styles={selectedLayerInfo[1]} // Get styles based on the selected variable
+            layers={variableKey}
+            styles={selectedLayerInfo[1]}
             format="image/png"
             transparent={true}
-            version="1.1.1"
-            colorScaleRange={selectedLayerInfo[2]} // Set the color scale range for the selected layer
+            version="1.3.0"
+            colorScaleRange={selectedLayerInfo[2]}
+            numColorBands={250}
           />
         )}
         {/* Render the legend based on the selected variable */}
-        {variable.id && <LegendControl variable={variable.id} url={wmsUrl} />}
+        {variable.id && <LegendControl variable={variable.id} url={wmsUrl} variableKey={variableKey} />}
         {/* Use custom zoom buttons */}
         {variable.id && <CustomZoomControl />}
       </MapContainer>
@@ -59,8 +56,9 @@ const LeafletMap = () => {
 export default LeafletMap;
 
 // Leaflet legend control (form WMS GetLegendGraphic)
-const LegendControl = ({ variable, url }) => {
+const LegendControl = ({ variable, url, variableKey }) => {
   const map = useMap();
+
 
   useEffect(() => {
     const legend = L.control({ position: 'bottomright' });
@@ -74,17 +72,11 @@ const LegendControl = ({ variable, url }) => {
       const styles = legendInfo[1];
       const colorScaleRange = legendInfo[2];
 
-      // change color scale range to Celsius
-      const [min, max] = colorScaleRange.split(',');
-      const minCelsius = convertKelvinToCelsius(min).toFixed(2);
-      const maxCelsius = convertKelvinToCelsius(max).toFixed(2);
-      const colorScaleRangeCelsius = `${minCelsius},${maxCelsius}`;
-
       // Construct the GetLegendGraphic URL
-      const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variable}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRangeCelsius}`;
+      const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: 220px;">`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: 220px; padding: 5px; background-color: white; border-radius: 5px;"/>`;
       return div;
     };
 
@@ -146,8 +138,9 @@ const getInfo = (variable) => {
   switch (variable) {
     /* --------------------------- T2MEAN ---------------------------  */
 
-    case 'T2MEAN':
-      return ['default', 'default-scalar/default', '282.15,302.15'];
+    case 'Tmed':
+      // return ['default', 'default-scalar/default', '282.15,302.15'];
+      return ['default', 'default-scalar/default', '9,29'];
 
     // case 'T2MEAN-wrfout_historical_TEMPS':
     //   return ['default', 'default-scalar/default', '282.15,296.15'];
@@ -169,8 +162,9 @@ const getInfo = (variable) => {
 
     /* --------------------------- T2MAX ---------------------------  */
 
-    case 'T2MAX':
-      return ['default', 'default-scalar/default', '284.15,302.15'];
+    case 'Tmax':
+      // return ['default', 'default-scalar/default', '284.15,302.15'];
+      return ['default', 'default-scalar/default', '11,29'];
 
     // case 'T2MAX-wrfout_historical_TEMPS':
     //   return ['default', 'default-scalar/default', '284.15,298.15'];
@@ -192,8 +186,9 @@ const getInfo = (variable) => {
 
     /* --------------------------- T2MIN ---------------------------  */
 
-    case 'T2MIN':
-      return ['default', 'default-scalar/default', '280.15,295.15'];
+    case 'Tmin':
+      // return ['default', 'default-scalar/default', '280.15,295.15'];
+      return ['default', 'default-scalar/default', '7,22'];
 
     // case 'T2MIN-wrfout_historical_TEMPS':
     //   return ['default', 'default-scalar/default', '280.15,292.15'];
@@ -216,6 +211,7 @@ const getInfo = (variable) => {
     /* --------------------------- DEFAULT ---------------------------  */
 
     default:
-      return ['default', 'default-scalar/default', '278.15,303.15'];
+      // return ['default', 'default-scalar/default', '278.15,303.15'];
+      return ['default', 'default-scalar/default', '5,30'];
   }
 };

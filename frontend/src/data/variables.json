@@ -3,15 +3,15 @@
         "name": "Temperature",
         "options": [
             {
-                "id": "T2MEAN",
+                "id": "Tmed",
                 "label": "Mean"
             },
             {
-                "id": "T2MIN",
+                "id": "Tmin",
                 "label": "Minimum"
             },
             {
-                "id": "T2MAX",
+                "id": "Tmax",
                 "label": "Maximum"
             },
             {
