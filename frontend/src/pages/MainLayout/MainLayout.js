@@ -6,6 +6,7 @@ import TimePeriod from '../../components/TimePeriodSubmenu/TimePeriod';
 import Variable from '../../components/VariableSubmenu/Variable';
 import TemporalMean from '../../components/TemporalMeanSubmenu/TemporalMean';
 import LeafletMap from '../../components/Map/LeafletMap';
+import GraphComponent from '../../components/Graph/GraphComponent';
 
 import { useSelector } from 'react-redux';
 
@@ -65,6 +66,7 @@ const MainLayout = () => {
             </div>
             <div className={styles.rightColumn}>
                 <div className={styles.topRightBox}>
+                    <GraphComponent />
                 </div>
                 <div className={styles.bottomRightBox}>
                 </div>

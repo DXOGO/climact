@@ -8,6 +8,7 @@ const router = express.Router();
 const filePath = path.join(__dirname, '../data/climatologias_TEMPS.xlsx');
 const workbook = XLSX.readFile(filePath);
 
+// Mapping of periods to column letters
 const periodMapping = {
     hist: 'B',
     ssp245_2046_2065: 'C',
