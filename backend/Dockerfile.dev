@@ -1,9 +1,10 @@
 # Use a base image with Node.js for development
-FROM node:alpine AS development
+FROM node:14-alpine AS development
 
 # Set environment variable
 ENV NODE_ENV=development
 
+# Install nodemon globally for development
 RUN npm install -g nodemon
 
 # Set the working directory inside the container
@@ -12,9 +13,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies if not already installed
-RUN npm config set registry https://registry.npmjs.org/
-RUN npm i
+# Install dependencies from package.json
+RUN npm install
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -22,5 +22,5 @@ COPY . .
 # Expose port 3001 for the Node.js backend
 EXPOSE 3001
 
-# Command to run your backend server (modify as needed)
+# Run nodemon for hot-reloading during development
 CMD ["nodemon", "index.js"]

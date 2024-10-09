@@ -9,6 +9,13 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Import Thredds route
+const threddsRoute = require('./routes/thredds');
+
+// Routes
+app.use('/api', threddsRoute);
+
+
 // Default route
 app.get('/', (req, res) => {
   res.send('Welcome to the ClimACT backend service!');

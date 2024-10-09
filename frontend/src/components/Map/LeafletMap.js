@@ -22,12 +22,14 @@ const LeafletMap = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
       <MapContainer
-        center={[39.5, -8]}
+        center={[39.6, -7.8]}
         zoom={7}
-        style={{ height: '100%', width: '100%' }}
-        scrollWheelZoom={false}
-        key={variableKey}
+        minZoom={7}
+        maxZoom={9}
         zoomControl={false}
+        style={{ height: '100%', width: '100%' }}
+        // scrollWheelZoom={false}
+        key={variableKey}
       >
 
         {variable.id && (
@@ -130,88 +132,19 @@ const CustomZoomControl = () => {
   return null;
 };
 
-function convertKelvinToCelsius(kelvinValue) { return kelvinValue - 273.15; }
-
-
 const getInfo = (variable) => {
-  // Celsius to Kelvin conversion: K = °C + 273.15
   switch (variable) {
-    /* --------------------------- T2MEAN ---------------------------  */
 
     case 'Tmed':
-      // return ['default', 'default-scalar/default', '282.15,302.15'];
       return ['default', 'default-scalar/default', '9,29'];
 
-    // case 'T2MEAN-wrfout_historical_TEMPS':
-    //   return ['default', 'default-scalar/default', '282.15,296.15'];
-
-    // case 'T2MEAN-wrfout_ssp245_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MEAN-wrfout_ssp245_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '286.15,300.15'];
-
-    // case 'T2MEAN-wrfout_ssp370_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MEAN-wrfout_ssp370_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '286.15,302.15'];
-
-    // case 'T2MEAN-wrfout_ssp585_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MEAN-wrfout_ssp585_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '287.15,302.15'];
-
-    /* --------------------------- T2MAX ---------------------------  */
-
     case 'Tmax':
-      // return ['default', 'default-scalar/default', '284.15,302.15'];
       return ['default', 'default-scalar/default', '11,29'];
 
-    // case 'T2MAX-wrfout_historical_TEMPS':
-    //   return ['default', 'default-scalar/default', '284.15,298.15'];
-
-    // case 'T2MAX-wrfout_ssp245_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MAX-wrfout_ssp245_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,300.15'];
-
-    // case 'T2MAX-wrfout_ssp370_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MAX-wrfout_ssp370_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '286.15,302.15'];
-
-    // case 'T2MAX-wrfout_ssp585_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '285.15,301.15'];
-    // case 'T2MAX-wrfout_ssp585_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '287.15,302.15'];
-
-    /* --------------------------- T2MIN ---------------------------  */
-
     case 'Tmin':
-      // return ['default', 'default-scalar/default', '280.15,295.15'];
       return ['default', 'default-scalar/default', '7,22'];
 
-    // case 'T2MIN-wrfout_historical_TEMPS':
-    //   return ['default', 'default-scalar/default', '280.15,292.15'];
-
-    // case 'T2MIN-wrfout_ssp245_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '281.15,293.15'];
-    // case 'T2MIN-wrfout_ssp245_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '282.15,293.15'];
-
-    // case 'T2MIN-wrfout_ssp370_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '281.15,294.15'];
-    // case 'T2MIN-wrfout_ssp370_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '282.15,294.15'];
-
-    // case 'T2MIN-wrfout_ssp585_2046_2065_TEMPS':
-    //   return ['default', 'default-scalar/default', '281.15,294.15'];
-    // case 'T2MIN-wrfout_ssp585_2081_2100_TEMPS':
-    //   return ['default', 'default-scalar/default', '283.15,295.15'];
-
-    /* --------------------------- DEFAULT ---------------------------  */
-
     default:
-      // return ['default', 'default-scalar/default', '278.15,303.15'];
       return ['default', 'default-scalar/default', '5,30'];
   }
 };
