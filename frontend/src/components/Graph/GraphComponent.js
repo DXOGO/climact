@@ -5,25 +5,46 @@ import HighchartsReact from 'highcharts-react-official';
 
 import styles from './GraphComponent.module.css';
 
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 
 const GraphComponent = () => {
+    const { t } = useTranslation();
+
     const [chartOptions, setChartOptions] = useState({});
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Example API endpoint: /api/data/tmed/hist or /api/data/tmax/ssp245_2046_2065
-                const response = await axios.get(`http://localhost:3001/api/data/${variable.id}/${timePeriod.id}`);
-                const data = response.data; // Assuming the data returns an array of temperature values for each month
+                const response = await axios.get(`http://localhost:3001/api/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
+                const data = response.data;
 
+                // For variables with line plot where x-axis is the month and y-axis is the value
                 const months = data.map(item => item.month);
-                const temperatures = data.map(item => item.temperature);
+                const values = data.map(item => item.value);
+
+                const minValue = Math.min(...values);
+                const maxValue = Math.max(...values);
+
+                // Calculate a reasonable tick interval based on the data range
+                const range = maxValue - minValue;
+                const tickInterval = range > 20 ? 5 : (range > 10 ? 2 : 1);
+
+                // Set y-axis label and tooltip units based on variable domain
+                let yAxisTitle = '';
+                let tooltipUnit = '';
+
+                if (variable.domain === 'TEMPS') {
+                    yAxisTitle = 'Temperature (ºC)';
+                    tooltipUnit = '°C';
+                } else if (variable.domain === 'NDAYS') {
+                    yAxisTitle = 'Number of days';
+                    tooltipUnit = ' days';
+                }
 
                 // Set chart options dynamically
                 setChartOptions({
@@ -32,7 +53,7 @@ const GraphComponent = () => {
                         backgroundColor: '#25292C',
                         spacingTop: 20,
                         fontFamily: 'Epilogue',
-                        height: 300,
+                        height: 280,
                     },
                     title: {
                         text: '',
@@ -49,31 +70,32 @@ const GraphComponent = () => {
                     },
                     yAxis: {
                         title: {
-                            text: '°C',
-                            align: 'high',
-                            x: -6,
-                            y: 8,
-                            rotation: 0, // Make the title horizontal
+                            text: yAxisTitle,
+                            x: -10,
                             style: {
                                 color: '#fff',
                                 fontSize: '14px',
+                                fontFamily: 'Epilogue',
                             },
                         },
                         labels: {
                             style: {
                                 color: '#fff',
                                 fontSize: '14px',
+                                fontFamily: 'Epilogue',
                             },
                         },
-                        tickInterval: 5,
+                        // tickInterval: 5,
                         gridLineColor: '#373C41',
                         gridLineWidth: 1.5,
-                        min: 5,
-                        max: 30,
+                        min: Math.floor(minValue) == 0 ? 0 : Math.floor(minValue) - 1,
+                        max: Math.floor(maxValue) + 1,
+                        tickInterval: tickInterval,
+
                     },
                     series: [{
                         name: `${variable.name} (${timePeriod.scenario})`,
-                        data: temperatures,
+                        data: values,
                         color: '#6EA9C0',
                     }],
                     plotOptions: {
@@ -90,7 +112,7 @@ const GraphComponent = () => {
                     tooltip: {
                         useHTML: true, // Enable HTML for tooltips
                         formatter: function () {
-                            return `<strong>${this.x}</strong>: ${this.y.toFixed(1)}°C`;
+                            return `Average<br /><strong>${this.x}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
                         },
                         backgroundColor: '#25292C',
                         borderWidth: 2,
@@ -121,7 +143,7 @@ const GraphComponent = () => {
         <div className={styles.graphContainer}>
             <div>
                 <h2 className={styles.chartTitle}>
-                    {`${variable.name} - ${variable.option}`}
+                    {`${t(variable.name)} - ${t(variable.option)}`}
                 </h2>
                 <h4 className={styles.chartSubtitle}>
                     {`${timePeriod.scenario}, ${timePeriod.period}`}

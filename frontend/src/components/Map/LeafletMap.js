@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, WMSTileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 
-import { useSelector } from 'react-redux'; // Import Redux
+import { useSelector } from 'react-redux';
 
 const LeafletMap = () => {
-  // Use Redux selectors for timePeriod and variable
+  const [loading, setLoading] = useState(true); // State to track loading
+
   const timePeriod = useSelector((state) => state.timePeriod);
   const variable = useSelector((state) => state.variable);
 
@@ -19,8 +20,20 @@ const LeafletMap = () => {
   // Get selected variable layer information
   const selectedLayerInfo = getInfo(variable.id);
 
+  // Function to handle tile loading events
+  const handleTileLoading = (layer) => {
+    layer.on('load', () => {
+      setLoading(false);
+    });
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+    {loading && (
+      <div className="loading-container">
+        <div className="loading-icon" />
+      </div>
+    )}
       <MapContainer
         center={[39.6, -7.8]}
         zoom={7}
@@ -43,6 +56,9 @@ const LeafletMap = () => {
             version="1.3.0"
             colorScaleRange={selectedLayerInfo[2]}
             numColorBands={250}
+            eventHandlers={{
+              add: (e) => handleTileLoading(e.target),
+            }}
           />
         )}
         {/* Render the legend based on the selected variable */}
@@ -86,7 +102,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
     return () => {
       map.removeControl(legend);
     };
-  }, [variable, url, map]);
+  }, [variable, variableKey, url, map]);
 
   return null;
 };

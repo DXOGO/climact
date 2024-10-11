@@ -4,7 +4,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: center;
     height: 100%;
 }
 
@@ -21,6 +21,6 @@
     color: #9EAAB9;
     font: 16px 'Epilogue', sans-serif;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     margin-top: 0px;
 }

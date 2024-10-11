@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import styles from './Variable.module.css';
 import RadioOption from '../RadioOption/RadioOption';
 import { setVariable } from '../../redux/actions'; // Redux action to dispatch
@@ -8,6 +9,8 @@ import { setVariable } from '../../redux/actions'; // Redux action to dispatch
 const variables = require('../../data/variables.json');
 
 const Variable = () => {
+    const { t } = useTranslation();
+
     const [hoveredVariable, setHoveredVariable] = useState(null);
 
     // Get the current selected variable from Redux
@@ -15,31 +18,31 @@ const Variable = () => {
     const dispatch = useDispatch();
 
     const handleOptionChange = (variableName, option) => {
-        dispatch(setVariable({ name: variableName, option: option.label, id: option.id }));
+        dispatch(setVariable({ name: variableName, domain: option.domain, option: option.label, id: option.id }));
     };
-    
+
     return (
         <div className={styles.variableSubmenu}>
             {variables.map((variable) => (
                 <div
                     key={variable.name}
-                    className={variable.name === 'Temperature' ? styles.variableTemp : styles.variableItem}
+                    className={variable.name === 'temperature' ? styles.variableTemp : styles.variableItem}
                     onMouseEnter={() => setHoveredVariable(variable.name)}
                     onMouseLeave={() => setHoveredVariable(null)}
                 >
                     <div className={styles.variableName}>
-                        {variable.name}
+                        {t(variable.name)}
                     </div>
                     {hoveredVariable === variable.name && variable.options.length > 0 && (
                         <div className={`${styles.variableOptions} ${hoveredVariable === variable.name ? styles.visible : ''}`}>
                             {variable.options.map((option) => (
                                 <RadioOption
                                     key={option.id}
-                                    label={`${variable.name}-${option.label}`}
+                                    label={`${t(variable.name)}-${t(option.label)}`}
                                     name={variable.name}
-                                    text={option.label} // Use the label for display
+                                    text={t(option.label)} 
                                     checked={selectedVariable.name === variable.name && selectedVariable.option === option.label}
-                                    onChange={() => handleOptionChange(variable.name, option)} // Pass the option object
+                                    onChange={() => handleOptionChange(variable.name, option)} 
                                 />
                             ))}
                         </div>

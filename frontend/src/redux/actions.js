@@ -12,10 +12,10 @@ export const setTimePeriod = ({ scenario, period, id }) => {
     };
 };
 
-export const setVariable = ({ name, option, id }) => {
+export const setVariable = ({ name, domain, option, id }) => {
     return {
         type: SET_VARIABLE,
-        payload: { name, option, id }
+        payload: { name, domain, option, id }
     };
 };
 

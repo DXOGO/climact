@@ -1,203 +1,210 @@
 [
     {
-        "name": "Temperature",
+        "name": "temperature",
         "options": [
             {
                 "id": "Tmed",
-                "label": "Mean"
+                "label": "meanTemp",
+                "domain": "TEMPS"
             },
             {
                 "id": "Tmin",
-                "label": "Minimum"
+                "label": "minTemp",
+                "domain": "TEMPS"
             },
             {
                 "id": "Tmax",
-                "label": "Maximum"
+                "label": "maxTemp",
+                "domain": "TEMPS"
             },
             {
-                "id": "VERY_HOT_DAYS",
-                "label": "Number of very hot days (Tmax > 40°C) per year"
+                "id": "very_hot_days",
+                "label": "veryHotDays",
+                "domain": "NDAYS"
             },
             {
-                "id": "HOT_DAYS",
-                "label": "Number of hot days (Tmax > 30°C) per year"
+                "id": "hot_days",
+                "label": "hotDays",
+                "domain": "NDAYS"
             },
             {
-                "id": "TROPICAL_NIGHTS",
-                "label": "Number of tropical nights (Tmin > 20°C) per year"
+                "id": "tropical_nights",
+                "label": "tropicalNights",
+                "domain": "NDAYS"
             },
             {
-                "id": "COLD_DAYS",
-                "label": "Number of cold days (Tmin < 0°C) per year"
+                "id": "frost_days",
+                "label": "frostDays",
+                "domain": "NDAYS"
             }
         ]
     },
     {
-        "name": "Heat waves",
+        "name": "heatWaves",
         "options": [
             {
                 "id": "HWN",
-                "label": "Average number per year"
+                "label": "hwAverageNumber"
             },
             {
                 "id": "HWI",
-                "label": "Average intensity per year"
+                "label": "hwAverageIntensity"
             },
             {
                 "id": "HWD",
-                "label": "Average duration per year"
+                "label": "hwAverageDuration"
             },
             {
                 "id": "HWDI",
-                "label": "Heat Wave duration index (HWDI)"
+                "label": "hwDurationIndex"
             }
         ]
     },
     {
-        "name": "Precipitation",
+        "name": "precipitation",
         "options": [
             {
                 "id": "PRCPTOT",
-                "label": "Annual total"
+                "label": "annualTotalPrecip"
             },
             {
                 "id": "R50MM",
-                "label": "Number of extreme precipitation days (Pr>50 mm) per year"
+                "label": "extremePrecip"
             },
             {
                 "id": "R20MM",
-                "label": "Number of very heavy precipitation days (Pr>20 mm) per year"
+                "label": "veryHeavyPrecip"
             },
             {
                 "id": "R10MM",
-                "label": "Number of very wet days (Pr > 10mm) per year"
+                "label": "veryWetDays"
             },
             {
                 "id": "R1MM",
-                "label": "Number of wet days (Pr > 1mm) per year"
+                "label": "wetDays"
             },
             {
                 "id": "R0MM",
-                "label": "Number of dry days (Pr < 1mm) per year"
+                "label": "dryDays"
             },
             {
                 "id": "RX1day",
-                "label": "RX1day (annual maximum 1-day Pr)"
+                "label": "rx1day"
             },
             {
                 "id": "RX5day",
-                "label": "RX5day (annual maximum 5-day Pr)"
+                "label": "rx5day"
             },
             {
                 "id": "CWD",
-                "label": "CWD (consecutive wet days)"
+                "label": "cwd"
             },
             {
                 "id": "CCD",
-                "label": "CCD (consecutive dry days)"
+                "label": "ccd"
             },
             {
                 "id": "LDP",
-                "label": "Longest dry period (Pr < 1mm)"
+                "label": "ldp"
             }
         ]
     },
     {
-        "name": "Climate classification",
+        "name": "climateClassification",
         "options": [
             {
                 "id": "KO",
-                "label": "Koppen climate classification"
+                "label": "ko"
             },
             {
                 "id": "KT",
-                "label": "Koppen-Trewartha climate classification"
+                "label": "kt"
             }
         ]
     },
     {
-        "name": "Thermal discomfort",
+        "name": "thermalDiscomfort",
         "options": [
             {
                 "id": "TDI",
-                "label": "thom Discomfort index (TDI)"
+                "label": "tdi"
             },
             {
                 "id": "UTCI",
-                "label": "Universal Thermal Climate Index (UTCI)"
+                "label": "utci"
             }
         ]
     },
     {
-        "name": "Air quality",
+        "name": "airQuality",
         "options": [
             {
                 "id": "PM2.5",
-                "label": "PM2.5"
+                "label": "pm25"
             },
             {
                 "id": "PM10",
-                "label": "PM10"
+                "label": "pm10"
             },
             {
                 "id": "O3",
-                "label": "O3"
+                "label": "o3"
             },
             {
                 "id": "NO2",
-                "label": "NO2"
+                "label": "no2"
             },
             {
                 "id": "SO2",
-                "label": "SO2"
+                "label": "so2"
             },
             {
                 "id": "CO",
-                "label": "CO"
+                "label": "co"
             }
         ],
-        "info": "Average number of days per year with pollutants concentrations above EU limits"
+        "info": "airQualityInfo"
     },
     {
-        "name": "Agriculture",
+        "name": "agriculture",
         "options": [
             {
                 "id": "DI",
-                "label": "Drought index (DI)"
+                "label": "di"
             },
             {
                 "id": "UNEP",
-                "label": "Aridity index (UNEP)"
+                "label": "unep"
             }            
         ]
     },
     {
-        "name": "Renewable energies",
+        "name": "renewableEnergies",
         "options": [
             {
                 "id": "WIND",
-                "label": "Annual wind energy resource (MW/m2 at 100m above ground)"
+                "label": "wind"
             },
             {
                 "id": "SOLAR",
-                "label": "Annual solar energy resource (MWh/m2)"
+                "label": "solar"
             }
         ]
     },
     {
-        "name": "Fire risk index (FWI)",
+        "name": "fireRiskIndex",
         "options": [
             {
                 "id": "HFWI",
-                "label": "Number of days with high FWI per year"
+                "label": "hfwi"
             },
             {
                 "id": "VHFWI",
-                "label": "Number of days with very high FWI per year"
+                "label": "vhfwi"
             },
             {
                 "id": "EFWI",
-                "label": "Number of days with extreme FWI per year"
+                "label": "efwi"
             }
         ]
     }

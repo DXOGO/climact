@@ -20,8 +20,9 @@ const initialState = {
         // }
     },
     variable: persistedVariable ? JSON.parse(persistedVariable) : {
-        name: 'Temperature',
-        option: 'Mean',
+        name: 'temperature',
+        domain: 'TEMPS',
+        option: 'meanTemp',
         id: 'Tmed'
        
         // options: {
@@ -29,7 +30,7 @@ const initialState = {
         //     id: 'Tmed'
         // }
     },
-    temporalMean: 'Annual',
+    temporalMean: 'annual',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -48,6 +49,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 variable: {
                     name: action.payload.name,
+                    domain: action.payload.domain,
                     option: action.payload.option,
                     id: action.payload.id
                 }
