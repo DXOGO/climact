@@ -17,6 +17,27 @@ const GraphComponent = () => {
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
+    let name;
+
+    // Set the graph title based on the selected variable
+    if (variable.id === 'Tmax') {
+        name = t('maximumTemperatureGraph');
+    } else if (variable.id === 'Tmin') {
+        name = t('minimumTemperatureGraph');
+    } else if (variable.id === 'Tmed') {
+        name = t('meanTemperatureGraph');
+    } else if (variable.id === 'very_hot_days') {
+        name = t('veryHotDays') + ' ' + t('perYear');
+    } else if (variable.id === 'tropical_nights') {
+        name = t('tropicalNights') + ' ' + t('perYear');
+    } else if (variable.id === 'frost_days') {
+        name = t('frostDays') + ' ' + t('perYear');
+    } else if (variable.id === 'cold_days') {
+        name = t('coldDays') + ' ' + t('perYear');
+    } else if (variable.id === 'hot_days') {
+        name = t('hotDays') + ' ' + t('perYear');
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -141,9 +162,9 @@ const GraphComponent = () => {
 
     return (
         <div className={styles.graphContainer}>
-            <div>
+            <div className={styles.chartHeader}>
                 <h2 className={styles.chartTitle}>
-                    {`${t(variable.name)} - ${t(variable.option)}`}
+                    {name}
                 </h2>
                 <h4 className={styles.chartSubtitle}>
                     {`${timePeriod.scenario}, ${timePeriod.period}`}

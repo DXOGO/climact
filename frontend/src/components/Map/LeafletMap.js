@@ -14,6 +14,9 @@ const LeafletMap = () => {
 
   const variableKey = `${variable.id}_${timePeriod.id}`;
 
+  // WMS URL in case there is 1 file per variable and time period
+  // const wmsUrl = `http://localhost:80/thredds/wms/cesamAll/${variableKey}.nc`;
+
   // WMS URL for the selected dataset
   const wmsUrl = `http://localhost:80/thredds/wms/cesamAll/${timePeriod.id}.nc`;
 
@@ -29,11 +32,11 @@ const LeafletMap = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-    {loading && (
-      <div className="loading-container">
-        <div className="loading-icon" />
-      </div>
-    )}
+      {loading && (
+        <div className="loading-container">
+          <div className="loading-icon" />
+        </div>
+      )}
       <MapContainer
         center={[39.6, -7.8]}
         zoom={7}
@@ -62,7 +65,7 @@ const LeafletMap = () => {
           />
         )}
         {/* Render the legend based on the selected variable */}
-        {variable.id && <LegendControl variable={variable.id} url={wmsUrl} variableKey={variableKey} />}
+        {variable.id && <LegendControl url={wmsUrl} variableKey={variableKey} />}
         {/* Use custom zoom buttons */}
         {variable.id && <CustomZoomControl />}
       </MapContainer>
@@ -74,9 +77,11 @@ const LeafletMap = () => {
 export default LeafletMap;
 
 // Leaflet legend control (form WMS GetLegendGraphic)
-const LegendControl = ({ variable, url, variableKey }) => {
+const LegendControl = ({ url, variableKey }) => {
   const map = useMap();
 
+  // get variable ID from variable key
+  const variableId = variableKey.split('_')[0];
 
   useEffect(() => {
     const legend = L.control({ position: 'bottomright' });
@@ -85,7 +90,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const div = L.DomUtil.create('div', 'info legend');
 
       // Fetch legend information based on the layer
-      const legendInfo = getInfo(variable);
+      const legendInfo = getInfo(variableId);
       const palette = legendInfo[0];
       const styles = legendInfo[1];
       const colorScaleRange = legendInfo[2];
@@ -102,7 +107,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
     return () => {
       map.removeControl(legend);
     };
-  }, [variable, variableKey, url, map]);
+  }, [variableKey, url, map]);
 
   return null;
 };
