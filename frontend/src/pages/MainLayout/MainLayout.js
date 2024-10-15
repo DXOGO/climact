@@ -41,10 +41,10 @@ const MainLayout = () => {
                             variable={timePeriod.period}
                             onClick={() => handleClick('timePeriod', t('timePeriod'))} />
                         <MenuOption
-                            title={t('temperature')} 
+                            title={t('variable')} 
                             subtitle={t(variable.name)}
                             variable={t(variable.option)}
-                            onClick={() => handleClick('variable', t('temperature'))} />
+                            onClick={() => handleClick('variable', t('variable'))} />
                         <MenuOption
                             title={t('temporalMean')}
                             subtitle={t(temporalMean)}

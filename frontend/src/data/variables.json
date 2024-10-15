@@ -3,7 +3,7 @@
         "name": "temperature",
         "options": [
             {
-                "id": "Tmed",
+                "id": "Tmean",
                 "label": "meanTemp",
                 "domain": "TEMPS"
             },
@@ -182,8 +182,9 @@
         "name": "renewableEnergies",
         "options": [
             {
-                "id": "WIND",
-                "label": "wind"
+                "id": "WS100m",
+                "label": "wind",
+                "domain": "WS"
             },
             {
                 "id": "SOLAR",

@@ -8,6 +8,7 @@ const router = express.Router();
 const fileMapping = {
     TEMPS: path.join(__dirname, '../data/climatologias_TEMPS.xlsx'),
     NDAYS: path.join(__dirname, '../data/climatologias_NDAYS.xlsx'),
+    WS: path.join(__dirname, '../data/climatologias_WS.xlsx')
     // Add more mappings as new files are introduced
 };
 
@@ -30,7 +31,16 @@ const periodMapping = {
         ssp370_2081_2100: 'F',
         ssp585_2046_2065: 'G',
         ssp585_2081_2100: 'H'
-    }
+    },
+    WS: {
+        hist: 'B',
+        ssp245_2046_2065: 'C',
+        ssp245_2081_2100: 'D',
+        ssp370_2046_2065: 'E',
+        ssp370_2081_2100: 'F',
+        ssp585_2046_2065: 'G',
+        ssp585_2081_2100: 'H'
+    },
     // Add more mappings as new domains are introduced
 };
 
@@ -43,6 +53,11 @@ function getVariableData(domain, variable, period) {
     }
 
     const workbook = XLSX.readFile(filePath); // Load the Excel file for the domain
+
+    if (!workbook.Sheets[variable]) {
+        throw new Error(`Sheet not found for variable: ${variable}`);
+    }
+
     const sheet = workbook.Sheets[variable]; // Get the sheet based on the variable (e.g., Tmed, Tmax)
     const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // Convert sheet to JSON
 
@@ -70,9 +85,24 @@ router.get('/data/:domain/:variable/:period', (req, res) => {
 
     try {
         const data = getVariableData(domain, variable, period);
+
+        if (!data || data.length === 0) {
+            return res.status(404).json({
+                success: false,
+                error: 'No data available for the specified parameters.'
+            });
+        }
+
         res.json(data);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        // Log the error for debugging purposes
+        console.error('Error occurred:', error);
+
+        // Send a 400 response with the error message
+        res.status(400).json({
+            success: false,
+            error: error.message
+        });
     }
 });
 

@@ -15,6 +15,10 @@
   display: none !important;
 }
 
+.leaflet-popup-content {
+  margin: 0px 24px 6px 12px !important;
+}
+
 .loading-container {
   z-index: 9999;
   position: absolute;

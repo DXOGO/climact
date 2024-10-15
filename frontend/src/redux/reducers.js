@@ -13,22 +13,12 @@ const initialState = {
         scenario: 'Future SSP2-4.5',
         period: '2046-2065',
         id: 'ssp245_2046_2065'
-
-        // period: {
-        //     label: '2046-2065',
-        //     id: 'ssp245_2046_2065'
-        // }
     },
     variable: persistedVariable ? JSON.parse(persistedVariable) : {
         name: 'temperature',
         domain: 'TEMPS',
         option: 'meanTemp',
-        id: 'Tmed'
-       
-        // options: {
-        //     label: 'Mean',
-        //     id: 'Tmed'
-        // }
+        id: 'Tmean'
     },
     temporalMean: 'annual',
 };
