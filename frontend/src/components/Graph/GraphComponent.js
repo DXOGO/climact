@@ -15,6 +15,22 @@ import axios from 'axios';
 const GraphComponent = () => {
     const { t } = useTranslation();
 
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenHeight(window.innerHeight);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        console.log('Screen Height:', screenHeight);
+    }, [screenHeight]);
+
     const [chartOptions, setChartOptions] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null); // To store error messages
     const timePeriod = useSelector(state => state.timePeriod);
@@ -89,7 +105,7 @@ const GraphComponent = () => {
                             backgroundColor: '#25292C',
                             spacingTop: 20,
                             fontFamily: 'Epilogue',
-                            height: 280,
+                            height: Math.max(screenHeight * 0.35, 300),
                         },
                         title: {
                             text: '',
@@ -187,7 +203,7 @@ const GraphComponent = () => {
         };
 
         fetchData();
-    }, [variable, timePeriod, t]);
+    }, [variable, timePeriod, t, screenHeight]);
 
     return (
         errorMessage ? (

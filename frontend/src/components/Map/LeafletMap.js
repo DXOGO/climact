@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { MapContainer, WMSTileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, WMSTileLayer, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
@@ -17,7 +17,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
   if (domain === 'TEMPS') {
     unitSymbol = '°C';
   } else if (domain === 'NDAYS') {
-    unitSymbol = 'days';
+    unitSymbol = 'days per year';
   } else if (domain === 'WS') {
     unitSymbol = 'm/s';
   }
@@ -239,30 +239,30 @@ const getInfo = (variable) => {
   // Pallete, style, colorScaleRange
   switch (variable) {
     case 'Tmean':
-      return ['default', 'default-scalar/default', '5,30'];
+      return ['seq-Heat', 'default-scalar', '5,30'];
 
     case 'Tmax':
-      return ['default', 'default-scalar/default', '10,30'];
+      return ['seq-Heat', 'default-scalar', '10,30'];
 
     case 'Tmin':
-      return ['default', 'default-scalar/default', '5,25'];
+      return ['seq-Heat', 'default-scalar', '5,25'];
 
     case 'very_hot_days':
-      return ['default', 'default-scalar/default', '0,30'];
+      return ['seq-Heat', 'default-scalar', '0,30'];
 
     case 'hot_days':
-      return ['default', 'default-scalar/default', '0,130'];
+      return ['seq-Heat', 'default-scalar', '0,130'];
 
     case 'tropical_nights':
-      return ['default', 'default-scalar/default', '0,100'];
+      return ['seq-Heat', 'default-scalar', '0,100'];
 
     case 'frost_days':
-      return ['default', 'default-scalar/default', '0,30'];
+      return ['seq-Heat', 'default-scalar', '0,30'];
 
     case 'WS100m':
       return ['default', 'default-scalar/default', '5,10'];
 
     default:
-      return ['default', 'default-scalar/default', '5,30'];
+      return ['default', 'default-scalar/default', '-50,50'];
   }
 };

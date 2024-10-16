@@ -13,6 +13,12 @@ services:
       - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml 
       # The catalog.xml contains new catalog configuration for CESAM data 
       - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml 
+      # Custom palette for the temperature data
+      - /var/thredds/palettes:/usr/local/tomcat/content/thredds/palettes
+      # The threddsConfig.xml contains the new palette
+      - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml
+      # The wmsConfig.xml contains the new palette
+      - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml
     networks:
       - thredds_network
 
