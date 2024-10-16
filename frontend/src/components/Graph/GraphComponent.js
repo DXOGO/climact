@@ -27,10 +27,6 @@ const GraphComponent = () => {
         };
     }, []);
 
-    useEffect(() => {
-        console.log('Screen Height:', screenHeight);
-    }, [screenHeight]);
-
     const [chartOptions, setChartOptions] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null); // To store error messages
     const timePeriod = useSelector(state => state.timePeriod);
