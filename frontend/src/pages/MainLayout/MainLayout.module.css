@@ -3,7 +3,6 @@
   flex-direction: row;
   gap: 25px;
   padding: 15px 25px 25px 25px;
-  /* height: 100vh;  */
   height: calc(100vh - 80px);
   min-height: 720px;
   max-height: 1080px;
@@ -11,6 +10,7 @@
   margin: 0 auto;
   width: 100vw;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .leftColumn,
@@ -51,38 +51,6 @@
 .bottomRightBox {
   flex-basis: calc(30% - 12.5px);
 }
-
-/* @media (max-width: 1200px) {
-    .leftColumn,
-    .middleColumn,
-    .rightColumn {
-      min-width: 100%;
-    }
-    
-    .rightColumn {
-      flex-direction: row;
-    }
-    
-    .topRightBox,
-    .bottomRightBox {
-      flex-basis: calc(50% - 12.5px);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-    
-    .rightColumn {
-      flex-direction: column;
-    }
-    
-    .topRightBox,
-    .bottomRightBox {
-      flex-basis: 100%;
-    }
-  } */
 
 .menuOption {
   display: flex;
@@ -131,7 +99,7 @@
   flex-direction: column;
   background-color: #25292C;
   border-radius: 10px;
-  height:100%;
+  height: 100%;
 }
 
 .backButton {
@@ -159,4 +127,57 @@
 .backButton:hover {
   background-color: rgba(23, 26, 28, 0.4);
   /* #171A1C with 40% opacity */
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    min-height: 250px;
+    max-height: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .leftColumn,
+  .middleColumn,
+  .rightColumn {
+    width: 100%;
+    min-width: 250px;
+    padding: 10px 14px;
+  }
+
+  .rightColumn {
+    width: 100%;
+    min-width: 250px;
+    background-color: #25292C;
+    border-radius: 10px;
+  }
+
+  .mobileDropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    align-items: center;
+  }
+
+  .menuOption {
+    padding: 6px 0px;
+  }
+
+  .backButton {
+    margin: 12px 0px 10px 0px;
+    padding: 0px;
+    margin-left: -10px;
+  }
+
+  .backTitle {
+    margin-left: 0px;
+  }
 }

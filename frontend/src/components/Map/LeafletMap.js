@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { MapContainer, WMSTileLayer, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 
-import { useSelector } from 'react-redux';
-
 const useMapClick = (wmsUrl, variable, variableKey) => {
+  
   const [clickedPosition, setClickedPosition] = useState(null);
   const [value, setValue] = useState(null);
   const map = useMap();
@@ -98,6 +98,7 @@ const LeafletMap = () => {
 
   const timePeriod = useSelector((state) => state.timePeriod);
   const variable = useSelector((state) => state.variable);
+  const isMobile = useSelector((state) => state.isMobile);
 
   const variableKey = `${variable.id}_${timePeriod.id}`;
   const wmsUrl = `http://localhost:80/thredds/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
@@ -118,12 +119,12 @@ const LeafletMap = () => {
         </div>
       )}
       <MapContainer
-        center={[39.6, -7.8]}
+        center={ isMobile ? [39.8, -7.8] : [39.6, -7.8] }
         zoom={7}
         minZoom={7}
         maxZoom={9}
         zoomControl={false}
-        style={{ height: '100%', width: '100%' }}
+        style={{ height: !isMobile ? '100%' : '600px' , width: '100%' }}
         key={variableKey}
         doubleClickZoom={false}
       >
@@ -135,6 +136,8 @@ const LeafletMap = () => {
 
 const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading }) => {
   useMapClick(wmsUrl, variable, variableKey);
+
+  const isMobile = useSelector((state) => state.isMobile);
 
   return (
     <>
@@ -152,7 +155,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         }}
       />
       <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
-      <CustomZoomControl />
+      {!isMobile && <CustomZoomControl />}
     </>
   );
 };
@@ -162,6 +165,8 @@ export default LeafletMap;
 // Leaflet legend control (form WMS GetLegendGraphic)
 const LegendControl = ({ variable, url, variableKey }) => {
   const map = useMap();
+
+  const isMobile = useSelector((state) => state.isMobile);
 
   const variableId = variable.id;
 
@@ -181,7 +186,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: 220px; padding: 5px; background-color: white; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white; border-radius: 5px;"/>`;
       return div;
     };
 
@@ -239,28 +244,28 @@ const getInfo = (variable) => {
   // Pallete, style, colorScaleRange
   switch (variable) {
     case 'Tmean':
-      return ['seq-Heat', 'default-scalar', '5,30'];
+      return ['default', 'default', '5,30'];
 
     case 'Tmax':
-      return ['seq-Heat', 'default-scalar', '10,30'];
+      return ['default', 'default', '10,30'];
 
     case 'Tmin':
-      return ['seq-Heat', 'default-scalar', '5,25'];
+      return ['default', 'default', '5,25'];
 
     case 'very_hot_days':
-      return ['seq-Heat', 'default-scalar', '0,30'];
+      return ['default', 'default', '0,30'];
 
     case 'hot_days':
-      return ['seq-Heat', 'default-scalar', '0,130'];
+      return ['default', 'default', '0,130'];
 
     case 'tropical_nights':
-      return ['seq-Heat', 'default-scalar', '0,100'];
+      return ['default', 'default', '0,100'];
 
     case 'frost_days':
-      return ['seq-Heat', 'default-scalar', '0,30'];
+      return ['default', 'default', '0,30'];
 
     case 'WS100m':
-      return ['default', 'default-scalar/default', '5,10'];
+      return ['default', 'default', '5,10'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];

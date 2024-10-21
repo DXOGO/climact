@@ -2,7 +2,7 @@ import {
     SET_TIME_PERIOD,
     SET_VARIABLE,
     SET_TEMPORAL_MEAN,
-    RESET
+    IS_MOBILE
 } from './types';
 
 export const setTimePeriod = ({ scenario, period, id }) => {
@@ -26,9 +26,10 @@ export const setTemporalMean = (temporalMean) => {
     };
 }
 
-export const reset = () => {
+export const setIsMobile = (isMobile) => {
     return {
-        type: RESET
+        type: IS_MOBILE,
+        payload: isMobile
     };
 }
 

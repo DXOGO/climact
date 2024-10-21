@@ -1,4 +1,6 @@
 {
+    "textMap": "Mapa",
+    "textGraph": "Gráfico",
     "noChartAvailable": "Gráfico não disponível",
     "timePeriod": "Período temporal",
     "temporalMean": "Média temporal",

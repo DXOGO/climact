@@ -15,6 +15,7 @@ import axios from 'axios';
 const GraphComponent = () => {
     const { t } = useTranslation();
 
+    const isMobile = useSelector(state => state.isMobile);
     const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
     useEffect(() => {
@@ -77,7 +78,7 @@ const GraphComponent = () => {
 
                     // Calculate a reasonable tick interval based on the data range
                     const range = maxValue - minValue;
-                    const tickInterval = range > 20 ? 5 : (range > 10 ? 2 : 1);
+                    const tickInterval = range >= 20 ? 5 : (range > 10 ? 2 : 1);
 
                     // Set y-axis label and tooltip units based on variable domain
                     let yAxisTitle = '';
@@ -102,6 +103,7 @@ const GraphComponent = () => {
                             spacingTop: 20,
                             fontFamily: 'Epilogue',
                             height: Math.max(screenHeight * 0.35, 300),
+                            width: !isMobile ? null : 600,
                         },
                         title: {
                             text: '',
@@ -218,8 +220,9 @@ const GraphComponent = () => {
                     </h4>
                 </div>
 
-                {/* Render either the chart or an error message */}
-                {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
+                <div className={styles.realChart}>
+                    {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
+                </div>
             </div>
         )
     );

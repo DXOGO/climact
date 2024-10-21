@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
+import React, { useEffect, useState } from 'react';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 import styles from './MainLayout.module.css';
@@ -16,6 +16,11 @@ const MainLayout = () => {
     const timePeriod = useSelector(state => state.timePeriod); // Scenario and period
     const variable = useSelector(state => state.variable); // Variable and option
     const temporalMean = useSelector(state => state.temporalMean);
+
+    const isMobile = useSelector(state => state.isMobile);
+
+    const [showMap, setShowMap] = useState(false); // For showing the map dropdown on mobile
+    const [showGraph, setShowGraph] = useState(false); // For showing the graph dropdown on mobile
 
     const [submenu, setSubmenu] = useState(null);
     const [title, setTitle] = useState('');
@@ -34,14 +39,19 @@ const MainLayout = () => {
         <div className={styles.container}>
             <div className={styles.leftColumn}>
                 {submenu === null ? (
-                    <div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}
+                    >
                         <MenuOption
                             title={t('timePeriod')}
                             subtitle={timePeriod.scenario}
                             variable={timePeriod.period}
                             onClick={() => handleClick('timePeriod', t('timePeriod'))} />
                         <MenuOption
-                            title={t('variable')} 
+                            title={t('variable')}
                             subtitle={t(variable.name)}
                             variable={t(variable.option)}
                             onClick={() => handleClick('variable', t('variable'))} />
@@ -63,19 +73,40 @@ const MainLayout = () => {
                 )}
             </div>
 
-            <div className={styles.middleColumn}>
-                <LeafletMap />
-            </div>
-
-            <div className={styles.rightColumn}>
-                <div className={styles.topRightBox}>
-                    <GraphComponent />
-                </div>
-                <div className={styles.bottomRightBox}>
-                </div>
-            </div>
+            {/* Conditional rendering for mobile and desktop layouts */}
+            {isMobile ? (
+                <>
+                    <div className={styles.middleColumn}>
+                        <div className={styles.mobileDropdown}>
+                            {t('textMap')}
+                            {showMap ? <MdExpandLess size={32} onClick={() => setShowMap(false)} /> : <MdExpandMore size={32} onClick={() => setShowMap(true)} />}
+                        </div>
+                        {showMap && <LeafletMap />}
+                    </div>
+                    <div className={styles.rightColumn}>
+                        <div className={styles.mobileDropdown}>
+                            {t('textGraph')}
+                            {showGraph ? <MdExpandLess size={32} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={32} onClick={() => setShowGraph(true)} />}
+                        </div>
+                        {showGraph && <GraphComponent />}
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className={styles.middleColumn}>
+                        <LeafletMap />
+                    </div>
+                    <div className={styles.rightColumn}>
+                        <div className={styles.topRightBox}>
+                            <GraphComponent />
+                        </div>
+                        <div className={styles.bottomRightBox}></div>
+                    </div>
+                </>
+            )
+            }
         </div>
-    );
+        );
 };
 
 const MenuOption = ({ title, subtitle, variable, onClick }) => {

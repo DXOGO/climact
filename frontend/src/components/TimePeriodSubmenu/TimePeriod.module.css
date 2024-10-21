@@ -14,18 +14,14 @@
     margin-bottom: 30px;
 }
 
-.backButton {
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px 0;
-}
 
-.backTitle {
-    color: #fff;
-    font-size: 18px;
-    margin-left: 10px;
+@media (max-width: 768px) {
+    .container {
+        padding: 0px 10px 0px 5px;
+    }
+
+    .optionGroup {
+        margin-bottom: 20px;
+    }
 }
 

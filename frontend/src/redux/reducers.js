@@ -2,7 +2,7 @@ import {
     SET_TEMPORAL_MEAN,
     SET_TIME_PERIOD,
     SET_VARIABLE,
-    RESET
+    IS_MOBILE
 } from './types';
 
 const persistedVariable = localStorage.getItem('selectedVariable');
@@ -21,6 +21,7 @@ const initialState = {
         id: 'Tmean'
     },
     temporalMean: 'annual',
+    isMobile: window.innerWidth <= 768
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -49,8 +50,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 temporalMean: action.payload
             };
-        case RESET:
-            return initialState;
+        case IS_MOBILE:
+            return {
+                ...state,
+                isMobile: action.payload
+            };
         default:
             return state;
     }
