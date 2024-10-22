@@ -1,24 +1,24 @@
 # Use a base image with Node.js
-FROM node:alpine AS development
+FROM node:18-alpine as development
 ENV NODE_ENV=development
 
 # Set the working directory inside the container
 WORKDIR /app
-
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install dependencies if not already installed
-RUN npm config set registry https://registry.npmjs.org/
-RUN npm i
-
-# Copy the rest of the application code to the working directory
-COPY . .
-
-RUN ln -s /app/node_modules /app/src/node_modules
 
 # Expose port 3000 to the outside world (default for create-react-app)
 EXPOSE 3000
 
 # Start the React development server
 CMD ["npm", "start"]
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
+RUN npm config set registry https://registry.npmjs.org/ && \
+    npm install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# RUN ln -s /app/node_modules /app/src/node_modules

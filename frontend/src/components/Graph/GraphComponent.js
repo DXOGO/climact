@@ -52,8 +52,10 @@ const GraphComponent = () => {
         name = t('coldDays') + ' ' + t('perYear');
     } else if (variable.id === 'hot_days') {
         name = t('hotDays') + ' ' + t('perYear');
-    } else if (variable.id === 'WS100m') {
+    } else if (variable.id === 'wind_energy') {
         name = t('wind');
+    } else if (variable.id === 'solar_energy') {
+        name = t('solar');
     }
 
     useEffect(() => {
@@ -78,7 +80,7 @@ const GraphComponent = () => {
 
                     // Calculate a reasonable tick interval based on the data range
                     const range = maxValue - minValue;
-                    const tickInterval = range >= 20 ? 5 : (range > 10 ? 2 : 1);
+                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : 1));
 
                     // Set y-axis label and tooltip units based on variable domain
                     let yAxisTitle = '';
@@ -90,9 +92,12 @@ const GraphComponent = () => {
                     } else if (variable.domain === 'NDAYS') {
                         yAxisTitle = t('yAxisTitleNDays');
                         tooltipUnit = ' days';
-                    } else if (variable.domain === 'WS') {
-                        yAxisTitle = t('yAxisTitleWs');
-                        tooltipUnit = ' m/s';
+                    } else if (variable.domain === 'WIND') {
+                        yAxisTitle = t('yAxisTitleWind');
+                        tooltipUnit = ' kW.h/m2';
+                    }  else if (variable.domain === 'SOLAR') {
+                        yAxisTitle = t('yAxisTitleSolar');
+                        tooltipUnit = ' kW.h/m2';
                     }
 
                     // Set chart options dynamically

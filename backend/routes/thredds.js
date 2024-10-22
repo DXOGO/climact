@@ -8,40 +8,27 @@ const router = express.Router();
 const fileMapping = {
     TEMPS: path.join(__dirname, '../data/climatologias_TEMPS.xlsx'),
     NDAYS: path.join(__dirname, '../data/climatologias_NDAYS.xlsx'),
-    WS: path.join(__dirname, '../data/climatologias_WS.xlsx')
+    WIND: path.join(__dirname, '../data/climatologias_WIND.xlsx'),
+    SOLAR: path.join(__dirname, '../data/climatologias_SOLAR.xlsx')
     // Add more mappings as new files are introduced
 };
 
 // Mapping of periods to column letters for each domain
+const monthMapping = {
+    hist: 'B',
+    ssp245_2046_2065: 'C',
+    ssp245_2081_2100: 'D',
+    ssp370_2046_2065: 'E',
+    ssp370_2081_2100: 'F',
+    ssp585_2046_2065: 'G',
+    ssp585_2081_2100: 'H'
+};
+
 const periodMapping = {
-    TEMPS: {
-        hist: 'B',
-        ssp245_2046_2065: 'C',
-        ssp245_2081_2100: 'D',
-        ssp370_2046_2065: 'E',
-        ssp370_2081_2100: 'F',
-        ssp585_2046_2065: 'G',
-        ssp585_2081_2100: 'H'
-    },
-    NDAYS: {
-        hist: 'B',
-        ssp245_2046_2065: 'C',
-        ssp245_2081_2100: 'D',
-        ssp370_2046_2065: 'E',
-        ssp370_2081_2100: 'F',
-        ssp585_2046_2065: 'G',
-        ssp585_2081_2100: 'H'
-    },
-    WS: {
-        hist: 'B',
-        ssp245_2046_2065: 'C',
-        ssp245_2081_2100: 'D',
-        ssp370_2046_2065: 'E',
-        ssp370_2081_2100: 'F',
-        ssp585_2046_2065: 'G',
-        ssp585_2081_2100: 'H'
-    },
-    // Add more mappings as new domains are introduced
+    TEMPS: {...monthMapping},
+    NDAYS: {...monthMapping},
+    WIND: {...monthMapping},
+    SOLAR: {...monthMapping}
 };
 
 // Function to load data from an Excel file and return relevant sheet data
@@ -54,7 +41,7 @@ function getVariableData(domain, variable, period) {
 
     const workbook = XLSX.readFile(filePath); // Load the Excel file for the domain
 
-    if (!workbook.Sheets[variable]) {
+    if (!workbook.Sheets[variable.trim()]) {
         throw new Error(`Sheet not found for variable: ${variable}`);
     }
 

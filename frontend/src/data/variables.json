@@ -182,13 +182,14 @@
         "name": "renewableEnergies",
         "options": [
             {
-                "id": "WS100m",
+                "id": "wind_energy",
                 "label": "wind",
-                "domain": "WS"
+                "domain": "WIND"
             },
             {
-                "id": "SOLAR",
-                "label": "solar"
+                "id": "solar_energy",
+                "label": "solar",
+                "domain": "SOLAR"
             }
         ]
     },
