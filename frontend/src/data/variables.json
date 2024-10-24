@@ -182,7 +182,7 @@
         "name": "renewableEnergies",
         "options": [
             {
-                "id": "wind_energy",
+                "id": "wind_energy_100m",
                 "label": "wind",
                 "domain": "WIND"
             },

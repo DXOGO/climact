@@ -187,8 +187,14 @@ const getInfo = (variable) => {
     case 'frost_days':
       return ['default', 'default', '0,30'];
 
-    case 'WS100m':
-      return ['default', 'default', '5,10'];
+    // case 'WS100m':
+    //   return ['default', 'default', '5,10'];
+
+    case 'wind_energy_100m':
+      return ['default', 'default', '0,5'];
+
+    case 'solar_energy':
+      return ['default', 'default', '1,2']; 
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];

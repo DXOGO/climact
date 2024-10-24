@@ -52,7 +52,7 @@ const GraphComponent = () => {
         name = t('coldDays') + ' ' + t('perYear');
     } else if (variable.id === 'hot_days') {
         name = t('hotDays') + ' ' + t('perYear');
-    } else if (variable.id === 'wind_energy') {
+    } else if (variable.id === 'wind_energy_100m') {
         name = t('wind');
     } else if (variable.id === 'solar_energy') {
         name = t('solar');
