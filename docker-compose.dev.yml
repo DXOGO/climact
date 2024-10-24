@@ -13,9 +13,9 @@ services:
       - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml 
       # The catalog.xml contains new catalog configuration for CESAM data 
       - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml 
-      # The threddsConfig.xml contains the new palette
+      # The threddsConfig.xml contains the new palette and styles
       - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml
-      # The wmsConfig.xml contains the new palette
+      # The wmsConfig.xml contains the new palette and styles
       - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml
     networks:
       - thredds_network
