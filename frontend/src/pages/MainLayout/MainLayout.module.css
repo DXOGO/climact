@@ -130,6 +130,15 @@
 }
 
 @media (max-width: 768px) {
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtext {
+    font-size: 14px;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -161,7 +170,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: #fff;
     align-items: center;
@@ -174,10 +183,11 @@
   .backButton {
     margin: 12px 0px 10px 0px;
     padding: 0px;
-    margin-left: -10px;
+    margin-left: -4px;
   }
 
   .backTitle {
     margin-left: 0px;
+    font-size: 16px;
   }
 }

@@ -107,7 +107,7 @@ const GraphComponent = () => {
                             backgroundColor: '#25292C',
                             spacingTop: 20,
                             fontFamily: 'Epilogue',
-                            height: Math.max(screenHeight * 0.35, 300),
+                            height: isMobile ? 250 : Math.max(screenHeight * 0.35, 300),
                             width: !isMobile ? null : 600,
                         },
                         title: {

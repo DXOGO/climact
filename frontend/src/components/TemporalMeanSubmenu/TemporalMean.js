@@ -19,7 +19,7 @@ const TemporalMean = () => {
 
     return (
         <div className={styles.optionGroup}>
-            <h5 className={styles.subheading}>{t("temporalMeanType")}</h5>
+            <div className={styles.subheading}>{t("temporalMeanType")}</div>
             <RadioOption
                 label="temporalMean-annual"
                 name="temporalMean"

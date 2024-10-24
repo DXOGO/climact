@@ -63,7 +63,7 @@ const MainLayout = () => {
                 ) : (
                     <div className={styles.submenu}>
                         <button className={styles.backButton} onClick={handleBack}>
-                            <MdKeyboardArrowLeft color='#fff' size={32} />
+                            <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} />
                             <span className={styles.backTitle}>{title}</span>
                         </button>
                         {submenu === 'timePeriod' && <TimePeriod />}
@@ -79,14 +79,14 @@ const MainLayout = () => {
                     <div className={styles.middleColumn}>
                         <div className={styles.mobileDropdown}>
                             {t('textMap')}
-                            {showMap ? <MdExpandLess size={32} onClick={() => setShowMap(false)} /> : <MdExpandMore size={32} onClick={() => setShowMap(true)} />}
+                            {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
                         </div>
                         {showMap && <LeafletMap />}
                     </div>
                     <div className={styles.rightColumn}>
                         <div className={styles.mobileDropdown}>
                             {t('textGraph')}
-                            {showGraph ? <MdExpandLess size={32} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={32} onClick={() => setShowGraph(true)} />}
+                            {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
                         </div>
                         {showGraph && <GraphComponent />}
                     </div>
@@ -110,6 +110,7 @@ const MainLayout = () => {
 };
 
 const MenuOption = ({ title, subtitle, variable, onClick }) => {
+    const isMobile = useSelector(state => state.isMobile);
     return (
         <div className={styles.menuOption} onClick={onClick}>
             <div className={styles.menuOptionText}>
@@ -119,7 +120,7 @@ const MenuOption = ({ title, subtitle, variable, onClick }) => {
                     {variable && <p>{variable}</p>}
                 </div>
             </div>
-            <MdKeyboardArrowRight color='#fff' size={32} />
+            <MdKeyboardArrowRight color='#fff' size={isMobile ? 28 : 32} />
         </div>
     );
 };

@@ -23,5 +23,9 @@
     .optionGroup {
         margin-bottom: 20px;
     }
+
+    .subheading {
+        font-size: 16px;
+    }
 }
 

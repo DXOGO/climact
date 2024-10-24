@@ -9,7 +9,8 @@ const fileMapping = {
     TEMPS: path.join(__dirname, '../data/climatologias_TEMPS.xlsx'),
     NDAYS: path.join(__dirname, '../data/climatologias_NDAYS.xlsx'),
     WIND: path.join(__dirname, '../data/climatologias_WIND.xlsx'),
-    SOLAR: path.join(__dirname, '../data/climatologias_SOLAR.xlsx')
+    SOLAR: path.join(__dirname, '../data/climatologias_SOLAR.xlsx'),
+    WS100m: path.join(__dirname, '../data/climatologias_WS100m.xlsx') //! currently not in app
     // Add more mappings as new files are introduced
 };
 
@@ -28,7 +29,8 @@ const periodMapping = {
     TEMPS: {...monthMapping},
     NDAYS: {...monthMapping},
     WIND: {...monthMapping},
-    SOLAR: {...monthMapping}
+    SOLAR: {...monthMapping},
+    WS100m: {...monthMapping} //! currently not in app
 };
 
 // Function to load data from an Excel file and return relevant sheet data

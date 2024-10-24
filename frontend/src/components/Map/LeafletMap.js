@@ -5,93 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 
-const useMapClick = (wmsUrl, variable, variableKey) => {
-  
-  const [clickedPosition, setClickedPosition] = useState(null);
-  const [value, setValue] = useState(null);
-  const map = useMap();
-
-  const domain = variable.domain;
-  let unitSymbol;
-
-  if (domain === 'TEMPS') {
-    unitSymbol = '°C';
-  } else if (domain === 'NDAYS') {
-    unitSymbol = 'days per year';
-  } else if (domain === 'WS') {
-    unitSymbol = 'm/s';
-  }
-
-  const getFeatureInfo = useCallback(async (latlng) => {
-    const size = map.getSize();
-    const bounds = map.getBounds();
-    const sw = bounds.getSouthWest();
-    const ne = bounds.getNorthEast();
-
-    const params = new URLSearchParams({
-      REQUEST: 'GetFeatureInfo',
-      SERVICE: 'WMS',
-      VERSION: '1.3.0',
-      LAYERS: variableKey,
-      QUERY_LAYERS: variableKey,
-      INFO_FORMAT: 'text/plain',
-      I: Math.round((latlng.lng - sw.lng) / (ne.lng - sw.lng) * size.x),
-      J: Math.round((ne.lat - latlng.lat) / (ne.lat - sw.lat) * size.y),
-      CRS: 'EPSG:4326',
-      WIDTH: size.x,
-      HEIGHT: size.y,
-      BBOX: `${sw.lat},${sw.lng},${ne.lat},${ne.lng}`
-    });
-
-    try {
-      const response = await fetch(`${wmsUrl}?${params}`);
-      const text = await response.text();
-
-      // Parse the plain text response
-      const lines = text.split('\n');
-      const valueLine = lines.find(line => line.includes('Value:'));
-      if (valueLine) {
-        const value = valueLine.split(':')[1].trim();
-        return isNaN(value) ? value : parseFloat(value).toFixed(1);
-      }
-      return 'N/A';
-    } catch (error) {
-      console.error('Error fetching feature info:', error);
-      return 'Error';
-    }
-  }, [map, wmsUrl, variableKey]);
-
-  const handleMapClick = useCallback(async (e) => {
-    const { lat, lng } = e.latlng;
-    setClickedPosition({ lat, lng });
-    const info = await getFeatureInfo(e.latlng);
-    setValue(info);
-  }, [getFeatureInfo]);
-
-  const handleMapDblClick = (e) => {
-    const { lat, lng } = e.latlng;
-    setClickedPosition({ lat, lng });
-
-    const popupContent = `
-    <div style="background-color: #fff">
-      <p style="margin-bottom: 4px; color: #25292C; font-size: 12px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
-      <p style="margin: 0; color: #373C41; font-size: 12px">Latitude: ${lat.toFixed(2)}</p>
-      <p style="margin: 0; color: #373C41; font-size: 12px">Longitude: ${lng.toFixed(2)}</p>
-    </div>
-  `;
-    L.popup()
-      .setLatLng([lat, lng])
-      .setContent(popupContent)
-      .openOn(map);
-  };
-
-  useMapEvents({
-    click: handleMapClick,
-    dblclick: handleMapDblClick,
-  });
-
-  return { clickedPosition, value };
-};
+import useMapClick from './useMapClick';
 
 const LeafletMap = () => {
   const [loading, setLoading] = useState(true);
@@ -119,12 +33,20 @@ const LeafletMap = () => {
         </div>
       )}
       <MapContainer
-        center={ isMobile ? [39.8, -7.8] : [39.6, -7.8] }
+        center={[39.6, -7.8]}
         zoom={7}
         minZoom={7}
         maxZoom={9}
         zoomControl={false}
-        style={{ height: !isMobile ? '100%' : '600px' , width: '100%' }}
+        maxBounds={
+          [
+            [36.9, -10.5], // Southwest corner (latitude, longitude)
+            [42.3, -5.0], // Northeast corner
+          ]
+        } 
+        maxBoundsViscosity={1.0} // map bounce back into place if dragged outside
+        // dragging={!isMobile} //* test on mobile to see if it's necessary
+        style={{ height: !isMobile ? '100%' : '650px' , width: '100%' }}
         key={variableKey}
         doubleClickZoom={false}
       >
@@ -241,7 +163,8 @@ const CustomZoomControl = () => {
 };
 
 const getInfo = (variable) => {
-  // Pallete, style, colorScaleRange
+  // Pallete, style, colorScaleRange 
+  // ! ALL DEFAULT BECAUSE PALLETES AND STYLES ARE BEING SET ON WMSCONFIG.XML AND THREDDSCONFIG.XML FILES
   switch (variable) {
     case 'Tmean':
       return ['default', 'default', '5,30'];

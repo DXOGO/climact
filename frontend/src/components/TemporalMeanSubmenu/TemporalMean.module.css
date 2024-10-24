@@ -13,3 +13,9 @@
     margin-top: 0px;
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+ .subheading {
+    font-size: 16px;
+  }
+}

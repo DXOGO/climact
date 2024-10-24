@@ -46,8 +46,10 @@
 }
 
 .languageDropdown {
-    padding: 11px 16px 8px 0px;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 4px 8px 10px;
     background-color: #171A1C;
     color: #fff;
     border: none;
@@ -79,7 +81,7 @@
     }
 
     .navButton {
-        padding: 6px 10px 8px 10px;
+        padding: 6px 10px 4px 10px;
         border: none;
         cursor: pointer;
         font-size: 16px;
@@ -96,5 +98,9 @@
     .active {
         background-color: #FFFFFF;
         color: #2B2B2B;
+    }
+
+    .languageDropdown {
+        padding: 10px 0px 8px 8px;
     }
 }

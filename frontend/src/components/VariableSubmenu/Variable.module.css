@@ -22,7 +22,16 @@
 
 .variableOptions {
     margin-top: 10px;
-    /* Space between variable name and options */
     background-color: #25292C;
     border-radius: 5px;
 }
+
+@media (max-width: 768px) {
+    .variableSubmenu {
+        font-size: 16px;
+    }
+
+    .variableItem {
+        padding: 10px 10px;
+    }
+} 
