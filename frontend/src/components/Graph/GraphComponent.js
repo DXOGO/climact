@@ -143,7 +143,7 @@ const GraphComponent = () => {
                             // tickInterval: 5,
                             gridLineColor: '#373C41',
                             gridLineWidth: 1.5,
-                            min: Math.floor(minValue) == 0 ? 0 : Math.floor(minValue) - 1,
+                            min: Math.floor(minValue) === 0 ? 0 : Math.floor(minValue) - 1,
                             max: Math.floor(maxValue) + 1,
                             tickInterval: tickInterval,
 
@@ -206,7 +206,7 @@ const GraphComponent = () => {
         };
 
         fetchData();
-    }, [variable, timePeriod, t, screenHeight]);
+    }, [variable, timePeriod, t, screenHeight, isMobile]);
 
     return (
         errorMessage ? (
