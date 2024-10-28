@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { MapContainer, WMSTileLayer, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, WMSTileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
@@ -116,7 +116,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
     return () => {
       map.removeControl(legend);
     };
-  }, [variableKey, url, map]);
+  }, [variableKey, url, map, variableId, isMobile]);
 
   return null;
 };

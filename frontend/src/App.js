@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './pages/MainLayout/MainLayout';
 import AboutProject from './pages/AboutProject/AboutProject';
@@ -10,11 +10,10 @@ import './App.css';
 function App() {
     const dispatch = useDispatch();
 
-    // Handle window resize
-    const handleResize = () => {
+    const handleResize = useCallback(() => {
         const isMobile = window.innerWidth <= 768;
         dispatch(setIsMobile(isMobile));
-    };
+    }, [dispatch]);
 
     useEffect(() => {
         // Set initial state
@@ -27,7 +26,7 @@ function App() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [dispatch, handleResize]); // Ensure dispatch is included in the dependency array
+    }, [handleResize]); // Ensure dispatch is included in the dependency array
 
     return (
         <div className="App">

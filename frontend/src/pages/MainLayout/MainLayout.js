@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
