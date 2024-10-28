@@ -5,18 +5,18 @@ services:
     container_name: thredds
     image: unidata/thredds-docker:5.5
     ports:
-      - "80:8080"
-    volumes: # These bind mounts have to be changed inside the CESAM host
+      - "8080:8080"
+    volumes: #! These bind mounts have to be changed inside the CESAM host
       # The /public directory contains the .nc files
-      - /var/thredds/public:/usr/local/tomcat/content/thredds/public  
+      - ./thredds/public:/usr/local/tomcat/content/thredds/public
       # The web.xml contains CORS configuration for the React server
-      - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml 
+      - ./thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml
       # The catalog.xml contains new catalog configuration for CESAM data 
-      - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml 
+      - ./thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml
       # The threddsConfig.xml contains the new palette and styles
-      - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml
+      - ./thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml
       # The wmsConfig.xml contains the new palette and styles
-      - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml
+      - ./thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml
     networks:
       - thredds_network
 

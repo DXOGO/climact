@@ -27,7 +27,7 @@ function App() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [dispatch]); // Ensure dispatch is included in the dependency array
+    }, [dispatch, handleResize]); // Ensure dispatch is included in the dependency array
 
     return (
         <div className="App">

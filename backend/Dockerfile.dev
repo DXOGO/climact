@@ -1,7 +1,5 @@
 # Use a base image with Node.js for development
 FROM node:14-alpine AS development
-
-# Set environment variable
 ENV NODE_ENV=development
 
 # Install nodemon globally for development

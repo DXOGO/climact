@@ -1,5 +1,5 @@
 # Use a base image with Node.js
-FROM node:18-alpine as development
+FROM node:18-alpine AS development
 ENV NODE_ENV=development
 
 # Set the working directory inside the container
