@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styles from './AboutProject.module.css';
 import fct_dark from "../../assets/fct-dark.png";
 import pt_dark from "../../assets/pt-dark.png";
