@@ -39,8 +39,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=/ # Relative URL for production
-      - REACT_APP_THREDDS_URL=/  # Relative URL for production
+      - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt/api  # Relative URL for production
+      - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt/thredds  # Relative URL for production
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
