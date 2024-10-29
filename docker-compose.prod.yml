@@ -33,7 +33,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:3000"
+      - "80:80"  # Expose port 80 from the NGINX container to port 3000
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=/3001  # Relative URL for production
