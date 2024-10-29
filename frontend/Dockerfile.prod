@@ -1,0 +1,24 @@
+# Build stage
+FROM node:18-alpine AS build
+
+# Set environment to production for optimized builds
+ENV NODE_ENV=production
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json first to leverage Docker cache
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm config set registry https://registry.npmjs.org/ && \
+    npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Final stage
+CMD ["npm", "start"]

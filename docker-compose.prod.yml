@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  thredds:
+    container_name: thredds
+    image: unidata/thredds-docker:5.5
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
+      - ./thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
+      - ./thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
+      - ./thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
+      - ./thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
+    networks:
+      - thredds_network
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - thredds_network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_BASE_URL=/api  # Relative URL for production
+      - REACT_APP_THREDDS_URL=/thredds/thredds  # Relative URL for production
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public/locales:/app/public/locales # translation files
+    networks:
+      - thredds_network
+
+  nginx:
+    container_name: 'nginx-service'
+    build:
+      context: .
+      dockerfile: docker/nginx.Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./config:/config
+    network_mode: "host"
+    restart: always
+
+networks:
+  thredds_network:
