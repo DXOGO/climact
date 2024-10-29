@@ -4,7 +4,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 COPY /config/nginx.conf /etc/nginx/conf.d
 
-RUN mkdir /etc/nginx/certs
+RUN mkdir /etc/nginx/certs /config
 
 RUN cat /config/CACert.crt >> /config/cesam-climact_ua_pt.crt && \
     cat /config/CACert.crt >> /config/cesam-climact_ua_pt.key
