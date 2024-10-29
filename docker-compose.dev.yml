@@ -6,6 +6,7 @@ services:
     image: unidata/thredds-docker:5.5
     ports:
       - "8080:8080"
+    volumes:
       - ./thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
       - ./thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
       - ./thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
