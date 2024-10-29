@@ -44,7 +44,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     volumes:
-      - ./etc/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf  # Update this path as needed
+      - /etc/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf  # Update this path as needed
     ports:
       - "80:80"  # Expose port 80 for web traffic
     networks:
