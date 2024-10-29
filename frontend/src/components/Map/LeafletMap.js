@@ -15,7 +15,8 @@ const LeafletMap = () => {
   const isMobile = useSelector((state) => state.isMobile);
 
   const variableKey = `${variable.id}_${timePeriod.id}`;
-  const wmsUrl = `http://localhost:8080/thredds/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
+
+  const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
   const selectedLayerInfo = getInfo(variable.id);
 

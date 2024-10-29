@@ -6,7 +6,7 @@ services:
     image: unidata/thredds-docker:5.5
     ports:
       - "8080:8080"
-    volumes: #! These bind mounts have to be changed inside the CESAM host
+    volumes:
       - ./thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
       - ./thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
       - ./thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
@@ -19,33 +19,27 @@ services:
     container_name: backend
     build:
       context: ./backend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     ports:
       - "3001:3001"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     networks:
       - thredds_network
-
+      
   frontend:
     container_name: frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
-      - REACT_APP_API_BASE_URL=http://localhost:3001  # Absolute URL for development
-      - REACT_APP_THREDDS_URL=http://localhost:8080/thredds  # Absolute URL for development
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public/locales:/app/public/locales # translation files
+      - NODE_ENV=production
+      - REACT_APP_API_BASE_URL=/3001  # Relative URL for production
+      - REACT_APP_THREDDS_URL=/8080/thredds  # Relative URL for production
     networks:
       - thredds_network
-
+      
 networks:
   thredds_network:
