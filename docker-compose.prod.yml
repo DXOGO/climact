@@ -13,7 +13,7 @@ services:
       - ./thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
       - ./thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
     networks:
-      - thredds_network
+      - climact_network
 
   backend:
     container_name: backend
@@ -25,7 +25,7 @@ services:
     environment:
       - NODE_ENV=production
     networks:
-      - thredds_network
+      - climact_network
       
   frontend:
     container_name: frontend
@@ -39,7 +39,16 @@ services:
       - REACT_APP_API_BASE_URL=/api  # Relative URL for production
       - REACT_APP_THREDDS_URL=/thredds  # Relative URL for production
     networks:
-      - thredds_network
+      - climact_network
+
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - /etc/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf  # Update this path as needed
+    ports:
+      - "80:80"  # Expose port 80 for web traffic
+    networks:
+      - climact_network
       
 networks:
-  thredds_network:
+  climact_network:
