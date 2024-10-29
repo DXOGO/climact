@@ -64,7 +64,7 @@ const GraphComponent = () => {
                 setErrorMessage(null); // Reset error message
                 setChartOptions(null);  // Reset chart options
 
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
                 
 
                 if (response.status === 200 && response.data && response.data.length > 0) {
