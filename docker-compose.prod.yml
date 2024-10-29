@@ -39,8 +39,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=/api  # Relative URL for production
-      - REACT_APP_THREDDS_URL=/thredds/thredds  # Relative URL for production
+      - REACT_APP_API_BASE_URL=/api2  # Relative URL for production
+      - REACT_APP_THREDDS_URL=/thredds2/thredds  # Relative URL for production
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
