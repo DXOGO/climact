@@ -56,7 +56,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./config:/config
+      - /etc/nginx/certs:/etc/nginx/certs  # Mount VM certs directory instead of copying
     restart: always
 
 networks:
