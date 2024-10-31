@@ -7,11 +7,11 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
-      - ./thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
-      - ./thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
-      - ./thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
-      - ./thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
+      - /var/thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
+      - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
+      - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
+      - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
+      - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
     networks:
       - thredds_network
 
