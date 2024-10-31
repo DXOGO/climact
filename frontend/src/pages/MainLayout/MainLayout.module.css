@@ -66,16 +66,16 @@
 
 .title {
   margin: 0;
-  color: #fff;
-  font-size: 18px;
+  color: #9EAAB9;
+  font-size: 16px;
   font-weight: 500;
 }
 
 .subtext {
   margin: 0;
-  color: #aaa;
+  color: #fff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .subtext p {
@@ -107,7 +107,7 @@
 
 .backTitle {
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   margin-left: 6px;
   font-family: 'Epilogue';
