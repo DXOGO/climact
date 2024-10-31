@@ -73,6 +73,14 @@ the GetFeatureInfo operation.
                 <defaultPaletteName>seq-Heat-inv</defaultPaletteName>
             </pathDefaults>
         </datasetPath>
+        <datasetPath pathSpec="cesamAll/FWI/*.nc">
+            <!-- Will apply to all paths that match the path spec above -->
+            <pathDefaults>
+                <!-- These will apply to all variables in this path unless overridden below -->
+                <allowFeatureInfo>true</allowFeatureInfo>
+                <defaultPaletteName>seq-Heat-inv</defaultPaletteName>
+            </pathDefaults>
+        </datasetPath>
     </overrides>
 </wmsConfig>
 

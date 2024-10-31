@@ -197,16 +197,29 @@
         "name": "fireRiskIndex",
         "options": [
             {
-                "id": "HFWI",
-                "label": "hfwi"
+                "id": "high_days_fwi",
+                "label": "hfwi",
+                "domain": "FWI"
             },
             {
-                "id": "VHFWI",
-                "label": "vhfwi"
+                "id": "very_high_days_fwi",
+                "label": "vhfwi",
+                "domain": "FWI"
             },
             {
-                "id": "EFWI",
-                "label": "efwi"
+                "id": "extreme_days_fwi",
+                "label": "efwi",
+                "domain": "FWI"
+            },
+            {
+                "id": "very_extreme_days_fwi",
+                "label": "vefwi",
+                "domain": "FWI"
+            },
+            {
+                "id": "exceptional_days_fwi",
+                "label": "exfwi",
+                "domain": "FWI"
             }
         ]
     }

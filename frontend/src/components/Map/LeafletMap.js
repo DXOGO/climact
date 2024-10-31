@@ -16,6 +16,7 @@ const LeafletMap = () => {
 
   const variableKey = `${variable.id}_${timePeriod.id}`;
 
+  console.log('variableKey', variable.domain);
   const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/thredds/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
   const selectedLayerInfo = getInfo(variable.id);
@@ -196,6 +197,21 @@ const getInfo = (variable) => {
 
     case 'solar_energy':
       return ['default', 'default', '1,2']; 
+
+    case 'high_days_fwi':
+      return ['default', 'default', '10,50'];
+    
+    case 'very_high_days_fwi':
+      return ['default', 'default', '30,70'];
+
+    case 'extreme_days_fwi':
+      return ['default', 'default', '10,50'];
+
+    case 'very_extreme_days_fwi':
+      return ['default', 'default', '10,50'];
+
+    case 'exceptional_days_fwi':
+      return ['default', 'default', '5,60'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];
