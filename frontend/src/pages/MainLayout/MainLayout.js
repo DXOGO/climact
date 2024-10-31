@@ -97,16 +97,13 @@ const MainLayout = () => {
                         <LeafletMap />
                     </div>
                     <div className={styles.rightColumn}>
-                        <div className={styles.topRightBox}>
-                            <GraphComponent />
-                        </div>
-                        <div className={styles.bottomRightBox}></div>
+                        <GraphComponent />
                     </div>
                 </>
             )
             }
         </div>
-        );
+    );
 };
 
 const MenuOption = ({ title, subtitle, variable, onClick }) => {

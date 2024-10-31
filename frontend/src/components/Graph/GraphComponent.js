@@ -56,6 +56,26 @@ const GraphComponent = () => {
         name = t('wind');
     } else if (variable.id === 'solar_energy') {
         name = t('solar');
+    } else if (variable.id === 'high_days_fwi') {
+        //const orString = t('hfwi');
+        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
+        name = t('hfwi');
+    } else if (variable.id === 'very_high_days_fwi') {
+        //const orString = t('vhfwi');
+        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
+        name = t('vhfwi');
+    } else if (variable.id === 'extreme_days_fwi') {
+        //const orString = t('edfwi');
+        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
+        name = t('efwi');
+    } else if (variable.id === 'very_extreme_fwi') {
+        //const orString = t('vefwi');
+        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
+        name = t('vefwi');
+    } else if (variable.id === 'excepetional_days_fwi') {
+        //const orString = t('exfwi');
+        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
+        name = t('exfwi');
     }
 
     useEffect(() => {
@@ -65,7 +85,7 @@ const GraphComponent = () => {
                 setChartOptions(null);  // Reset chart options
 
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
-                
+
 
                 if (response.status === 200 && response.data && response.data.length > 0) {
                     const data = response.data;
@@ -89,13 +109,13 @@ const GraphComponent = () => {
                     if (variable.domain === 'TEMPS') {
                         yAxisTitle = t('yAxisTitleTemp');
                         tooltipUnit = '°C';
-                    } else if (variable.domain === 'NDAYS') {
+                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI') {
                         yAxisTitle = t('yAxisTitleNDays');
                         tooltipUnit = ' days';
                     } else if (variable.domain === 'WIND') {
                         yAxisTitle = t('yAxisTitleWind');
                         tooltipUnit = ' kW.h/m2';
-                    }  else if (variable.domain === 'SOLAR') {
+                    } else if (variable.domain === 'SOLAR') {
                         yAxisTitle = t('yAxisTitleSolar');
                         tooltipUnit = ' kW.h/m2';
                     }
@@ -107,7 +127,7 @@ const GraphComponent = () => {
                             backgroundColor: '#25292C',
                             spacingTop: 20,
                             fontFamily: 'Epilogue',
-                            height: isMobile ? 250 : Math.max(screenHeight * 0.35, 300),
+                            height: isMobile ? 250 : Math.max(screenHeight * 0.35, 350),
                             width: !isMobile ? null : 600,
                         },
                         title: {
@@ -223,6 +243,9 @@ const GraphComponent = () => {
                     <h4 className={styles.chartSubtitle}>
                         {`${timePeriod.scenario}, ${timePeriod.period}`}
                     </h4>
+                    <div className={styles.chartDescription}>
+                        { variable.description ? variable.description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ligula nisi. Phasellus in gravida augue, ac hendrerit orci. Nam et est rutrum, viverra neque ac, gravida massa'}
+                    </div>
                 </div>
 
                 <div className={styles.realChart}>
