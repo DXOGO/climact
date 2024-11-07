@@ -27,18 +27,6 @@ services:
     networks:
       - thredds_network
 
-  nginx:
-    container_name: 'nginx-service'
-    build:
-      context: .
-      dockerfile: ./docker/nginx.Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /etc/nginx/certs:/etc/nginx/certs
-    restart: always
-    
   frontend:
     container_name: frontend
     build:
@@ -57,6 +45,18 @@ services:
       - nginx
     networks:
       - thredds_network
+
+  nginx:
+    container_name: 'nginx-service'
+    build:
+      context: .
+      dockerfile: ./docker/nginx.Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/nginx/certs:/etc/nginx/certs:ro
+    restart: always
 
 networks:
   thredds_network:
