@@ -38,6 +38,9 @@ services:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
       - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public/locales:/app/public/locales # translation files
     networks:
       - thredds_network
 
