@@ -1,22 +1,23 @@
 # Build stage
 FROM node:18-alpine AS build
 ENV NODE_ENV=production
-
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json first to leverage Docker cache
+# Copy package.json files and install dependencies
 COPY package*.json ./
+RUN npm install --production
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
+# Copy app code and build the static files
 COPY . .
-
-# Build the React app
 RUN npm run build
 
-# Serve the production build with a lightweight server
-RUN npm install -g serve
-CMD ["serve", "-s", "build"]
+# Use NGINX to serve the static files
+FROM nginx:1.27.0-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copy a custom NGINX configuration if needed
+COPY /config/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the NGINX port
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
