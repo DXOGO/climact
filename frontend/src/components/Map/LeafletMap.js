@@ -16,7 +16,6 @@ const LeafletMap = () => {
 
   const variableKey = `${variable.id}_${timePeriod.id}`;
 
-  console.log('variableKey', variable.domain);
   const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/thredds/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
   const selectedLayerInfo = getInfo(variable.id);

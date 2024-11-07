@@ -26,7 +26,7 @@ services:
       - ./backend:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     networks:
       - thredds_network
 
@@ -36,14 +36,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt  # Relative URL for production
       - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt  # Relative URL for production
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public/locales:/app/public/locales # translation files
+    # volumes:
+    #   - ./frontend/src:/app/src
+    #   - ./frontend/public/locales:/app/public/locales # translation files
     networks:
       - thredds_network
 
