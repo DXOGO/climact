@@ -36,7 +36,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:80"
+      - "3000:3000"
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt  # Relative URL for production
