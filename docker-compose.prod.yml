@@ -44,6 +44,8 @@ services:
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
+    depends_on:
+      - nginx
     networks:
       - thredds_network
 
