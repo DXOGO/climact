@@ -5,7 +5,7 @@ services:
     container_name: thredds
     image: unidata/thredds-docker:5.5
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - /var/thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
       - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
@@ -21,29 +21,28 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     ports:
-      - "3001:3001"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - 3001:3001
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     networks:
       - thredds_network
 
   frontend:
     container_name: frontend
     build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
-    ports:
-      - "3000:3000"
+      context: .
+      dockerfile: ./frontend/Dockerfile.prod
+    # ports:
+    #   - 3000:3000
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt  # Relative URL for production
-      - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt  # Relative URL for production
+      - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
+      - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
+    depends_on:
+      - nginx
     networks:
       - thredds_network
 

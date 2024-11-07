@@ -1,4 +1,3 @@
-# Build stage
 FROM node:18-alpine AS build
 
 # Set environment to production for optimized builds
