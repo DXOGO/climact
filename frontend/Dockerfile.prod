@@ -22,9 +22,6 @@ ENV REACT_APP_THREDDS_URL=$REACT_APP_THREDDS_URL
 # Build the React app
 RUN npm run build
 
-# # Build the React app
-# CMD ["npm", "start"]
-
 # Step 2: Serve the app with nginx
 FROM nginx:1.27.0-alpine
 
