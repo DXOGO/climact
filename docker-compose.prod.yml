@@ -61,7 +61,7 @@ services:
       - 443:443
     volumes:
       - /etc/nginx/certs:/etc/nginx/certs
-      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     # command: >
     #   sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
     # depends_on:
