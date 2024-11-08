@@ -35,6 +35,9 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile.prod
+      args:
+        REACT_APP_API_BASE_URL: "/api"
+        REACT_APP_THREDDS_URL: "/thredds"
     # ports:
     #   - 3000:3000
     ports:
@@ -42,8 +45,8 @@ services:
       - 443:443
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=/api
-      - REACT_APP_THREDDS_URL=/thredds
+      # - REACT_APP_API_BASE_URL=/api
+      # - REACT_APP_THREDDS_URL=/thredds
     volumes:
       - ./frontend/public/locales:/app/public/locales # translation files
       - /etc/nginx/certs:/etc/nginx/certs
