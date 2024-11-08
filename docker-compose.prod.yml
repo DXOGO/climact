@@ -61,7 +61,6 @@ services:
       - 443:443
     volumes:
       - /etc/nginx/certs:/etc/nginx/certs
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf 
     # command: >
     #   sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
     restart: always
