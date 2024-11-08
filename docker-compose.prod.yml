@@ -47,6 +47,7 @@ services:
       - /etc/nginx/certs:/etc/nginx/certs
     networks:
       - thredds_network
+    restart: always
 
   # nginx:
   #   container_name: 'nginx-service'
