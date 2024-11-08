@@ -35,14 +35,14 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile.prod
-    # ports:
-    #   - 3000:3000
+    ports:
+      - 3000:80
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=/api
-      - REACT_APP_THREDDS_URL=/thredds
-      # - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
-      # - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
+      # - REACT_APP_API_BASE_URL=/api
+      # - REACT_APP_THREDDS_URL=/thredds
+      - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
+      - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
