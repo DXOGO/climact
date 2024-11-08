@@ -39,28 +39,31 @@ services:
       dockerfile: frontend/Dockerfile.prod
     # ports:
     #   - 3000:3000
+    ports:
+      - 80:80
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
       - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
     volumes:
       - ./frontend/public/locales:/app/public/locales # translation files
+      - /etc/nginx/certs:/etc/nginx/certs
     networks:
       - thredds_network
 
-  nginx:
-    container_name: 'nginx-service'
-    build:
-      context: .
-      dockerfile: docker/nginx.Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /etc/nginx/certs:/etc/nginx/certs
-    depends_on:
-      - frontend
-    restart: always
+  # nginx:
+  #   container_name: 'nginx-service'
+  #   build:
+  #     context: .
+  #     dockerfile: docker/nginx.Dockerfile
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - /etc/nginx/certs:/etc/nginx/certs
+  #   depends_on:
+  #     - frontend
+  #   restart: always
 
 networks:
   thredds_network:
