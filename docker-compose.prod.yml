@@ -37,8 +37,8 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile.prod
-    # ports:
-    #   - 3000:3000
+    ports:
+      - 80:80
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
