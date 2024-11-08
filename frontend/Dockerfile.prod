@@ -24,6 +24,9 @@ RUN npm run build
 # Step 2: Serve the app with nginx
 FROM nginx:alpine
 
+# Remove the default nginx welcome page
+RUN rm -rf /usr/share/nginx/html/*
+
 # Copy the React build output to the nginx HTML directory
 COPY --from=build /app/build /usr/share/nginx/html
 
