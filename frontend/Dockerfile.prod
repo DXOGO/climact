@@ -14,7 +14,7 @@ RUN npm install --omit=dev
 COPY ./frontend ./
 
 # Build the React app
-RUN npm run build
+RUN npm run build && ls -la /app/build
 
 # # Build the React app
 # CMD ["npm", "start"]
