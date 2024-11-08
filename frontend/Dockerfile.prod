@@ -7,13 +7,13 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy package.json and package-lock.json first to leverage Docker cache
-COPY package*.json ./
+COPY ./frontend/package*.json ./
 
 # Install only production dependencies
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Copy the rest of the application code
-COPY . .
+COPY ./frontend ./
 
 # Build the React app
 RUN npm run build
@@ -28,10 +28,10 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Copy custom nginx config
-COPY ../config/nginx.conf /etc/nginx/nginx.conf
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
 
 # Expose the default nginx port
-EXPOSE 80 443
+EXPOSE 80
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
