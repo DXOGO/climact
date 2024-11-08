@@ -44,9 +44,8 @@ services:
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
       - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
     volumes:
+      - /app/build
       - ./frontend/public/locales:/app/public/locales # translation files
-    depends_on:
-      - nginx
     networks:
       - thredds_network
 
@@ -59,7 +58,10 @@ services:
       - 80:80
       - 443:443
     volumes:
+      - /app/build:/usr/share/nginx/html  # Mount the build folder to NGINX's web directory
       - /etc/nginx/certs:/etc/nginx/certs
+    depends_on:
+      - frontend
     # command: >
     #   sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
     restart: always
