@@ -16,20 +16,20 @@ COPY ./frontend ./
 # Build the React app
 RUN npm run build
 
-# # Build the React app
-# CMD ["npm", "start"]
+# Build the React app
+CMD ["npm", "start"]
 
-# Step 2: Serve the app with nginx
-FROM nginx:alpine
+# # Step 2: Serve the app with nginx
+# FROM nginx:alpine
 
-# Remove the default nginx welcome page
-RUN rm -rf /usr/share/nginx/html/*
+# # Remove the default nginx welcome page
+# RUN rm -rf /usr/share/nginx/html/*
 
-# Copy the React build output to the nginx HTML directory
-COPY --from=build /app/build /usr/share/nginx/html
+# # Copy the React build output to the nginx HTML directory
+# COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the default nginx port
-EXPOSE 80
+# # Expose the default nginx port
+# EXPOSE 80
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# # Start nginx
+# CMD ["nginx", "-g", "daemon off;"]
