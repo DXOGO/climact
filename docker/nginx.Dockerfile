@@ -6,4 +6,3 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy the custom NGINX configuration
 COPY /config/default.conf /etc/nginx/conf.d/default.conf
 
-RUN addgroup --system www-data && adduser --system --ingroup www-data www-data
