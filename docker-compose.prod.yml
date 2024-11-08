@@ -46,6 +46,8 @@ services:
     volumes:
       - /app/build
       - ./frontend/public/locales:/app/public/locales # translation files
+      - ./frontend:/app  
+    command: ["npm", "run", "build"]
     networks:
       - thredds_network
 
@@ -58,7 +60,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /app/build:/usr/share/nginx/html  # Mount the build folder to NGINX's web directory
+      - ./frontend/build:/usr/share/nginx/html:ro
       - /etc/nginx/certs:/etc/nginx/certs
     depends_on:
       - frontend
