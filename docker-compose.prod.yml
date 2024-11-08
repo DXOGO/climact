@@ -35,8 +35,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
     environment:
       - NODE_ENV=production
       - REACT_APP_API_BASE_URL=https://cesam-climact.ua.pt 
@@ -58,7 +58,13 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /etc/nginx/certs:/etc/nginx/certs
+      - /etc/nginx/certs:/etc/nginx/certs:ro
+    command: >
+      sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
+    depends_on:
+      - frontend
+      - backend
+      - thredds
     restart: always
 
 networks:
