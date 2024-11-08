@@ -84,7 +84,6 @@ const GraphComponent = () => {
                 setErrorMessage(null); // Reset error message
                 setChartOptions(null);  // Reset chart options
 
-                console.log(process.env.REACT_APP_API_BASE_URL);
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
 
 
