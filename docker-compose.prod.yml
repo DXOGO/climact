@@ -45,8 +45,6 @@ services:
       - REACT_APP_THREDDS_URL=https://cesam-climact.ua.pt 
     volumes:
       - ./frontend/public/locales:/app/public/locales # translation files
-      - /etc/nginx/certs:/etc/nginx/certs
-
     networks:
       - thredds_network
 
