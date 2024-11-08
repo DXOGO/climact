@@ -33,7 +33,7 @@ services:
   frontend:
     container_name: frontend
     build:
-      context: .frontend
+      context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
       - 3000:80
