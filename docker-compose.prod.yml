@@ -47,7 +47,6 @@ services:
       - /app/build
       - ./frontend/public/locales:/app/public/locales # translation files
       - ./frontend:/app  
-    command: ["npm", "run", "build"]
     networks:
       - thredds_network
 
