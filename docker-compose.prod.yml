@@ -22,11 +22,11 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - 3001:3001
+    environment:
+      - NODE_ENV=production
     volumes:
       - ./backend:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=production
     networks:
       - thredds_network
 
@@ -44,6 +44,8 @@ services:
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public/locales:/app/public/locales # translation files
+    depends_on:
+      - nginx
     networks:
       - thredds_network
 
@@ -57,8 +59,8 @@ services:
       - 443:443
     volumes:
       - /etc/nginx/certs:/etc/nginx/certs
-    command: >
-      sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
+    # command: >
+    #   sh -c "chown root:root /etc/nginx/certs/* && chmod 644 /etc/nginx/certs/* && nginx -g 'daemon off;'"
     # depends_on:
     #   - frontend
     #   - backend
