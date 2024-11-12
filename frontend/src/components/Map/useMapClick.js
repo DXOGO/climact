@@ -4,7 +4,6 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const useMapClick = (wmsUrl, variable, variableKey) => {
-
     const [clickedPosition, setClickedPosition] = useState(null);
     const [value, setValue] = useState(null);
     const map = useMap();
@@ -16,8 +15,10 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         unitSymbol = '°C';
     } else if (domain === 'NDAYS' || domain === 'FWI') {
         unitSymbol = 'days per year';
-    } else if (domain === 'WS') {
-        unitSymbol = 'm/s';
+    } else if (domain === 'SOLAR' || domain === 'WIND') {
+        unitSymbol = 'kW.h/m2';
+    } else {
+        unitSymbol = '';
     }
 
     const getFeatureInfo = useCallback(async (latlng) => {
@@ -44,15 +45,8 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         try {
             const response = await fetch(`${wmsUrl}?${params}`);
             const text = await response.text();
-
-            // Parse the plain text response
-            const lines = text.split('\n');
-            const valueLine = lines.find(line => line.includes('Value:'));
-            if (valueLine) {
-                const value = valueLine.split(':')[1].trim();
-                return isNaN(value) ? value : parseFloat(value).toFixed(1);
-            }
-            return 'N/A';
+            const valueLine = text.split('\n').find(line => line.includes('Value:'));
+            return valueLine ? parseFloat(valueLine.split(':')[1].trim()).toFixed(1) : 'N/A';
         } catch (error) {
             console.error('Error fetching feature info:', error);
             return 'Error';
@@ -61,26 +55,23 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     const handleMapClick = useCallback(async (e) => {
         const { lat, lng } = e.latlng;
-        setClickedPosition({ lat, lng });
         const info = await getFeatureInfo(e.latlng);
+        setClickedPosition(info !== 'N/A' ? { lat, lng } : null);
         setValue(info);
     }, [getFeatureInfo]);
 
     const handleMapDblClick = (e) => {
-        const { lat, lng } = e.latlng;
-        setClickedPosition({ lat, lng });
+        if (value === 'N/A') return;  // Prevent popup if value is 'N/A'
 
+        const { lat, lng } = e.latlng;
         const popupContent = `
-      <div style="background-color: #fff">
-        <p style="margin-bottom: 4px; color: #25292C; font-size: 12px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
-        <p style="margin: 0; color: #373C41; font-size: 10px">Latitude: ${lat.toFixed(2)}</p>
-        <p style="margin: 0; color: #373C41; font-size: 10px">Longitude: ${lng.toFixed(2)}</p>
-      </div>
-    `;
-        L.popup()
-            .setLatLng([lat, lng])
-            .setContent(popupContent)
-            .openOn(map);
+            <div style="background-color: #fff">
+                <p style="margin-bottom: 4px; color: #25292C; font-size: 12px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
+                <p style="margin: 0; color: #373C41; font-size: 10px">Latitude: ${lat.toFixed(2)}</p>
+                <p style="margin: 0; color: #373C41; font-size: 10px">Longitude: ${lng.toFixed(2)}</p>
+            </div>
+        `;
+        L.popup().setLatLng([lat, lng]).setContent(popupContent).openOn(map);
     };
 
     useMapEvents({

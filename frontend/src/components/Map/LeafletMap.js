@@ -72,6 +72,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         transparent={true}
         version="1.3.0"
         colorScaleRange={selectedLayerInfo[2]}
+        tileSize={512}
         numColorBands={250}
         eventHandlers={{
           add: (e) => handleTileLoading(e.target),

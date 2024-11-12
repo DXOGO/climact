@@ -20,6 +20,10 @@
     .chartDescription {
         margin-bottom: 20px !important;
     }
+
+    .realChart {
+        overflow-x: scroll;
+    }    
 }
 
 .chartHeader {
@@ -59,7 +63,7 @@
 .realChart {
     width: 100%;
     height: 100%;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .errorMessage {
