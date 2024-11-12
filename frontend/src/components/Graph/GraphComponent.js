@@ -189,13 +189,12 @@ const GraphComponent = () => {
                             formatter: function () {
                                 return `Average<br /><strong>${this.x}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
                             },
-                            backgroundColor: '#25292C',
-                            borderWidth: 2,
-                            borderColor: '#373C41',
+                            backgroundColor: '#fff',
+                            borderRadius: 5,
                             padding: 10,
                             shadow: false,
                             style: {
-                                color: '#fff',
+                                color: '#25292C',
                                 fontSize: '12px',
                             }
                         },

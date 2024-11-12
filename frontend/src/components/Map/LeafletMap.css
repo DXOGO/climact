@@ -15,6 +15,11 @@
   display: none !important;
 }
 
+.leaflet-popup-content-wrapper {
+  background-color: #fff !important;
+  border-radius: 5px !important;
+}
+
 .leaflet-popup-content {
   margin: 0px 24px 6px 12px !important;
 }
