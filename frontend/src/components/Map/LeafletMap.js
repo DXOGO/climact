@@ -112,7 +112,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;
     };
 
