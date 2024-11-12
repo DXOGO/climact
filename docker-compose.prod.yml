@@ -2,8 +2,8 @@ services:
   thredds:
     container_name: thredds
     image: unidata/thredds-docker:5.5
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080
     volumes:
       - /var/thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
       - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
@@ -18,8 +18,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.prod
-    ports:
-      - 3001:3001
+    # ports:
+    #   - 3001:3001
     environment:
       - NODE_ENV=production
     volumes:
