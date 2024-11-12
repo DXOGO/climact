@@ -5,9 +5,12 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 
+import { useTranslation } from 'react-i18next';
+
 import useMapClick from './useMapClick';
 
 const LeafletMap = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
 
   const timePeriod = useSelector((state) => state.timePeriod);
@@ -30,6 +33,7 @@ const LeafletMap = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
       {loading && (
         <div className="loading-container">
+          <div>{t('loadingMap')}</div>
           <div className="loading-icon" />
         </div>
       )}
@@ -79,9 +83,11 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         }}
       />
        {!loading && (
-      <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
+        <>
+          <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
+          {!isMobile && <CustomZoomControl />}
+        </>
       )}
-      {!isMobile && <CustomZoomControl />}
     </>
   );
 };
