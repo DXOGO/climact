@@ -63,7 +63,7 @@ const MainLayout = () => {
                 ) : (
                     <div className={styles.submenu}>
                         <button className={styles.backButton} onClick={handleBack}>
-                            <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} />
+                            <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} style={{flexShrink: 0}} />
                             <span className={styles.backTitle}>{title}</span>
                         </button>
                         {submenu === 'timePeriod' && <TimePeriod />}
@@ -117,7 +117,7 @@ const MenuOption = ({ title, subtitle, variable, onClick }) => {
                     {variable && <p>{variable}</p>}
                 </div>
             </div>
-            <MdKeyboardArrowRight color='#fff' size={isMobile ? 28 : 32} />
+            <MdKeyboardArrowRight color='#fff' size={isMobile ? 28 : 32} style={{flexShrink: 0}} />
         </div>
     );
 };
