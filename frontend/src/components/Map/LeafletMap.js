@@ -51,13 +51,13 @@ const LeafletMap = () => {
         key={variableKey}
         doubleClickZoom={false}
       >
-        <MapContent wmsUrl={wmsUrl} variable={variable} variableKey={variableKey} selectedLayerInfo={selectedLayerInfo} handleTileLoading={handleTileLoading} />
+        <MapContent wmsUrl={wmsUrl} variable={variable} variableKey={variableKey} selectedLayerInfo={selectedLayerInfo} handleTileLoading={handleTileLoading} loading={loading} />
       </MapContainer>
     </div>
   );
 };
 
-const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading }) => {
+const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading }) => {
   useMapClick(wmsUrl, variable, variableKey);
 
   const isMobile = useSelector((state) => state.isMobile);
