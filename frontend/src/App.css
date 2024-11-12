@@ -12,7 +12,7 @@
 }
 
 html, body {
-  background-color: #171A1C;
+  background-color: #171A1C !important;
   margin: 0;
   padding: 0;
 }

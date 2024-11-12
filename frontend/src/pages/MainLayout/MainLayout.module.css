@@ -17,7 +17,7 @@
 .middleColumn,
 .rightColumn
 {
-  background-color: #25292C;
+  background-color: #25292C !important;
   border-radius: 10px;
   padding: 20px;
   flex-grow: 1;
@@ -47,7 +47,7 @@
   align-items: flex-start;
   margin: 10px 0px 10px 0px;
   padding: 10px;
-  background-color: #25292C;
+  background-color: #25292C !important;
   border-radius: 10px;
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -60,20 +60,19 @@
 }
 
 .menuOption:hover {
-  background-color: rgba(23, 26, 28, 0.4);
-  /* #171A1C with 40% opacity */
+  background-color: rgba(23, 26, 28, 0.4) !important;
 }
 
 .title {
   margin: 0;
-  color: #9EAAB9;
+  color: #9EAAB9 !important;
   font-size: 16px;
   font-weight: 500;
 }
 
 .subtext {
   margin: 0;
-  color: #fff;
+  color: #fff !important;
   font-size: 16px;
   font-weight: 400;
 }
@@ -86,7 +85,7 @@
 .submenu {
   display: flex;
   flex-direction: column;
-  background-color: #25292C;
+  background-color: #25292C !important;
   border-radius: 10px;
   height: 100%;
 }
@@ -94,7 +93,7 @@
 .backButton {
   background: none;
   border: none;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -106,7 +105,7 @@
 }
 
 .backTitle {
-  color: #fff;
+  color: #fff !important;
   font-size: 16px;
   font-weight: 500;
   margin-left: 6px;
@@ -114,8 +113,7 @@
 }
 
 .backButton:hover {
-  background-color: rgba(23, 26, 28, 0.4);
-  /* #171A1C with 40% opacity */
+  background-color: rgba(23, 26, 28, 0.4) !important;
 }
 
 @media (max-width: 768px) {
@@ -154,7 +152,7 @@
     justify-content: space-between;
     font-size: 16px;
     font-weight: 500;
-    color: #fff;
+    color: #fff !important;
     align-items: center;
   }
 
