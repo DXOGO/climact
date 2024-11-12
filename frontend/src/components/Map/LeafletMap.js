@@ -78,12 +78,9 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
           add: (e) => handleTileLoading(e.target),
         }}
       />
-       {loading && (
-        <div className="loading-container">
-          <div className="loading-icon" />
-        </div>
-      )}
+       {!loading && (
       <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
+      )}
       {!isMobile && <CustomZoomControl />}
     </>
   );
