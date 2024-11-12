@@ -145,16 +145,16 @@ const CustomZoomControl = () => {
 
     // Apply custom styles
     zoomIn.style.cssText = `
-      background-color: #fff;
-      color: #25292C;
+      background-color: #fff !important;
+      color: #25292C !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;
     `;
 
     zoomOut.style.cssText = `
-      background-color: #fff;
-      color: #25292C;
+      background-color: #fff !important;
+      color: #25292C !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;
