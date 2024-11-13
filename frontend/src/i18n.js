@@ -16,8 +16,8 @@ i18n
     },
 
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json', 
-      cache: 'false',
+      loadPath: '/locales/{{lng}}/{{ns}}.json?={{version}}',
+      queryStringParams: { version: Date.now() }
     },
   });
 
