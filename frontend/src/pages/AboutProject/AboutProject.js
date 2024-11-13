@@ -13,9 +13,7 @@ const AboutProject = () => {
     <div className={styles.container}>
       <div className={styles.leftColumn}>
         <p><strong>{t('coordinatorTitle')}:</strong> David João da Silva Carvalho</p>
-        <p><strong>{t('programmeTitle')}:</strong> Projetos de Investigação de Caráter Exploratório - 2022</p>
         <p><strong>{t('datesTitle')}:</strong> 01/01/2023 - 30/06/2024</p>
-        <p><strong>{t('totalFundingTitle')}:</strong> 49993 €</p>
         <p><strong>{t('fundingEntityTitle')}:</strong> FCT</p>
         <p><strong>{t('proponentInstitutionTitle')}:</strong> Universidade de Aveiro</p>
         <p><strong>{t('participatingInstitutionsTitle')}:</strong>

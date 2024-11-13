@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { MdErrorOutline } from "react-icons/md";
+import { MdErrorOutline, MdInfoOutline } from "react-icons/md";
 
 import styles from './GraphComponent.module.css';
 
@@ -33,49 +33,55 @@ const GraphComponent = () => {
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
-    let name;
+    let title;
 
     // Set the graph title based on the selected variable
-    if (variable.id === 'Tmax') {
-        name = t('maximumTemperatureGraph');
-    } else if (variable.id === 'Tmin') {
-        name = t('minimumTemperatureGraph');
-    } else if (variable.id === 'Tmean') {
-        name = t('meanTemperatureGraph');
-    } else if (variable.id === 'very_hot_days') {
-        name = t('veryHotDays') + ' ' + t('perYear');
-    } else if (variable.id === 'tropical_nights') {
-        name = t('tropicalNights') + ' ' + t('perYear');
-    } else if (variable.id === 'frost_days') {
-        name = t('frostDays') + ' ' + t('perYear');
-    } else if (variable.id === 'cold_days') {
-        name = t('coldDays') + ' ' + t('perYear');
-    } else if (variable.id === 'hot_days') {
-        name = t('hotDays') + ' ' + t('perYear');
-    } else if (variable.id === 'wind_energy_100m') {
-        name = t('wind');
-    } else if (variable.id === 'solar_energy') {
-        name = t('solar');
-    } else if (variable.id === 'high_days_fwi') {
-        //const orString = t('hfwi');
-        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
-        name = t('hfwi');
-    } else if (variable.id === 'very_high_days_fwi') {
-        //const orString = t('vhfwi');
-        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
-        name = t('vhfwi');
-    } else if (variable.id === 'extreme_days_fwi') {
-        //const orString = t('edfwi');
-        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
-        name = t('efwi');
-    } else if (variable.id === 'very_extreme_fwi') {
-        //const orString = t('vefwi');
-        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
-        name = t('vefwi');
-    } else if (variable.id === 'excepetional_days_fwi') {
-        //const orString = t('exfwi');
-        //name = orString.replace(/\s*\(.*?\)\s*/g, '') + ' ' + t('perYear');
-        name = t('exfwi');
+    switch (variable.id) {
+        case 'Tmax':
+            title = t('maximumTemperatureGraphTitle');
+            break;
+        case 'Tmin':
+            title = t('minimumTemperatureGraphTitle');
+            break;
+        case 'Tmean':
+            title = t('meanTemperatureGraphTitle');
+            break;
+        case 'very_hot_days':
+            title = t('veryHotDaysGraphTitle');
+            break;
+        case 'hot_days':
+            title = t('hotDaysGraphTitle');
+            break;
+        case 'tropical_nights':
+            title = t('tropicalNights');
+            break;
+        case 'frost_days':
+            title = t('frostDaysGraphTitle');
+            break;
+        case 'cold_days':
+            title = t('coldDaysGraphTitle');
+            break;
+        case 'wind_energy_100m':
+            title = t('windGraphTitle');
+            break;
+        case 'solar_energy':
+            title = t('solarGraphTitle');
+            break;
+        case 'high_days_fwi':
+            title = t('hfwiGraphTitle');
+            break;
+        case 'very_high_days_fwi':
+            title = t('vhfwiGraphTitle');
+            break;
+        case 'extreme_days_fwi':
+            title = t('efwiGraphTitle');
+            break;
+        case 'very_extreme_fwi':
+            title = t('vefwiGraphTitle');
+            break;
+        case 'excepetional_days_fwi':
+            title = t('exfwiGraphTitle');
+            break;
     }
 
     useEffect(() => {
@@ -237,13 +243,23 @@ const GraphComponent = () => {
             <div className={styles.graphContainer}>
                 <div className={styles.chartHeader}>
                     <h2 className={styles.chartTitle}>
-                        {name}
+                        {title}
                     </h2>
                     <h4 className={styles.chartSubtitle}>
                         {`${timePeriod.scenario}, ${timePeriod.period}`}
                     </h4>
-                    <div className={styles.chartDescription}>
-                        { variable.description ? variable.description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ligula nisi. Phasellus in gravida augue, ac hendrerit orci. Nam et est rutrum, viverra neque ac, gravida massa'}
+                    <div className={styles.chartDescriptionInfo}>
+                        <div className={styles.chartDescriptionIcon}>
+                        </div>
+                        <div className={styles.chartDescription}>
+                            <div className={styles.chartDescriptionMain}>
+                                <MdInfoOutline size={24} style={{ marginBottom: '4px', marginRight: '8px', flexShrink: 0 }} />
+                                {t('graphInfoMain')}
+                            </div>
+                            <div className={styles.chartDescriptionExample}>
+                                {t('graphInfoSecondary')}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
