@@ -6,19 +6,25 @@ import { useTranslation } from 'react-i18next';
 
 const AboutProject = () => {
   const { t } = useTranslation();
-  
+
   const aboutProjectParagraphs = t('aboutProjectText').split('\n');
 
   return (
     <div className={styles.container}>
       <div className={styles.leftColumn}>
-        <p><strong>{t('coordinatorTitle')}:</strong> David João da Silva Carvalho</p>
+        <p><strong>{t('coordinatorTitle')}:</strong>
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> David João da Silva Carvalho</p>
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> {t('cesam')}</p>
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> {t('dfis')}, {t('ua')}</p>
+        </p>
         <p><strong>{t('datesTitle')}:</strong> 01/01/2023 - 30/06/2024</p>
         <p><strong>{t('fundingEntityTitle')}:</strong> FCT</p>
-        <p><strong>{t('proponentInstitutionTitle')}:</strong> Universidade de Aveiro</p>
+        <p><strong>{t('proponentInstitutionTitle')}:</strong>
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> {t('ua')}</p>
+        </p>
         <p><strong>{t('participatingInstitutionsTitle')}:</strong>
-          <br /> Swedish Meteorological and Hydrological Institute, Sweden
-          <br /> Universidad de Vigo, Spain
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> Swedish Meteorological and Hydrological Institute, Sweden</p>
+          <p style={{lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px'}}> Universidad de Vigo, Spain</p>
         </p>
       </div>
 
