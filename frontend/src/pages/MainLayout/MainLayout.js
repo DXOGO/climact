@@ -22,102 +22,128 @@ const MainLayout = () => {
     const [showMap, setShowMap] = useState(false); // For showing the map dropdown on mobile
     const [showGraph, setShowGraph] = useState(false); // For showing the graph dropdown on mobile
 
-    const [submenu, setSubmenu] = useState(null);
+    const [activeMenu, setActiveMenu] = useState(null);
     const [title, setTitle] = useState('');
 
+    const handleMouseEnter = (menu) => { setActiveMenu(menu); };
+
+    const handleMouseLeave = () => { setActiveMenu(null); };
+
     const handleClick = (menu, title) => {
-        setSubmenu(menu); // Opens the submenu
-        setTitle(title); // Sets the title for the submenu
+        setActiveMenu(menu);
+        setTitle(title);
     };
 
     const handleBack = () => {
-        setSubmenu(null); // Returns to the main menu
-        setTitle(''); // Resets the title
+        setActiveMenu(null);
+        setTitle('');
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.leftColumn}>
-                {submenu === null ? (
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}
-                    >
+        !isMobile ? (
+            <div className={styles.container} onMouseLeave={handleMouseLeave}>
+                <div className={`${styles.leftColumn} ${activeMenu ? styles.expandedLeftColumn : ''}`}>
+                    <div className={`${styles.mainMenu} ${activeMenu ? styles.expandedMainMenu : ''}`}>
                         <MenuOption
                             title={t('timePeriod')}
                             subtitle={timePeriod.scenario}
                             variable={timePeriod.period}
-                            onClick={() => handleClick('timePeriod', t('timePeriod'))} />
+                            isActive={activeMenu === 'timePeriod'}
+                            onMouseEnter={() => handleMouseEnter('timePeriod')}
+                        />
                         <MenuOption
                             title={t('variable')}
                             subtitle={t(variable.name)}
                             variable={t(variable.option)}
-                            onClick={() => handleClick('variable', t('variable'))} />
+                            isActive={activeMenu === 'variable'}
+                            onMouseEnter={() => handleMouseEnter('variable')}
+                        />
                         <MenuOption
                             title={t('temporalMean')}
                             subtitle={t(temporalMean)}
-                            onClick={() => handleClick('temporalMean', t('temporalMean'))} />
+                            isActive={activeMenu === 'temporalMean'}
+                            onMouseEnter={() => handleMouseEnter('temporalMean')}
+                        />
                     </div>
-                ) : (
-                    <div className={styles.submenu}>
-                        <button className={styles.backButton} onClick={handleBack}>
-                            <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} style={{flexShrink: 0}} />
-                            <span className={styles.backTitle}>{title}</span>
-                        </button>
-                        {submenu === 'timePeriod' && <TimePeriod />}
-                        {submenu === 'variable' && <Variable />}
-                        {submenu === 'temporalMean' && <TemporalMean />}
-                    </div>
-                )}
-            </div>
 
-            {/* Conditional rendering for mobile and desktop layouts */}
-            {isMobile ? (
-                <>
-                    <div className={styles.middleColumn}>
-                        <div className={styles.mobileDropdown}>
-                            {t('textMap')}
-                            {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
+                    <div className={`${styles.submenu} ${activeMenu ? styles.expandedSubmenu : ''}`}>
+                        {activeMenu === 'timePeriod' && <TimePeriod />}
+                        {activeMenu === 'variable' && <Variable />}
+                        {activeMenu === 'temporalMean' && <TemporalMean />}
+                    </div>
+                </div>
+                <div className={styles.middleColumn}>
+                    <LeafletMap />
+                </div>
+                <div className={styles.rightColumn}>
+                    <GraphComponent />
+                </div>
+            </div>
+        ) : (
+            <div className={styles.container}>
+                <div className={styles.leftColumn}>
+                    {activeMenu === null ? (
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <MenuOption
+                                title={t('timePeriod')}
+                                subtitle={timePeriod.scenario}
+                                variable={timePeriod.period}
+                                onClick={() => handleClick('timePeriod', t('timePeriod'))} />
+                            <MenuOption
+                                title={t('variable')}
+                                subtitle={t(variable.name)}
+                                variable={t(variable.option)}
+                                onClick={() => handleClick('variable', t('variable'))} />
+                            <MenuOption
+                                title={t('temporalMean')}
+                                subtitle={t(temporalMean)}
+                                onClick={() => handleClick('temporalMean', t('temporalMean'))} />
                         </div>
-                        {showMap && <LeafletMap />}
-                    </div>
-                    <div className={styles.rightColumn}>
-                        <div className={styles.mobileDropdown}>
-                            {t('textGraph')}
-                            {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
+                    ) : (
+                        <div className={styles.activeMenu}>
+                            <button className={styles.backButton} onClick={handleBack}>
+                                <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} style={{ flexShrink: 0 }} />
+                                <span className={styles.backTitle}>{title}</span>
+                            </button>
+                            {activeMenu === 'timePeriod' && <TimePeriod />}
+                            {activeMenu === 'variable' && <Variable />}
+                            {activeMenu === 'temporalMean' && <TemporalMean />}
                         </div>
-                        {showGraph && <GraphComponent />}
+                    )}
+                </div>
+                <div className={styles.middleColumn}>
+                    <div className={styles.mobileDropdown}>
+                        {t('textMap')}
+                        {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
                     </div>
-                </>
-            ) : (
-                <>
-                    <div className={styles.middleColumn}>
-                        <LeafletMap />
+                    {showMap && <LeafletMap />}
+                </div>
+                <div className={styles.rightColumn}>
+                    <div className={styles.mobileDropdown}>
+                        {t('textGraph')}
+                        {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
                     </div>
-                    <div className={styles.rightColumn}>
-                        <GraphComponent />
-                    </div>
-                </>
-            )
-            }
-        </div>
+                    {showGraph && <GraphComponent />}
+                </div>
+            </div>
+        )
     );
 };
 
-const MenuOption = ({ title, subtitle, variable, onClick }) => {
-    const isMobile = useSelector(state => state.isMobile);
+const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive }) => {
     return (
-        <div className={styles.menuOption} onClick={onClick}>
-            <div className={styles.menuOptionText}>
+        <div
+            className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''}`}
+            onMouseEnter={onMouseEnter}
+            onClick={onClick}
+        >
+            <div className={styles.menuOptionHeader}>
                 <div className={styles.title}>{title}</div>
-                <div className={styles.subtext}>
-                    <p>{subtitle}</p>
-                    {variable && <p>{variable}</p>}
-                </div>
             </div>
-            <MdKeyboardArrowRight color='#fff' size={isMobile ? 28 : 32} style={{flexShrink: 0}} />
+            <div className={styles.subtext}>
+                <p>{subtitle}</p>
+                {variable && <p>{variable}</p>}
+            </div>
         </div>
     );
 };
