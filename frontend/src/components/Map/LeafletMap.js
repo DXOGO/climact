@@ -30,7 +30,7 @@ const LeafletMap = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+    <div style={{ height: '100%', width: '100%' }}>
       {loading && (
         <div className="loading-container">
           <div>{t('loadingMap')}</div>
@@ -55,7 +55,13 @@ const LeafletMap = () => {
         key={variableKey}
         doubleClickZoom={false}
       >
-        <MapContent wmsUrl={wmsUrl} variable={variable} variableKey={variableKey} selectedLayerInfo={selectedLayerInfo} handleTileLoading={handleTileLoading} loading={loading} />
+        <MapContent wmsUrl={wmsUrl}
+          variable={variable}
+          variableKey={variableKey}
+          selectedLayerInfo={selectedLayerInfo}
+          handleTileLoading={handleTileLoading}
+          loading={loading}
+        />
       </MapContainer>
     </div>
   );
