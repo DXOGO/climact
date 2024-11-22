@@ -3,14 +3,13 @@
   flex-direction: row;
   gap: 25px;
   padding: 15px 25px 25px 25px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 85px);
   min-height: 720px;
   max-height: 1080px;
   max-width: 1920px;
   margin: 0 auto;
   width: 100vw;
   box-sizing: border-box;
-  flex-shrink: 0;
 }
 
 .leftColumn,

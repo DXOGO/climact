@@ -8,7 +8,7 @@
     margin: 0 auto;
     width: 100vw;
     box-sizing: border-box;
-    flex-shrink: 0;
+    max-height: 85px;
 }
 
 .logoContainer {
