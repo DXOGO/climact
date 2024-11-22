@@ -30,7 +30,7 @@ const LeafletMap = () => {
   };
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
       {loading && (
         <div className="loading-container">
           <div>{t('loadingMap')}</div>
