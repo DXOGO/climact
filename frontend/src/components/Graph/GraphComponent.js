@@ -130,10 +130,10 @@ const GraphComponent = () => {
                     setChartOptions({
                         chart: {
                             type: 'line',
-                            backgroundColor: '#25292C',
+                            backgroundColor: 'rgb(39, 49, 57, 0)',
                             spacingTop: 20,
                             fontFamily: 'Epilogue',
-                            height: isMobile ? 250 : Math.max(screenHeight * 0.35, 350),
+                            height: isMobile ? 250 : (Math.max(screenHeight * 0.35, screenHeight > 800 ? 350 : 300)),
                             width: !isMobile ? null : 600,
                         },
                         title: {
@@ -200,7 +200,7 @@ const GraphComponent = () => {
                             padding: 10,
                             shadow: false,
                             style: {
-                                color: '#25292C',
+                                color: 'rgb(39, 49, 57)',
                                 fontSize: '12px',
                             }
                         },

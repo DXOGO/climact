@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import styles from './Header.module.css'; 
+import styles from './Header.module.css';
 
-import desktopLogo from '../../assets/climact-dark.svg'; 
+import desktopLogo from '../../assets/climact-dark.svg';
 import mobileLogo from '../../assets/climact-dark-mobile.svg'
 
 const Header = () => {
@@ -22,7 +22,9 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.logoContainer}>
-                <img src={!isMobile ? desktopLogo : mobileLogo} alt="ClimACT Logo" className={styles.logo} />
+                <Link to="/">
+                    <img src={!isMobile ? desktopLogo : mobileLogo} alt="ClimACT Logo" className={styles.logo} />
+                </Link>
             </div>
             <div className={styles.navButtons}>
                 <Link
@@ -42,8 +44,8 @@ const Header = () => {
                     onChange={(e) => changeLanguage(e.target.value)}
                     value={i18n.language}
                 >
-                    <option value="en" style={{fontSize: isMobile ? '14px' : '16px'}}>EN</option>
-                    <option value="pt" style={{fontSize: isMobile ? '14px' : '16px'}}>PT</option>
+                    <option value="en" style={{ fontSize: isMobile ? '14px' : '16px' }}>EN</option>
+                    <option value="pt" style={{ fontSize: isMobile ? '14px' : '16px' }}>PT</option>
                 </select>
             </div>
         </header>
