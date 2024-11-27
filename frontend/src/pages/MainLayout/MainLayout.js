@@ -41,8 +41,8 @@ const MainLayout = () => {
 
     return (
         !isMobile ? (
-            <div className={styles.container} onMouseLeave={handleMouseLeave}>
-                <div className={`${styles.leftColumn} ${activeMenu ? styles.expandedLeftColumn : ''}`}>
+            <div className={styles.container}>
+                <div className={`${styles.leftColumn} ${activeMenu ? styles.expandedLeftColumn : ''}`} onMouseLeave={handleMouseLeave}>
                     <div className={`${styles.mainMenu} ${activeMenu ? styles.expandedMainMenu : ''}`}>
                         <MenuOption
                             title={t('timePeriod')}

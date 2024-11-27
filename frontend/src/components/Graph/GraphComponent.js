@@ -33,6 +33,8 @@ const GraphComponent = () => {
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
+    console.log('variable:', variable.domain);
+
     let title;
 
     // Set the graph title based on the selected variable
@@ -82,6 +84,24 @@ const GraphComponent = () => {
         case 'excepetional_days_fwi':
             title = t('exfwiGraphTitle');
             break;
+        case 'NO2':
+            title = t('aqGraphTitle') + ' NO2';
+            break;
+        case 'O3':
+            title = t('aqGraphTitle') + ' O3';
+            break;
+        case 'PM10':
+            title = t('aqGraphTitle') + ' PM10';
+            break;
+        case 'PM25':
+            title = t('aqGraphTitle') + ' PM2.5';
+            break;
+        case 'CO':
+            title = t('aqGraphTitle') + ' CO';
+            break;
+        case 'SO2':
+            title = t('aqGraphTitle') + ' SO2';
+            break;
     }
 
     useEffect(() => {
@@ -115,7 +135,7 @@ const GraphComponent = () => {
                     if (variable.domain === 'TEMPS') {
                         yAxisTitle = t('yAxisTitleTemp');
                         tooltipUnit = '°C';
-                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI') {
+                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ') {
                         yAxisTitle = t('yAxisTitleNDays');
                         tooltipUnit = ' days';
                     } else if (variable.domain === 'WIND') {
