@@ -228,19 +228,22 @@ const getInfo = (variable) => {
       return ['default', 'default', '5,60'];
 
     case 'NO2':
-      return ['default', 'default', '0,100'];
+      return ['default', 'default', '0,10'];
 
     case 'O3':
-      return ['default', 'default', '0,100'];
+      return ['default', 'default', '0,30'];
 
     case 'PM10':
-      return ['default', 'default', '0,100'];
+      return ['default', 'default', '0,20'];
 
     case 'PM25':
-      return ['default', 'default', '0,100'];
+      return ['default', 'default', '0,20'];
 
     case 'CO':
-      return ['default', 'default', '0,100'];
+      return ['default', 'default', '0,10'];
+
+    case 'SO2':
+      return ['default', 'default', '0,10'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];

@@ -13,7 +13,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     if (domain === 'TEMPS') {
         unitSymbol = '°C';
-    } else if (domain === 'NDAYS' || domain === 'FWI') {
+    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ') {
         unitSymbol = 'days per year';
     } else if (domain === 'SOLAR' || domain === 'WIND') {
         unitSymbol = 'kW.h/m2';
