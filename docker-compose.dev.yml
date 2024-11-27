@@ -12,6 +12,7 @@ services:
       - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
       - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
       - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
+    restart: always
     networks:
       - thredds_network
 

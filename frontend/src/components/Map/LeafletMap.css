@@ -3,7 +3,7 @@
 }
 
 .leaflet-container {
-  background-color: #25292C !important;
+  background-color: rgb(39, 49, 57, 0) !important;
 }
 
 .leaflet-control-attribution {

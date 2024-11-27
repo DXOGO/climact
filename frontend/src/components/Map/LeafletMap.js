@@ -30,7 +30,7 @@ const LeafletMap = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
       {loading && (
         <div className="loading-container">
           <div>{t('loadingMap')}</div>
@@ -45,17 +45,23 @@ const LeafletMap = () => {
         zoomControl={false}
         maxBounds={
           [
-            [36.9, -10.5], // Southwest corner (latitude, longitude)
-            [42.3, -5.0], // Northeast corner
+            [31.9, -13.5], // Southwest corner (latitude, longitude)
+            [47.3, -3.0], // Northeast corner
           ]
         }
-        maxBoundsViscosity={1.0} // map bounce back into place if dragged outside
+        maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
         // dragging={!isMobile} //* test on mobile to see if it's necessary
         style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
         key={variableKey}
         doubleClickZoom={false}
       >
-        <MapContent wmsUrl={wmsUrl} variable={variable} variableKey={variableKey} selectedLayerInfo={selectedLayerInfo} handleTileLoading={handleTileLoading} loading={loading} />
+        <MapContent wmsUrl={wmsUrl}
+          variable={variable}
+          variableKey={variableKey}
+          selectedLayerInfo={selectedLayerInfo}
+          handleTileLoading={handleTileLoading}
+          loading={loading}
+        />
       </MapContainer>
     </div>
   );
@@ -152,7 +158,7 @@ const CustomZoomControl = () => {
     // Apply custom styles
     zoomIn.style.cssText = `
       background-color: #fff !important;
-      color: #25292C !important;
+      color: rgb(39, 49, 57) !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;
@@ -160,7 +166,7 @@ const CustomZoomControl = () => {
 
     zoomOut.style.cssText = `
       background-color: #fff !important;
-      color: #25292C !important;
+      color: rgb(39, 49, 57) !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;
