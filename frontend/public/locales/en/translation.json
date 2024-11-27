@@ -57,6 +57,7 @@
     "no2": "NO2",
     "so2": "SO2",
     "co": "CO",
+    "aqGraphTitle": "Average number of days with exceedances (concentrations of the pollutant above the limits defined by the European Environment Agency) per km2 of",
     "airQualityInfo": "Average number of days with pollutants concentrations above EU limits",
     "agriculture": "Agriculture",
     "di": "Drought Index (DI)",

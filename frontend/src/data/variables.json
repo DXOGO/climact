@@ -139,28 +139,34 @@
         "name": "airQuality",
         "options": [
             {
-                "id": "PM2.5",
-                "label": "pm25"
+                "id": "PM25",
+                "label": "pm25",
+                "domain": "AQ"
             },
             {
                 "id": "PM10",
-                "label": "pm10"
+                "label": "pm10",
+                "domain": "AQ"
             },
             {
                 "id": "O3",
-                "label": "o3"
+                "label": "o3",
+                "domain": "AQ"
             },
             {
                 "id": "NO2",
-                "label": "no2"
+                "label": "no2",
+                "domain": "AQ"
             },
             {
                 "id": "SO2",
-                "label": "so2"
+                "label": "so2",
+                "domain": "AQ"
             },
             {
                 "id": "CO",
-                "label": "co"
+                "label": "co",
+                "domain": "AQ"
             }
         ],
         "info": "airQualityInfo"

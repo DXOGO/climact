@@ -57,6 +57,7 @@
     "no2": "NO2",
     "so2": "SO2",
     "co": "CO",
+    "aqGraphTitle": "Número médio de dias com excedências (concentrações do poluente acima dos limites definidos pela agencia europeia do ambiente) por km2 de",
     "airQualityInfo": "Número médio de dias com concentrações de poluentes acima dos limites da UE",
     "agriculture": "Agricultura",
     "di": "Índice de Seca (DI)",

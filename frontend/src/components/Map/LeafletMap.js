@@ -48,10 +48,10 @@ const LeafletMap = () => {
             [36.9, -10.5], // Southwest corner (latitude, longitude)
             [42.3, -5.0], // Northeast corner
           ]
-        } 
+        }
         maxBoundsViscosity={1.0} // map bounce back into place if dragged outside
         // dragging={!isMobile} //* test on mobile to see if it's necessary
-        style={{ height: !isMobile ? '100%' : '650px' , width: '100%' }}
+        style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
         key={variableKey}
         doubleClickZoom={false}
       >
@@ -82,7 +82,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
           add: (e) => handleTileLoading(e.target),
         }}
       />
-       {!loading && (
+      {!loading && (
         <>
           <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
           {!isMobile && <CustomZoomControl />}
@@ -204,11 +204,11 @@ const getInfo = (variable) => {
       return ['default', 'default', '0,5'];
 
     case 'solar_energy':
-      return ['default', 'default', '1,2']; 
+      return ['default', 'default', '1,2'];
 
     case 'high_days_fwi':
       return ['default', 'default', '10,50'];
-    
+
     case 'very_high_days_fwi':
       return ['default', 'default', '30,70'];
 
@@ -220,6 +220,21 @@ const getInfo = (variable) => {
 
     case 'exceptional_days_fwi':
       return ['default', 'default', '5,60'];
+
+    case 'NO2':
+      return ['default', 'default', '0,100'];
+
+    case 'O3':
+      return ['default', 'default', '0,100'];
+
+    case 'PM10':
+      return ['default', 'default', '0,100'];
+
+    case 'PM25':
+      return ['default', 'default', '0,100'];
+
+    case 'CO':
+      return ['default', 'default', '0,100'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];
