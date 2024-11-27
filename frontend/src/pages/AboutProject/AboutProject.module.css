@@ -9,6 +9,7 @@
     width: 100vw;
     margin: 0 auto;
     box-sizing: border-box;
+    color: #2C2C36
 }
 
 @media (max-width: 768px) {
@@ -20,7 +21,7 @@
 .leftColumn {
     width: 25%;
     padding-right: 20px;
-    border-right: 2px solid rgb(39, 49, 57, 0.5);
+    border-right: 2px solid rgb(97, 109, 123, 0.4);
     line-height: 2;
 }
 
@@ -38,7 +39,7 @@
 
 .text {
     line-height: 1.6;
-    color: #fff;
+    color: #2C2C36;
 }
 
 .logos {

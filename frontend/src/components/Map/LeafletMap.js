@@ -124,7 +124,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '220px' : '240px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;
     };
 
@@ -143,7 +143,7 @@ const CustomZoomControl = () => {
 
   useEffect(() => {
     const zoomControl = L.control.zoom({
-      position: 'topleft', // or customize placement
+      position: 'topleft',
     });
 
     map.addControl(zoomControl);
@@ -158,7 +158,10 @@ const CustomZoomControl = () => {
     // Apply custom styles
     zoomIn.style.cssText = `
       background-color: #fff !important;
-      color: rgb(39, 49, 57) !important;
+      color: rgb(44, 44, 54) !important;
+      background-color: #fff !important;
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2) !important;
+      border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;
@@ -166,7 +169,10 @@ const CustomZoomControl = () => {
 
     zoomOut.style.cssText = `
       background-color: #fff !important;
-      color: rgb(39, 49, 57) !important;
+      color: rgb(44, 44, 54) !important;
+      background-color: #fff !important;
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2) !important;
+      border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
       font-size: 20px;
       margin: 5px;

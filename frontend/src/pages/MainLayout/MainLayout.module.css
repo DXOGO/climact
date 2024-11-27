@@ -15,7 +15,7 @@
 .leftColumn,
 .middleColumn,
 .rightColumn {
-  background-color: rgb(39, 49, 57, 0.5);
+  background-color: #fff;
   border-radius: 10px;
   padding: 20px;
   flex-grow: 1;
@@ -89,7 +89,7 @@
 }
 
 .activeMenuOption {
-  background-color: rgb(39, 49, 57, 0.5);
+  background-color: rgb(217, 223, 228, 0.4);
 }
 
 .menuOptionText {
@@ -99,12 +99,12 @@
 }
 
 .menuOption:hover {
-  background-color: rgb(39, 49, 57, 0.5);
+  background-color: rgb(217, 223, 228, 0.4);
 }
 
 .title {
   margin: 0;
-  color: #9EAAB9;
+  color: #616D7B;
   font-size: 16px;
   font-weight: 500;
   flex-grow: 1;
@@ -118,7 +118,7 @@
 
 .subtext {
   margin: 0;
-  color: #fff;
+  color: #2C2C36;
   font-size: 16px;
   font-weight: 400;
 }
@@ -152,7 +152,7 @@
 }
 
 .backButton:hover {
-  background-color: rgb(39, 49, 57, 0.5);
+  background-color: #fff;
 }
 
 @media (max-width: 768px) {
