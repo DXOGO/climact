@@ -11,6 +11,7 @@ const fileMapping = {
     WIND: path.join(__dirname, '../data/climatologias_WIND.xlsx'),
     SOLAR: path.join(__dirname, '../data/climatologias_SOLAR.xlsx'),
     FWI: path.join(__dirname, '../data/climatologias_FWI.xlsx'),
+    AQ: path.join(__dirname, '../data/climatologias_AQ.xlsx'),
     WS100m: path.join(__dirname, '../data/climatologias_WS100m.xlsx') //! currently not in app
     // Add more mappings as new files are introduced
 };
@@ -32,6 +33,7 @@ const periodMapping = {
     WIND: {...monthMapping},
     SOLAR: {...monthMapping},
     FWI: {...monthMapping},
+    AQ: {...monthMapping},
     WS100m: {...monthMapping} //! currently not in app
 };
 
