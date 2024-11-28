@@ -6,12 +6,14 @@ import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 
 import { useTranslation } from 'react-i18next';
+import { MdErrorOutline } from 'react-icons/md';
 
 import useMapClick from './useMapClick';
 
 const LeafletMap = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const timePeriod = useSelector((state) => state.timePeriod);
   const variable = useSelector((state) => state.variable);
@@ -27,9 +29,24 @@ const LeafletMap = () => {
     layer.on('load', () => {
       setLoading(false);
     });
+    layer.on('tileerror', (e) => {
+      setLoading(false);
+      setErrorMessage(t('noMapAvailable'));
+    });
   };
 
-  return (
+  useEffect(() => {
+    setLoading(true);
+    setErrorMessage(null);
+  }, [variable, timePeriod]);
+
+
+  return errorMessage ? (
+    <div className="error-message-container">
+      <MdErrorOutline size={28} style={{ marginBottom: '12px' }} />
+      {errorMessage}
+    </div>
+  ) : (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
       {loading && (
         <div className="loading-container">

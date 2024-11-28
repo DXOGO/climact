@@ -54,3 +54,15 @@
       transform: rotate(360deg);
   }
 }
+
+.error-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #2c2c36;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  height: 100%;
+}

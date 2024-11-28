@@ -258,7 +258,7 @@ const GraphComponent = () => {
     return (
         errorMessage ? (
             <p className={styles.errorMessage}>
-                <MdErrorOutline size={32} style={{ marginBottom: '16px', flexShrink: 0 }} />
+                <MdErrorOutline size={28} style={{ marginBottom: '12px', flexShrink: 0 }} />
                 {errorMessage}
             </p>
         ) : (

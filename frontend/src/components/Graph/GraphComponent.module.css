@@ -99,11 +99,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: #2C2C36;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
     height: 100%;
+    margin: 0px;
 }
 
 [data-highcharts-chart] {
