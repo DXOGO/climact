@@ -1,10 +1,10 @@
 .variableSubmenu {
-    color: #616D7B;
+    color: #68727D;
     font-size: 16px;
     height: 100%;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: #616D7B #fff;
+    scrollbar-color: #68727D #fff;
 }
 
 .variableItem {

@@ -164,7 +164,7 @@ const GraphComponent = () => {
                             categories: months,
                             labels: {
                                 style: {
-                                    color: '#616D7B',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                 },
                             },
@@ -174,20 +174,20 @@ const GraphComponent = () => {
                                 text: yAxisTitle,
                                 x: -10,
                                 style: {
-                                    color: '#616D7B',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
                             labels: {
                                 style: {
-                                    color: '#616D7B',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
                             // tickInterval: 5,
-                            gridLineColor: 'rgb(217, 223, 228)',
+                            gridLineColor: 'rgba(44, 44, 54, 0.1)',
                             gridLineWidth: 1.5,
                             min: Math.floor(minValue) === 0 ? 0 : Math.floor(minValue) - 1,
                             max: Math.floor(maxValue) + 1,

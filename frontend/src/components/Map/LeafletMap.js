@@ -160,7 +160,7 @@ const CustomZoomControl = () => {
       background-color: #fff !important;
       color: rgb(44, 44, 54) !important;
       background-color: #fff !important;
-      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2) !important;
+      box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
       font-size: 20px;
@@ -171,7 +171,7 @@ const CustomZoomControl = () => {
       background-color: #fff !important;
       color: rgb(44, 44, 54) !important;
       background-color: #fff !important;
-      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2) !important;
+      box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
       font-size: 20px;
