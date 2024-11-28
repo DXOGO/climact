@@ -164,7 +164,7 @@ const GraphComponent = () => {
                             categories: months,
                             labels: {
                                 style: {
-                                    color: '#fff',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                 },
                             },
@@ -174,20 +174,20 @@ const GraphComponent = () => {
                                 text: yAxisTitle,
                                 x: -10,
                                 style: {
-                                    color: '#fff',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
                             labels: {
                                 style: {
-                                    color: '#fff',
+                                    color: '#68727D',
                                     fontSize: '14px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
                             // tickInterval: 5,
-                            gridLineColor: '#373C41',
+                            gridLineColor: 'rgba(44, 44, 54, 0.1)',
                             gridLineWidth: 1.5,
                             min: Math.floor(minValue) === 0 ? 0 : Math.floor(minValue) - 1,
                             max: Math.floor(maxValue) + 1,
@@ -217,10 +217,12 @@ const GraphComponent = () => {
                             },
                             backgroundColor: '#fff',
                             borderRadius: 5,
+                            borderWidth: 2,
+                            borderColor: 'rgb(217, 223, 228)',
                             padding: 10,
                             shadow: false,
                             style: {
-                                color: 'rgb(39, 49, 57)',
+                                color: 'rgb(44, 44, 54)',
                                 fontSize: '12px',
                             }
                         },

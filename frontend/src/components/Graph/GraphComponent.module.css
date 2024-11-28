@@ -33,7 +33,7 @@
 }
 
 .chartTitle {
-    color: #fff;
+    color: rgb(44, 44, 54);
     font-size: 16px;
     font-weight: 500;
     text-align: center;
@@ -43,7 +43,7 @@
 }
 
 .chartSubtitle {
-    color: #9EAAB9;
+    color: #68727D;
     font: 16px 'Epilogue';
     text-align: center;
     margin-bottom: 40px;
@@ -55,7 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(39, 49, 57, 0.5);
+    background-color: rgba(44, 44, 54, 0.1);
     padding: 20px 24px;
     border-radius: 10px;
     margin-bottom: 40px;
@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #fff;
+    color: #2C2C36;
     font: 14px 'Epilogue';
     font-weight: 400;
     text-align: justify;
@@ -82,7 +82,7 @@
 
 .chartDescriptionExample {
     width: 100%;
-    color: #9EAAB9;
+    color: #68727D;
     font: 12px 'Epilogue';
     font-weight: 400;
     text-align: justify;
