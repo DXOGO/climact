@@ -36,7 +36,7 @@ const LeafletMap = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     setErrorMessage(null);
   }, [variable, timePeriod]);
 
