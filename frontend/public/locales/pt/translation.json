@@ -3,6 +3,7 @@
     "textMap": "Mapa",
     "textGraph": "Gráfico",
     "noChartAvailable": "Gráfico não disponível",
+    "noMapAvailable": "Mapa não disponível",
     "timePeriod": "Período temporal",
     "temporalMean": "Média temporal",
     "variable": "Variável",

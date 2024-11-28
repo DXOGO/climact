@@ -5,8 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styles from './Header.module.css';
 
-import desktopLogo from '../../assets/climact-dark.svg';
-import mobileLogo from '../../assets/climact-dark-mobile.svg'
+import desktopLogo from '../../assets/climact-light.svg';
+import mobileLogo from '../../assets/climact-light-mobile.svg'
 
 const Header = () => {
     const location = useLocation(); // Get the current location
