@@ -197,7 +197,7 @@ const GraphComponent = () => {
                         series: [{
                             name: `${variable.name} (${timePeriod.scenario})`,
                             data: values,
-                            color: '#6EA9C0',
+                            color: '#44A3DA',
                         }],
                         plotOptions: {
                             line: {
