@@ -66,7 +66,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         const { lat, lng } = e.latlng;
         const popupContent = `
             <div style="background-color: #fff;">
-                <p style="margin-bottom: 4px; color: rgb(39, 49, 57); font-size: 12px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
+                <p style="margin-bottom: 4px; color: rgb(39, 49, 57); font-size: 11px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
                 <p style="margin: 0; color: #373C41; font-size: 11px">Latitude: ${lat.toFixed(2)}</p>
                 <p style="margin: 0; color: #373C41; font-size: 11px">Longitude: ${lng.toFixed(2)}</p>
             </div>
