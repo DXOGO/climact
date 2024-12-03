@@ -83,7 +83,7 @@ const MainLayout = () => {
             <div className={styles.container}>
                 <div className={styles.leftColumn}>
                     {activeMenu === null ? (
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                             <MenuOption
                                 title={t('timePeriod')}
                                 subtitle={timePeriod.scenario}

@@ -1,5 +1,6 @@
 {
     "loadingMap": "A carregar mapa...",
+    "mapTip": "Dica: duplo click no mapa para obter informações para um ponto específico",
     "textMap": "Mapa",
     "textGraph": "Gráfico",
     "noChartAvailable": "Gráfico não disponível",

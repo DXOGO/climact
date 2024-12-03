@@ -54,32 +54,36 @@ const LeafletMap = () => {
           <div className="loading-icon" />
         </div>
       )}
-      <MapContainer
-        center={[39.6, -7.8]}
-        zoom={7}
-        minZoom={7}
-        maxZoom={9}
-        zoomControl={false}
-        maxBounds={
-          [
-            [31.9, -13.5], // Southwest corner (latitude, longitude)
-            [47.3, -3.0], // Northeast corner
-          ]
-        }
-        maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
-        // dragging={!isMobile} //* test on mobile to see if it's necessary
-        style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
-        key={variableKey}
-        doubleClickZoom={false}
-      >
-        <MapContent wmsUrl={wmsUrl}
-          variable={variable}
-          variableKey={variableKey}
-          selectedLayerInfo={selectedLayerInfo}
-          handleTileLoading={handleTileLoading}
-          loading={loading}
-        />
-      </MapContainer>
+        <MapContainer
+          center={[39.6, -7.8]}
+          zoom={7}
+          minZoom={7}
+          maxZoom={9}
+          zoomControl={false}
+          maxBounds={
+            [
+              [31.9, -13.5], // Southwest corner (latitude, longitude)
+              [47.3, -3.0], // Northeast corner
+            ]
+          }
+          maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
+          // dragging={!isMobile} //* test on mobile to see if it's necessary
+          style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
+          key={variableKey}
+          doubleClickZoom={false}
+        >
+          <MapContent wmsUrl={wmsUrl}
+            variable={variable}
+            variableKey={variableKey}
+            selectedLayerInfo={selectedLayerInfo}
+            handleTileLoading={handleTileLoading}
+            loading={loading}
+          />
+        </MapContainer>
+        {/* div with a tip text */}
+        <div style={{width: '100%', color: '#2c2c36', margin: '10px', fontSize: '11px' }}>
+          {t('mapTip')}
+        </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 {
     "loadingMap": "Loading map...",
+    "mapTip": "Tip: double click map to get point-specific data",
     "textMap": "Map",
     "textGraph": "Graph",
     "noChartAvailable": "No chart available",
