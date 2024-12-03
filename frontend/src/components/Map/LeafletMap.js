@@ -141,7 +141,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '220px' : '240px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;
     };
 
@@ -180,7 +180,7 @@ const CustomZoomControl = () => {
       box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
-      font-size: 20px;
+      font-size: 18px;
       margin: 5px;
     `;
 
@@ -191,7 +191,7 @@ const CustomZoomControl = () => {
       box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
-      font-size: 20px;
+      font-size: 18px;
       margin: 5px;
     `;
 
