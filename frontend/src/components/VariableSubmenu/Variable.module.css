@@ -1,6 +1,6 @@
 .variableSubmenu {
     color: #68727D;
-    font-size: 16px;
+    font-size: 14px;
     height: 100%;
     overflow-y: scroll;
     scrollbar-width: thin;
@@ -30,7 +30,7 @@
 
 @media (max-width: 768px) {
     .variableSubmenu {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .variableItem {

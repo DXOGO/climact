@@ -44,8 +44,8 @@ const Header = () => {
                     onChange={(e) => changeLanguage(e.target.value)}
                     value={i18n.language}
                 >
-                    <option value="en" style={{ fontSize: isMobile ? '14px' : '16px' }}>EN</option>
-                    <option value="pt" style={{ fontSize: isMobile ? '14px' : '16px' }}>PT</option>
+                    <option value="en" style={{ fontSize: isMobile ? '12px' : '14px' }}>EN</option>
+                    <option value="pt" style={{ fontSize: isMobile ? '12px' : '14px' }}>PT</option>
                 </select>
             </div>
         </header>

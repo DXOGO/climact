@@ -55,7 +55,7 @@ const GraphComponent = () => {
             title = t('hotDaysGraphTitle');
             break;
         case 'tropical_nights':
-            title = t('tropicalNights');
+            title = t('tropicalNightsGraphTitle');
             break;
         case 'frost_days':
             title = t('frostDaysGraphTitle');
@@ -161,11 +161,12 @@ const GraphComponent = () => {
                         },
 
                         xAxis: {
+                            lineColor: '#68727D',
                             categories: months,
                             labels: {
                                 style: {
                                     color: '#68727D',
-                                    fontSize: '14px',
+                                    fontSize: '12px',
                                 },
                             },
                         },
@@ -175,14 +176,14 @@ const GraphComponent = () => {
                                 x: -10,
                                 style: {
                                     color: '#68727D',
-                                    fontSize: '14px',
+                                    fontSize: '12px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
                             labels: {
                                 style: {
                                     color: '#68727D',
-                                    fontSize: '14px',
+                                    fontSize: '12px',
                                     fontFamily: 'Epilogue',
                                 },
                             },
@@ -223,7 +224,7 @@ const GraphComponent = () => {
                             shadow: false,
                             style: {
                                 color: 'rgb(44, 44, 54)',
-                                fontSize: '12px',
+                                fontSize: '10px',
                             }
                         },
                         legend: {
@@ -271,8 +272,6 @@ const GraphComponent = () => {
                         {`${timePeriod.scenario}, ${timePeriod.period}`}
                     </h4>
                     <div className={styles.chartDescriptionInfo}>
-                        <div className={styles.chartDescriptionIcon}>
-                        </div>
                         <div className={styles.chartDescription}>
                             <div className={styles.chartDescriptionMain}>
                                 <MdInfoOutline size={24} style={{ marginBottom: '4px', marginRight: '8px', flexShrink: 0 }} />

@@ -1,40 +1,22 @@
 /* GraphComponent.module.css */
 
 .graphContainer {
-    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
 }
 
-@media (max-width: 768px) {
-    .graphContainer {
-        padding: 20px 0px 10px 0px;
-    }
-
-    .chartSubtitle {
-        margin-bottom: 20px !important;
-    }
-
-    .chartDescription {
-        margin-bottom: 20px !important;
-    }
-
-    .realChart {
-        overflow-x: scroll !important;
-    }
-}
-
 .chartHeader {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 }
 
 .chartTitle {
     color: rgb(44, 44, 54);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     text-align: center;
     margin-top: 0px;
@@ -44,9 +26,8 @@
 
 .chartSubtitle {
     color: #68727D;
-    font: 16px 'Epilogue';
+    font: 14px 'Epilogue';
     text-align: center;
-    margin-bottom: 40px;
     margin-top: 0px;
     font-weight: 500;
 }
@@ -58,8 +39,9 @@
     background-color: rgba(44, 44, 54, 0.1);
     padding: 20px 24px;
     border-radius: 10px;
+    margin-top: 20px;
     margin-bottom: 40px;
-    width: 90%;
+    width: 94%;
 }
 
 .chartDescription {
@@ -74,7 +56,7 @@
     flex-direction: row;
     align-items: center;
     color: #2C2C36;
-    font: 14px 'Epilogue';
+    font: 12px 'Epilogue';
     font-weight: 400;
     text-align: justify;
     margin-bottom: 10px;
@@ -100,7 +82,7 @@
     justify-content: center;
     align-items: center;
     color: #2C2C36;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     text-align: center;
     height: 100%;
@@ -109,4 +91,25 @@
 
 [data-highcharts-chart] {
     overflow: visible !important;
+}
+
+
+@media (max-width: 768px) {
+    .graphContainer {
+        padding: 20px 0px 10px 0px;
+    }
+    
+    .chartSubtitle {
+        margin-bottom: 20px !important;
+    }
+    
+    .realChart {
+        overflow-x: scroll !important;
+    }
+
+    .chartDescriptionInfo {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
 }

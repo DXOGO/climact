@@ -1,5 +1,7 @@
 .leaflet-control-zoom {
   border: none !important;
+  margin-left: 5px !important;
+  margin-top: 5px !important;
 }
 
 .leaflet-container {
@@ -62,8 +64,13 @@
   justify-content: center;
   align-items: center;
   color: #2c2c36;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   height: 100%;
+}
+
+.legend {
+  margin-bottom: 5px !important;
+  margin-right: 5px !important;
 }

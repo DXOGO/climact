@@ -54,32 +54,36 @@ const LeafletMap = () => {
           <div className="loading-icon" />
         </div>
       )}
-      <MapContainer
-        center={[39.6, -7.8]}
-        zoom={7}
-        minZoom={7}
-        maxZoom={9}
-        zoomControl={false}
-        maxBounds={
-          [
-            [31.9, -13.5], // Southwest corner (latitude, longitude)
-            [47.3, -3.0], // Northeast corner
-          ]
-        }
-        maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
-        // dragging={!isMobile} //* test on mobile to see if it's necessary
-        style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
-        key={variableKey}
-        doubleClickZoom={false}
-      >
-        <MapContent wmsUrl={wmsUrl}
-          variable={variable}
-          variableKey={variableKey}
-          selectedLayerInfo={selectedLayerInfo}
-          handleTileLoading={handleTileLoading}
-          loading={loading}
-        />
-      </MapContainer>
+        <MapContainer
+          center={[39.6, -7.8]}
+          zoom={7}
+          minZoom={7}
+          maxZoom={9}
+          zoomControl={false}
+          maxBounds={
+            [
+              [31.9, -13.5], // Southwest corner (latitude, longitude)
+              [47.3, -3.0], // Northeast corner
+            ]
+          }
+          maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
+          // dragging={!isMobile} //* test on mobile to see if it's necessary
+          style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
+          key={variableKey}
+          doubleClickZoom={false}
+        >
+          <MapContent wmsUrl={wmsUrl}
+            variable={variable}
+            variableKey={variableKey}
+            selectedLayerInfo={selectedLayerInfo}
+            handleTileLoading={handleTileLoading}
+            loading={loading}
+          />
+        </MapContainer>
+        {/* div with a tip text */}
+        <div style={{width: '100%', color: '#2c2c36', margin: '10px', fontSize: '11px' }}>
+          {t('mapTip')}
+        </div>
     </div>
   );
 };
@@ -141,7 +145,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
 
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '220px' : '240px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;
     };
 
@@ -180,7 +184,7 @@ const CustomZoomControl = () => {
       box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
-      font-size: 20px;
+      font-size: 18px;
       margin: 5px;
     `;
 
@@ -191,7 +195,7 @@ const CustomZoomControl = () => {
       box-shadow: 0px 0px 10px rgba(44, 44, 54, 0.1) !important;
       border: 1px solid #D9DFE4 !important;
       border-radius: 5px;
-      font-size: 20px;
+      font-size: 18px;
       margin: 5px;
     `;
 

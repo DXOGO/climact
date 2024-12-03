@@ -83,7 +83,7 @@ const MainLayout = () => {
             <div className={styles.container}>
                 <div className={styles.leftColumn}>
                     {activeMenu === null ? (
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                             <MenuOption
                                 title={t('timePeriod')}
                                 subtitle={timePeriod.scenario}
@@ -102,7 +102,7 @@ const MainLayout = () => {
                     ) : (
                         <div className={styles.activeMenu}>
                             <button className={styles.backButton} onClick={handleBack}>
-                                <MdKeyboardArrowLeft color='#fff' size={isMobile ? 28 : 32} style={{ flexShrink: 0 }} />
+                                <MdKeyboardArrowLeft color='#2c2c36' size={isMobile ? 28 : 32} style={{ flexShrink: 0 }} />
                                 <span className={styles.backTitle}>{title}</span>
                             </button>
                             {activeMenu === 'timePeriod' && <TimePeriod />}
