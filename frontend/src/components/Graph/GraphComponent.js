@@ -224,7 +224,7 @@ const GraphComponent = () => {
                             shadow: false,
                             style: {
                                 color: 'rgb(44, 44, 54)',
-                                fontSize: '10px',
+                                fontSize: '11px',
                             }
                         },
                         legend: {
