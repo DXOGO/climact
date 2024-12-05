@@ -85,22 +85,22 @@ const GraphComponent = () => {
             title = t('exfwiGraphTitle');
             break;
         case 'NO2':
-            title = t('aqGraphTitle') + ' NO2';
+            title = t('aqGraphTitlePt1') + ' NO2 ' + t('aqGraphTitlePt2');
             break;
         case 'O3':
-            title = t('aqGraphTitle') + ' O3';
+            title = t('aqGraphTitlePt1') + ' O3 ' + t('aqGraphTitlePt2');
             break;
         case 'PM10':
-            title = t('aqGraphTitle') + ' PM10';
+            title = t('aqGraphTitlePt1') + ' PM10 ' + t('aqGraphTitlePt2');;
             break;
         case 'PM25':
-            title = t('aqGraphTitle') + ' PM2.5';
+            title = t('aqGraphTitlePt1') + ' PM2.5 ' + t('aqGraphTitlePt2');
             break;
         case 'CO':
-            title = t('aqGraphTitle') + ' CO';
+            title = t('aqGraphTitlePt1') + ' CO ' + t('aqGraphTitlePt2');
             break;
         case 'SO2':
-            title = t('aqGraphTitle') + ' SO2';
+            title = t('aqGraphTitlePt1') + ' SO2 ' + t('aqGraphTitlePt2');
             break;
     }
 
