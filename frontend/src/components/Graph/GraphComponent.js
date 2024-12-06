@@ -81,7 +81,7 @@ const GraphComponent = () => {
         case 'very_extreme_fwi':
             title = t('vefwiGraphTitle');
             break;
-        case 'excepetional_days_fwi':
+        case 'exceptional_days_fwi':
             title = t('exfwiGraphTitle');
             break;
         case 'NO2':

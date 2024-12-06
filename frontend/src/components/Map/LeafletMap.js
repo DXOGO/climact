@@ -57,7 +57,7 @@ const LeafletMap = () => {
         <MapContainer
           center={[39.6, -7.8]}
           zoom={7}
-          minZoom={7}
+          minZoom={6}
           maxZoom={9}
           zoomControl={false}
           maxBounds={
