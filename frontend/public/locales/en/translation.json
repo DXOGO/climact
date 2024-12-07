@@ -59,7 +59,7 @@
     "no2": "NO2",
     "so2": "SO2",
     "co": "CO",
-    "aqGraphTitlePt1": "Average number of days per year and km2 with",
+    "aqGraphTitlePt1": "Average number of days per year with",
     "aqGraphTitlePt2": "concentration above the limits set by the European Environment Agency",
     "airQualityInfo": "Average number of days with pollutants concentrations above EU limits",
     "agriculture": "Agriculture",

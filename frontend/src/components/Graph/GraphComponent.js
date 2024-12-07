@@ -33,8 +33,6 @@ const GraphComponent = () => {
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
-    console.log('variable:', variable.domain);
-
     let title;
 
     // Set the graph title based on the selected variable
@@ -81,7 +79,7 @@ const GraphComponent = () => {
         case 'very_extreme_fwi':
             title = t('vefwiGraphTitle');
             break;
-        case 'excepetional_days_fwi':
+        case 'exceptional_days_fwi':
             title = t('exfwiGraphTitle');
             break;
         case 'NO2':

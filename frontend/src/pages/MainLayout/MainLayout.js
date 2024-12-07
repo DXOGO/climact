@@ -4,6 +4,12 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 import styles from './MainLayout.module.css';
 
+import fct from "../../assets/fct-light.png";
+import pt from "../../assets/pt-light.png";
+import ua from "../../assets/ua-light.png";
+import cesam from "../../assets/cesam-light.png";
+import dfis from "../../assets/dfis-light.png";
+
 import TimePeriod from '../../components/TimePeriodSubmenu/TimePeriod';
 import Variable from '../../components/VariableSubmenu/Variable';
 import TemporalMean from '../../components/TemporalMeanSubmenu/TemporalMean';
@@ -41,44 +47,54 @@ const MainLayout = () => {
 
     return (
         !isMobile ? (
-            <div className={styles.container}>
-                <div className={`${styles.leftColumn} ${activeMenu ? styles.expandedLeftColumn : ''}`} onMouseLeave={handleMouseLeave}>
-                    <div className={`${styles.mainMenu} ${activeMenu ? styles.expandedMainMenu : ''}`}>
-                        <MenuOption
-                            title={t('timePeriod')}
-                            subtitle={timePeriod.scenario}
-                            variable={timePeriod.period}
-                            isActive={activeMenu === 'timePeriod'}
-                            onMouseEnter={() => handleMouseEnter('timePeriod')}
-                        />
-                        <MenuOption
-                            title={t('variable')}
-                            subtitle={t(variable.name)}
-                            variable={t(variable.option)}
-                            isActive={activeMenu === 'variable'}
-                            onMouseEnter={() => handleMouseEnter('variable')}
-                        />
-                        <MenuOption
-                            title={t('temporalMean')}
-                            subtitle={t(temporalMean)}
-                            isActive={activeMenu === 'temporalMean'}
-                            onMouseEnter={() => handleMouseEnter('temporalMean')}
-                        />
-                    </div>
+            <>
+                <div className={styles.container}>
+                    <div className={`${styles.leftColumn} ${activeMenu ? styles.expandedLeftColumn : ''}`} onMouseLeave={handleMouseLeave}>
+                        <div className={`${styles.mainMenu} ${activeMenu ? styles.expandedMainMenu : ''}`}>
+                            <MenuOption
+                                title={t('timePeriod')}
+                                subtitle={timePeriod.scenario}
+                                variable={timePeriod.period}
+                                isActive={activeMenu === 'timePeriod'}
+                                onMouseEnter={() => handleMouseEnter('timePeriod')} />
+                            <MenuOption
+                                title={t('variable')}
+                                subtitle={t(variable.name)}
+                                variable={t(variable.option)}
+                                isActive={activeMenu === 'variable'}
+                                onMouseEnter={() => handleMouseEnter('variable')} />
+                            <MenuOption
+                                title={t('temporalMean')}
+                                subtitle={t(temporalMean)}
+                                isActive={activeMenu === 'temporalMean'}
+                                onMouseEnter={() => handleMouseEnter('temporalMean')} />
+                        </div>
 
-                    <div className={`${styles.submenu} ${activeMenu ? styles.expandedSubmenu : ''}`}>
-                        {activeMenu === 'timePeriod' && <TimePeriod />}
-                        {activeMenu === 'variable' && <Variable />}
-                        {activeMenu === 'temporalMean' && <TemporalMean />}
+                        <div className={`${styles.submenu} ${activeMenu ? styles.expandedSubmenu : ''}`}>
+                            {activeMenu === 'timePeriod' && <TimePeriod />}
+                            {activeMenu === 'variable' && <Variable />}
+                            {activeMenu === 'temporalMean' && <TemporalMean />}
+                        </div>
+                    </div>
+                    <div className={styles.middleColumn}>
+                        <LeafletMap />
+                    </div>
+                    <div className={styles.rightColumn}>
+                        <GraphComponent />
                     </div>
                 </div>
-                <div className={styles.middleColumn}>
-                    <LeafletMap />
+                <div className={styles.logos}>
+                    <div className={styles.logosLeft}>
+                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '88px', width: 'auto' }} />
+                        <img src={dfis} alt="Departamento de Física" style={{ height: '98px', width: 'auto' }} />
+                        <img src={ua} alt="Universidade de Aveiro" style={{ height: '40px', width: 'auto' }} />
+                    </div>
+                    <div className={styles.logosRight}>
+                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={{ height: '40px', width: 'auto' }} />
+                        <img src={pt} alt="República Portuguesa" style={{ height: '40px', width: 'auto' }} />
+                    </div>
                 </div>
-                <div className={styles.rightColumn}>
-                    <GraphComponent />
-                </div>
-            </div>
+            </>
         ) : (
             <div className={styles.container}>
                 <div className={styles.leftColumn}>

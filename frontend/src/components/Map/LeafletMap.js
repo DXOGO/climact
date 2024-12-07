@@ -57,7 +57,7 @@ const LeafletMap = () => {
         <MapContainer
           center={[39.6, -7.8]}
           zoom={7}
-          minZoom={7}
+          minZoom={6}
           maxZoom={9}
           zoomControl={false}
           maxBounds={
@@ -98,7 +98,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
       <WMSTileLayer
         url={wmsUrl}
         layers={variableKey}
-        styles={selectedLayerInfo[1]}
+        styles="default"
         format="image/png"
         transparent={true}
         version="1.3.0"
@@ -143,7 +143,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
 
       // Construct the GetLegendGraphic URL
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
-
+      console.log('Legend URL:', legendUrl);
       // Set the image as the legend
       div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;

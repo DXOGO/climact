@@ -42,13 +42,13 @@ const AboutProject = () => {
       </div>
       <div className={styles.logos}>
         <div className={styles.logosLeft}>
-          <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '98px', width: 'auto' }} />
-          <img src={dfis} alt="Departamento de Física" style={{ height: '108px', width: 'auto' }} />
-          <img src={ua} alt="Universidade de Aveiro" style={{ height: '50px', width: 'auto' }} />
+          <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '88px', width: 'auto' }} />
+          <img src={dfis} alt="Departamento de Física" style={{ height: '98px', width: 'auto' }} />
+          <img src={ua} alt="Universidade de Aveiro" style={{ height: '40px', width: 'auto' }} />
         </div>
         <div className={styles.logosRight}>
-          <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={{ height: '50px', width: 'auto' }} />
-          <img src={pt} alt="República Portuguesa" style={{ height: '50px', width: 'auto' }} />
+          <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={{ height: '40px', width: 'auto' }} />
+          <img src={pt} alt="República Portuguesa" style={{ height: '40px', width: 'auto' }} />
         </div>
       </div>
 
