@@ -33,8 +33,6 @@ const GraphComponent = () => {
     const timePeriod = useSelector(state => state.timePeriod);
     const variable = useSelector(state => state.variable);
 
-    console.log('variable:', variable.domain);
-
     let title;
 
     // Set the graph title based on the selected variable

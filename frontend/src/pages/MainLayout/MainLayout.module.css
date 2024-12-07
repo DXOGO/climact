@@ -163,6 +163,35 @@
   background-color: #fff;
 }
 
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 50px 20px 50px;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1920px;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 25px 50px 25px 50px;
+}
+
+.logosLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.logosRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 60px;
+}
+
 @media (max-width: 768px) {
 
   .title {
