@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { MapContainer, WMSTileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -54,41 +54,42 @@ const LeafletMap = () => {
           <div className="loading-icon" />
         </div>
       )}
-        <MapContainer
-          center={[39.6, -7.8]}
-          zoom={7}
-          minZoom={6}
-          maxZoom={9}
-          zoomControl={false}
-          maxBounds={
-            [
-              [31.9, -13.5], // Southwest corner (latitude, longitude)
-              [47.3, -3.0], // Northeast corner
-            ]
-          }
-          maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
-          // dragging={!isMobile} //* test on mobile to see if it's necessary
-          style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
-          key={variableKey}
-          doubleClickZoom={false}
-        >
-          <MapContent wmsUrl={wmsUrl}
-            variable={variable}
-            variableKey={variableKey}
-            selectedLayerInfo={selectedLayerInfo}
-            handleTileLoading={handleTileLoading}
-            loading={loading}
-          />
-        </MapContainer>
-        {/* div with a tip text */}
-        <div style={{width: '100%', color: '#2c2c36', margin: '10px', fontSize: '11px' }}>
-          {t('mapTip')}
-        </div>
+      <MapContainer
+        center={[39.6, -7.8]}
+        zoom={7}
+        minZoom={6}
+        maxZoom={9}
+        zoomControl={false}
+        maxBounds={
+          [
+            [31.9, -13.5], // Southwest corner (latitude, longitude)
+            [47.3, -3.0], // Northeast corner
+          ]
+        }
+        maxBoundsViscosity={0.5} // map bounce back into place if dragged outside
+        // dragging={!isMobile} //* test on mobile to see if it's necessary
+        style={{ height: !isMobile ? '100%' : '650px', width: '100%' }}
+        key={variableKey}
+        doubleClickZoom={false}
+      >
+        <MapContent wmsUrl={wmsUrl}
+          variable={variable}
+          variableKey={variableKey}
+          selectedLayerInfo={selectedLayerInfo}
+          handleTileLoading={handleTileLoading}
+          loading={loading}
+        />
+      </MapContainer>
+      {/* div with a tip text */}
+      <div style={{ width: '100%', color: '#2c2c36', margin: '10px', fontSize: '11px' }}>
+        {t('mapTip')}
+      </div>
     </div>
   );
 };
 
 const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading }) => {
+
   useMapClick(wmsUrl, variable, variableKey);
 
   const isMobile = useSelector((state) => state.isMobile);
@@ -143,7 +144,6 @@ const LegendControl = ({ variable, url, variableKey }) => {
 
       // Construct the GetLegendGraphic URL
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
-      console.log('Legend URL:', legendUrl);
       // Set the image as the legend
       div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
       return div;

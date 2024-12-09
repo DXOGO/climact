@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './WelcomeModal.module.css';
+import { useTranslation } from 'react-i18next';
 
 import fct from "../../assets/fct-light.png";
 import pt from "../../assets/pt-light.png";
@@ -11,16 +12,20 @@ import dfis from "../../assets/dfis-light.png";
 const WelcomeModal = ({ onClose }) => {
     const isMobile = useSelector((state) => state.isMobile);
 
+    const { t } = useTranslation();
+
     return (
         <div className={styles.welcomeModalOverlay}>
             <div className={styles.welcomeModalContent}>
-                <div className={styles.welcomeModalTitle}>
-                    <p>Welcome to ClimACT</p>
+                <div className={styles.welcomeModalTextContainer}>
+                    <div className={styles.welcomeModalTitle}>
+                        <p>{t('welcomeModalTitle')}</p>
+                    </div>
+                    <div className={styles.welcomeModalText}>
+                        <>{t('welcomeModalText')}</>
+                    </div>
+                    <button className={styles.modalButton} onClick={onClose}>{t('continue')}</button>
                 </div>
-                <div className={styles.welcomeModalText}>
-                    <p>The main deliverable of ClimACT will be a Future Climate Atlas for Portugal, a website where all ClimACT climate data and products will be publicly accessible, to be explored and used by the scientific community, end-users, decision-makers, and stakeholders to evaluate CC impacts in the sectors most vulnerable to climate change impacts in Portugal</p>
-                </div>
-                <button className={styles.modalButton} onClick={onClose}>Continuar</button>
                 <div className={styles.logos}>
                     <div className={styles.logosLeft}>
                         <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '74px', width: 'auto' } : { height: 'auto', width: '110px' }} />

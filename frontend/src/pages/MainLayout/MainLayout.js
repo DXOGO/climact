@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
+import React, { useState, useEffect, useRef } from 'react';
+import { MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 import styles from './MainLayout.module.css';
@@ -30,6 +30,25 @@ const MainLayout = () => {
 
     const [activeMenu, setActiveMenu] = useState(null);
     const [title, setTitle] = useState('');
+
+    const [mapKey, setMapKey] = useState(0); // To trigger re-render of LeafletMap
+    const middleColumnRef = useRef(null); // Ref for middleColumn
+
+    // Resize observer to detect width changes
+    useEffect(() => {
+        const middleColumn = middleColumnRef.current;
+        if (!middleColumn) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            setMapKey(prevKey => prevKey + 1); // Increment mapKey to re-render LeafletMap
+        });
+        
+        resizeObserver.observe(middleColumn);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
 
     const handleMouseEnter = (menu) => { setActiveMenu(menu); };
 
@@ -76,8 +95,8 @@ const MainLayout = () => {
                             {activeMenu === 'temporalMean' && <TemporalMean />}
                         </div>
                     </div>
-                    <div className={styles.middleColumn}>
-                        <LeafletMap />
+                    <div className={styles.middleColumn} ref={middleColumnRef}>
+                        <LeafletMap key={mapKey} />
                     </div>
                     <div className={styles.rightColumn}>
                         <GraphComponent />

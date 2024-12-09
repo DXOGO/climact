@@ -56,16 +56,17 @@
     flex-direction: row;
     align-items: center;
     color: #2C2C36;
-    font: 12px 'Epilogue';
+    font-size: 12px;
     font-weight: 400;
     text-align: justify;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 .chartDescriptionExample {
     width: 100%;
     color: #68727D;
-    font: 12px 'Epilogue';
+    font-size: 12px;
     font-weight: 400;
     text-align: justify;
 }
