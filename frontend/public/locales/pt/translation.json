@@ -1,5 +1,9 @@
 {
     "loadingMap": "A carregar mapa...",
+    "welcomeModalText": "O principal produto do ClimACT será um Atlas Climático Futuro para Portugal, um site onde todos os dados climáticos e produtos do ClimACT estarão publicamente acessíveis, para serem explorados e utilizados pela comunidade científica, utilizadores finais, tomadores de decisão e partes interessadas, para avaliar os impactos das AC nos setores mais vulneráveis às mudanças climáticas em Portugal: eventos climáticos extremos, incêndios florestais, qualidade do ar, saúde humana, recursos hídricos, energias renováveis e agricultura.",
+    "welcomeModalTitle": "Bem-vindo ao Climact - Atlas de Clima Futuro para Portugal continental",
+    "continue": "Continuar",
+    "daysPerYear": "dias por ano",
     "mapTip": "Dica: duplo click no mapa para obter informações para um ponto específico",
     "textMap": "Mapa",
     "textGraph": "Gráfico",

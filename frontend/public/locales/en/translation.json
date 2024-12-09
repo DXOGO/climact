@@ -1,5 +1,9 @@
 {
     "loadingMap": "Loading map...",
+    "welcomeModalText": "The main deliverable of ClimACT will be a Future Climate Atlas for Portugal, a website where all ClimACT climate data and products will be publicly accessible, to be explored and used by the scientific community, end-users, decision-makers, and stakeholders to evaluate CC impacts in the sectors most vulnerable to climate change impacts in Portugal: extreme weather, forest fires, air quality, human health, water resources, renewable energies, and agriculture.",
+    "welcomeModalTitle": "Welcome to ClimACT - Future Climate Atlas for Portugal",
+    "continue": "Continue",
+    "daysPerYear": "days per year",
     "mapTip": "Tip: double click map to get point-specific data",
     "textMap": "Map",
     "textGraph": "Graph",
