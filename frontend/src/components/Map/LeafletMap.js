@@ -78,6 +78,7 @@ const LeafletMap = () => {
           selectedLayerInfo={selectedLayerInfo}
           handleTileLoading={handleTileLoading}
           loading={loading}
+          t={t}
         />
       </MapContainer>
       {/* div with a tip text */}
@@ -88,7 +89,7 @@ const LeafletMap = () => {
   );
 };
 
-const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading }) => {
+const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading, t }) => {
 
   useMapClick(wmsUrl, variable, variableKey);
 
@@ -105,14 +106,13 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         version="1.3.0"
         colorScaleRange={selectedLayerInfo[2]}
         tileSize={512}
-        numColorBands={250}
         eventHandlers={{
           add: (e) => handleTileLoading(e.target),
         }}
       />
       {!loading && (
         <>
-          <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} />
+          <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} t={t} />
           {!isMobile && <CustomZoomControl />}
         </>
       )}
@@ -123,7 +123,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
 export default LeafletMap;
 
 // Leaflet legend control (form WMS GetLegendGraphic)
-const LegendControl = ({ variable, url, variableKey }) => {
+const LegendControl = ({ variable, url, variableKey, t }) => {
   const map = useMap();
 
   const isMobile = useSelector((state) => state.isMobile);
@@ -143,9 +143,40 @@ const LegendControl = ({ variable, url, variableKey }) => {
       const colorScaleRange = legendInfo[2];
 
       // Construct the GetLegendGraphic URL
-      const legendUrl = `${url}?REQUEST=GetLegendGraphic&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
+      const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=250&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
+      // const legendUrl = `${url}?REQUEST=GetLegendGraphic&COLORBARONLY=true&NUMCOLORBANDS=250&PALETTE=${palette}&WIDTH=60`;
+
       // Set the image as the legend
-      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px; background-color: white !important; border-radius: 5px;"/>`;
+      div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px 15px 5px 5px; background-color: white !important; border-radius: 5px;"/>`;
+      // div.style.width = '69%';
+
+      // Add a white square on top of the legend to cover the text
+      const legendImage = div.querySelector('img');
+      const whiteSquare = L.DomUtil.create('div', 'white-square');
+      whiteSquare.style.position = 'absolute';
+      whiteSquare.style.top = '0';
+      whiteSquare.style.right = '0';
+      whiteSquare.style.width = '30%';
+      whiteSquare.style.height = `${isMobile ? '200px' : '220px'}`;
+      whiteSquare.style.backgroundColor = 'white';
+      whiteSquare.style.display = 'flex';
+      div.appendChild(whiteSquare);
+
+      const verticalText = L.DomUtil.create('div', 'vertical-text');
+      verticalText.innerHTML = getLegendText(variableId, t);
+      verticalText.style.position = 'absolute';
+      // verticalText.style.top = '30%';
+      verticalText.style.right = '2px';
+      verticalText.style.transform = 'translateY(50%) rotate(-90deg)';
+      verticalText.style.transformOrigin = 'right bottom';
+      // verticalText.style.backgroundColor = 'white';
+      verticalText.style.padding = '2px 0px';
+      verticalText.style.fontSize = '11px';
+      verticalText.style.color = 'black';
+      verticalText.style.whiteSpace = 'nowrap';
+      verticalText.style.top = '-20px';
+      whiteSquare.appendChild(verticalText);
+
       return div;
     };
 
@@ -153,7 +184,7 @@ const LegendControl = ({ variable, url, variableKey }) => {
     return () => {
       map.removeControl(legend);
     };
-  }, [variableKey, url, map, variableId, isMobile]);
+  }, [variableKey, url, map, variableId, isMobile, t]);
 
   return null;
 };
@@ -210,69 +241,138 @@ const getInfo = (variable) => {
   // ! ALL DEFAULT BECAUSE PALLETES AND STYLES ARE BEING SET ON WMSCONFIG.XML AND THREDDSCONFIG.XML FILES
   switch (variable) {
     case 'Tmean':
-      return ['default', 'default', '5,30'];
+      return ['seq-Heat-inv', 'default', '5,30'];
 
     case 'Tmax':
-      return ['default', 'default', '10,30'];
+      return ['seq-Heat-inv', 'default', '10,30'];
 
     case 'Tmin':
-      return ['default', 'default', '5,25'];
+      return ['seq-Heat-inv', 'default', '5,25'];
 
     case 'very_hot_days':
-      return ['default', 'default', '0,30'];
+      return ['seq-Heat-inv', 'default', '0,30'];
 
     case 'hot_days':
-      return ['default', 'default', '0,130'];
+      return ['seq-Heat-inv', 'default', '0,130'];
 
     case 'tropical_nights':
-      return ['default', 'default', '0,100'];
+      return ['seq-Heat-inv', 'default', '0,100'];
 
     case 'frost_days':
-      return ['default', 'default', '0,30'];
+      return ['psu-viridis', 'default', '0,30'];
 
     // case 'WS100m':
     //   return ['default', 'default', '5,10'];
 
     case 'wind_energy_100m':
-      return ['default', 'default', '0,5'];
+      return ['seq-cubeYF-inv', 'default', '0,5'];
 
     case 'solar_energy':
-      return ['default', 'default', '1,2'];
+      return ['seq-cubeYF-inv', 'default', '1,2'];
 
     case 'high_days_fwi':
-      return ['default', 'default', '10,50'];
+      return ['seq-Heat-inv', 'default', '10,50'];
 
     case 'very_high_days_fwi':
-      return ['default', 'default', '30,70'];
+      return ['seq-Heat-inv', 'default', '30,70'];
 
     case 'extreme_days_fwi':
-      return ['default', 'default', '10,50'];
+      return ['seq-Heat-inv', 'default', '10,50'];
 
     case 'very_extreme_days_fwi':
-      return ['default', 'default', '10,50'];
+      return ['seq-Heat-inv', 'default', '10,50'];
 
     case 'exceptional_days_fwi':
-      return ['default', 'default', '5,60'];
+      return ['seq-Heat-inv', 'default', '5,60'];
 
     case 'NO2':
-      return ['default', 'default', '0,10'];
+      return ['seq-cubeYF-inv', 'default', '0,10'];
 
     case 'O3':
-      return ['default', 'default', '0,30'];
+      return ['seq-cubeYF-inv', 'default', '0,30'];
 
     case 'PM10':
-      return ['default', 'default', '0,20'];
+      return ['seq-cubeYF-inv', 'default', '0,20'];
 
     case 'PM25':
-      return ['default', 'default', '0,20'];
+      return ['seq-cubeYF-inv', 'default', '0,20'];
 
     case 'CO':
-      return ['default', 'default', '0,10'];
+      return ['seq-cubeYF-inv', 'default', '0,10'];
 
     case 'SO2':
-      return ['default', 'default', '0,10'];
+      return ['seq-cubeYF-inv', 'default', '0,10'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];
   }
 };
+
+
+const getLegendText = (variableId, t) => {
+
+  switch (variableId) {
+    case 'Tmean':
+      return t('yAxisTitleTemp');;
+
+    case 'Tmax':
+      return t('yAxisTitleTemp');;
+
+    case 'Tmin':
+      return t('yAxisTitleTemp');;
+
+    case 'very_hot_days':
+      return t('yAxisTitleNDays');
+
+    case 'hot_days':
+      return t('yAxisTitleNDays');
+
+    case 'tropical_nights':
+      return t('yAxisTitleNDays');
+
+    case 'frost_days':
+      return t('yAxisTitleNDays');
+
+    case 'wind_energy_100m':
+      return t('yAxisTitleWind');
+
+    case 'solar_energy':
+      return t('yAxisTitleSolar');
+
+    case 'high_days_fwi':
+      return t('yAxisTitleNDays');
+
+    case 'very_high_days_fwi':
+      return t('yAxisTitleNDays');
+
+    case 'extreme_days_fwi':
+      return t('yAxisTitleNDays');
+
+    case 'very_extreme_days_fwi':
+      return t('yAxisTitleNDays');
+
+    case 'exceptional_days_fwi':
+      return t('yAxisTitleNDays');
+
+    case 'NO2':
+      return t('yAxisTitleNDays');
+
+    case 'O3':
+      return t('yAxisTitleNDays');
+
+    case 'PM10':
+      return t('yAxisTitleNDays');
+
+    case 'PM25':
+      return t('yAxisTitleNDays');
+
+    case 'CO':
+      return t('yAxisTitleNDays');
+
+    case 'SO2':
+      return t('yAxisTitleNDays');
+
+    default:
+      return '';
+  }
+}
