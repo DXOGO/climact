@@ -3,7 +3,12 @@ import { useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import { useTranslation } from 'react-i18next';
+
 const useMapClick = (wmsUrl, variable, variableKey) => {
+
+    const { t } = useTranslation();
+
     const [clickedPosition, setClickedPosition] = useState(null);
     const [value, setValue] = useState(null);
     const map = useMap();
@@ -14,7 +19,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
     if (domain === 'TEMPS') {
         unitSymbol = '°C';
     } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ') {
-        unitSymbol = 'days per year';
+        unitSymbol = t('daysPerYear');
     } else if (domain === 'SOLAR' || domain === 'WIND') {
         unitSymbol = 'kW.h/m2';
     } else {
@@ -51,7 +56,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
             console.error('Error fetching feature info:', error);
             return 'Error';
         }
-    }, [map, wmsUrl, variableKey]);
+    }, [map, wmsUrl, variableKey, t]);
 
     const handleMapClick = useCallback(async (e) => {
         const { lat, lng } = e.latlng;
