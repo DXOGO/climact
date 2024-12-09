@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, use } from 'react';
 import { MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
@@ -49,7 +49,7 @@ const MainLayout = () => {
             resizeObserver.disconnect();
         };
     }, []);
-
+    
     const handleMouseEnter = (menu) => { setActiveMenu(menu); };
 
     const handleMouseLeave = () => { setActiveMenu(null); };
