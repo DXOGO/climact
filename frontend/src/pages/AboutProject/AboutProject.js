@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import styles from './AboutProject.module.css';
 import fct from "../../assets/fct-light.png";
 import pt from "../../assets/pt-light.png";
@@ -11,6 +13,8 @@ const AboutProject = () => {
   const { t } = useTranslation();
 
   const aboutProjectParagraphs = t('aboutProjectText').split('\n');
+
+  const isMobile = useSelector((state) => state.isMobile);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -42,13 +46,13 @@ const AboutProject = () => {
       </div>
       <div className={styles.logos}>
         <div className={styles.logosLeft}>
-          <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '88px', width: 'auto' }} />
-          <img src={dfis} alt="Departamento de Física" style={{ height: '98px', width: 'auto' }} />
-          <img src={ua} alt="Universidade de Aveiro" style={{ height: '40px', width: 'auto' }} />
+          <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '84px', width: 'auto' } : {height: 'auto', width: '110px'}} />
+          <img src={dfis} alt="Departamento de Física" style={!isMobile ? { height: '88px', width: 'auto' } : {height: 'auto', width: '80px'}} />
+          <img src={ua} alt="Universidade de Aveiro" style={!isMobile ? { height: '40px', width: 'auto' } : {height: 'auto', width: '110px'}} />
         </div>
         <div className={styles.logosRight}>
-          <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={{ height: '40px', width: 'auto' }} />
-          <img src={pt} alt="República Portuguesa" style={{ height: '40px', width: 'auto' }} />
+          <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={!isMobile ? { height: '40px', width: 'auto' } : {height: 'auto', width: '110px'}} />
+          <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : {height: 'auto', width: '110px'}} />
         </div>
       </div>
 

@@ -85,8 +85,8 @@ const MainLayout = () => {
                 </div>
                 <div className={styles.logos}>
                     <div className={styles.logosLeft}>
-                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '88px', width: 'auto' }} />
-                        <img src={dfis} alt="Departamento de Física" style={{ height: '98px', width: 'auto' }} />
+                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '84px', width: 'auto' }} />
+                        <img src={dfis} alt="Departamento de Física" style={{ height: '88px', width: 'auto' }} />
                         <img src={ua} alt="Universidade de Aveiro" style={{ height: '40px', width: 'auto' }} />
                     </div>
                     <div className={styles.logosRight}>
@@ -96,52 +96,65 @@ const MainLayout = () => {
                 </div>
             </>
         ) : (
-            <div className={styles.container}>
-                <div className={styles.leftColumn}>
-                    {activeMenu === null ? (
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                            <MenuOption
-                                title={t('timePeriod')}
-                                subtitle={timePeriod.scenario}
-                                variable={timePeriod.period}
-                                onClick={() => handleClick('timePeriod', t('timePeriod'))} />
-                            <MenuOption
-                                title={t('variable')}
-                                subtitle={t(variable.name)}
-                                variable={t(variable.option)}
-                                onClick={() => handleClick('variable', t('variable'))} />
-                            <MenuOption
-                                title={t('temporalMean')}
-                                subtitle={t(temporalMean)}
-                                onClick={() => handleClick('temporalMean', t('temporalMean'))} />
-                        </div>
-                    ) : (
-                        <div className={styles.activeMenu}>
-                            <button className={styles.backButton} onClick={handleBack}>
-                                <MdKeyboardArrowLeft color='#2c2c36' size={isMobile ? 28 : 32} style={{ flexShrink: 0 }} />
-                                <span className={styles.backTitle}>{title}</span>
-                            </button>
-                            {activeMenu === 'timePeriod' && <TimePeriod />}
-                            {activeMenu === 'variable' && <Variable />}
-                            {activeMenu === 'temporalMean' && <TemporalMean />}
-                        </div>
-                    )}
-                </div>
-                <div className={styles.middleColumn}>
-                    <div className={styles.mobileDropdown}>
-                        {t('textMap')}
-                        {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
+            <>
+                <div className={styles.container}>
+                    <div className={styles.leftColumn}>
+                        {activeMenu === null ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                                <MenuOption
+                                    title={t('timePeriod')}
+                                    subtitle={timePeriod.scenario}
+                                    variable={timePeriod.period}
+                                    onClick={() => handleClick('timePeriod', t('timePeriod'))} />
+                                <MenuOption
+                                    title={t('variable')}
+                                    subtitle={t(variable.name)}
+                                    variable={t(variable.option)}
+                                    onClick={() => handleClick('variable', t('variable'))} />
+                                <MenuOption
+                                    title={t('temporalMean')}
+                                    subtitle={t(temporalMean)}
+                                    onClick={() => handleClick('temporalMean', t('temporalMean'))} />
+                            </div>
+                        ) : (
+                            <div className={styles.activeMenu}>
+                                <button className={styles.backButton} onClick={handleBack}>
+                                    <MdKeyboardArrowLeft color='#2c2c36' size={isMobile ? 28 : 32} style={{ flexShrink: 0 }} />
+                                    <span className={styles.backTitle}>{title}</span>
+                                </button>
+                                {activeMenu === 'timePeriod' && <TimePeriod />}
+                                {activeMenu === 'variable' && <Variable />}
+                                {activeMenu === 'temporalMean' && <TemporalMean />}
+                            </div>
+                        )}
                     </div>
-                    {showMap && <LeafletMap />}
-                </div>
-                <div className={styles.rightColumn}>
-                    <div className={styles.mobileDropdown}>
-                        {t('textGraph')}
-                        {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
+                    <div className={styles.middleColumn}>
+                        <div className={styles.mobileDropdown}>
+                            {t('textMap')}
+                            {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
+                        </div>
+                        {showMap && <LeafletMap />}
                     </div>
-                    {showGraph && <GraphComponent />}
+                    <div className={styles.rightColumn}>
+                        <div className={styles.mobileDropdown}>
+                            {t('textGraph')}
+                            {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
+                        </div>
+                        {showGraph && <GraphComponent />}
+                    </div>
                 </div>
-            </div>
+                <div className={styles.logos}>
+                    <div className={styles.logosLeft}>
+                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '88px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={dfis} alt="Departamento de Física" style={!isMobile ? { height: '98px', width: 'auto' } : { height: 'auto', width: '80px' }} />
+                        <img src={ua} alt="Universidade de Aveiro" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                    </div>
+                    <div className={styles.logosRight}>
+                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                    </div>
+                </div>
+            </>
         )
     );
 };

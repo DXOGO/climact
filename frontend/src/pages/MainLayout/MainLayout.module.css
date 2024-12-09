@@ -240,4 +240,23 @@
     margin-left: 0px;
     font-size: 14px;
   }
+
+  .logos {
+    align-items: center;
+    justify-content: space-between;
+    align-items: self-start;
+  }
+
+  .logosLeft {
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .logosRight {
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+    gap: 40px;
+  }
 }
