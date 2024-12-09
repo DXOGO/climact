@@ -151,7 +151,6 @@ const LegendControl = ({ variable, url, variableKey, t }) => {
       // div.style.width = '69%';
 
       // Add a white square on top of the legend to cover the text
-      const legendImage = div.querySelector('img');
       const whiteSquare = L.DomUtil.create('div', 'white-square');
       whiteSquare.style.position = 'absolute';
       whiteSquare.style.top = '0';
