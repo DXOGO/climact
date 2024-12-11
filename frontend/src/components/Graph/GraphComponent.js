@@ -268,7 +268,7 @@ const GraphComponent = () => {
                         {title}
                     </h2>
                     <h4 className={styles.chartSubtitle}>
-                        {`${futureScenario.scenario}, ${timePeriod.period}`}
+                        {`${timePeriod.domain === 'historical' ? t('historical') : t('futureScenario') + ' ' + futureScenario.scenario.split(' ')[1]}, ${t('period')} ${timePeriod.period}`}
                     </h4>
                     <div className={styles.chartDescriptionInfo}>
                         <div className={styles.chartDescription}>
