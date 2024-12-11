@@ -125,7 +125,7 @@ const GraphComponent = () => {
 
                     // Calculate a reasonable tick interval based on the data range
                     const range = maxValue - minValue;
-                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : 1));
+                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : (range > 1 ? 1 : 0.2)));
 
                     // Set y-axis label and tooltip units based on variable domain
                     let yAxisTitle = '';
