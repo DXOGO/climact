@@ -12,18 +12,18 @@ import dfis from "../../assets/dfis-light.png";
 
 import TimePeriod from '../../components/TimePeriodSubmenu/TimePeriod';
 import Variable from '../../components/VariableSubmenu/Variable';
-import TemporalMean from '../../components/TemporalMeanSubmenu/TemporalMean';
+import FutureScenario from '../../components/FutureScenarioSubmenu/FutureScenario';
+// import TemporalMean from '../../components/TemporalMeanSubmenu/TemporalMean';
 import LeafletMap from '../../components/Map/LeafletMap';
 import GraphComponent from '../../components/Graph/GraphComponent';
 
 const MainLayout = () => {
     const { t } = useTranslation();
 
-    const timePeriod = useSelector(state => state.timePeriod); // Scenario and period
-    const variable = useSelector(state => state.variable); // Variable and option
-    const temporalMean = useSelector(state => state.temporalMean);
-
-    const isMobile = useSelector(state => state.isMobile);
+    const timePeriod = useSelector((state) => state.timePeriod);
+    const futureScenario = useSelector((state) => state.futureScenario);
+    const variable = useSelector((state) => state.variable);
+    const isMobile = useSelector((state) => state.isMobile);
 
     const [showMap, setShowMap] = useState(false); // For showing the map dropdown on mobile
     const [showGraph, setShowGraph] = useState(false); // For showing the graph dropdown on mobile
@@ -42,14 +42,14 @@ const MainLayout = () => {
         const resizeObserver = new ResizeObserver(() => {
             setMapKey(prevKey => prevKey + 1); // Increment mapKey to re-render LeafletMap
         });
-        
+
         resizeObserver.observe(middleColumn);
 
         return () => {
             resizeObserver.disconnect();
         };
     }, []);
-    
+
     const handleMouseEnter = (menu) => { setActiveMenu(menu); };
 
     const handleMouseLeave = () => { setActiveMenu(null); };
@@ -64,6 +64,9 @@ const MainLayout = () => {
         setTitle('');
     };
 
+
+    const isFutureScenarioDisabled = timePeriod.domain === 'historical';
+
     return (
         !isMobile ? (
             <>
@@ -72,27 +75,28 @@ const MainLayout = () => {
                         <div className={`${styles.mainMenu} ${activeMenu ? styles.expandedMainMenu : ''}`}>
                             <MenuOption
                                 title={t('timePeriod')}
-                                subtitle={timePeriod.scenario}
                                 variable={timePeriod.period}
                                 isActive={activeMenu === 'timePeriod'}
                                 onMouseEnter={() => handleMouseEnter('timePeriod')} />
+                            <MenuOption
+                                title={t('futureScenario')}
+                                variable={t(futureScenario.scenario)}
+                                isActive={activeMenu === 'futureScenario'}
+                                onMouseEnter={() => !isFutureScenarioDisabled && handleMouseEnter('futureScenario')}
+                                disabled={isFutureScenarioDisabled}
+                                t={t} />
                             <MenuOption
                                 title={t('variable')}
                                 subtitle={t(variable.name)}
                                 variable={t(variable.option)}
                                 isActive={activeMenu === 'variable'}
                                 onMouseEnter={() => handleMouseEnter('variable')} />
-                            <MenuOption
-                                title={t('temporalMean')}
-                                subtitle={t(temporalMean)}
-                                isActive={activeMenu === 'temporalMean'}
-                                onMouseEnter={() => handleMouseEnter('temporalMean')} />
                         </div>
 
                         <div className={`${styles.submenu} ${activeMenu ? styles.expandedSubmenu : ''}`}>
                             {activeMenu === 'timePeriod' && <TimePeriod />}
+                            {activeMenu === 'futureScenario' && !isFutureScenarioDisabled && <FutureScenario />}
                             {activeMenu === 'variable' && <Variable />}
-                            {activeMenu === 'temporalMean' && <TemporalMean />}
                         </div>
                     </div>
                     <div className={styles.middleColumn} ref={middleColumnRef}>
@@ -122,18 +126,19 @@ const MainLayout = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                                 <MenuOption
                                     title={t('timePeriod')}
-                                    subtitle={timePeriod.scenario}
                                     variable={timePeriod.period}
                                     onClick={() => handleClick('timePeriod', t('timePeriod'))} />
+                                <MenuOption
+                                    title={t('futureScenario')}
+                                    subtitle={t(futureScenario.scenario)}
+                                    onClick={() => !isFutureScenarioDisabled && handleClick('futureScenario', t('futureScenario'))}
+                                    disabled={isFutureScenarioDisabled}
+                                    t={t} />
                                 <MenuOption
                                     title={t('variable')}
                                     subtitle={t(variable.name)}
                                     variable={t(variable.option)}
                                     onClick={() => handleClick('variable', t('variable'))} />
-                                <MenuOption
-                                    title={t('temporalMean')}
-                                    subtitle={t(temporalMean)}
-                                    onClick={() => handleClick('temporalMean', t('temporalMean'))} />
                             </div>
                         ) : (
                             <div className={styles.activeMenu}>
@@ -142,8 +147,8 @@ const MainLayout = () => {
                                     <span className={styles.backTitle}>{title}</span>
                                 </button>
                                 {activeMenu === 'timePeriod' && <TimePeriod />}
+                                {activeMenu === 'futureScenario' && !isFutureScenarioDisabled && <FutureScenario />}
                                 {activeMenu === 'variable' && <Variable />}
-                                {activeMenu === 'temporalMean' && <TemporalMean />}
                             </div>
                         )}
                     </div>
@@ -178,12 +183,12 @@ const MainLayout = () => {
     );
 };
 
-const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive }) => {
+const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive, disabled, t }) => {
     return (
         <div
-            className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''}`}
-            onMouseEnter={onMouseEnter}
-            onClick={onClick}
+            className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''} ${disabled ? styles.disabledMenuOption : ''}`} onMouseEnter={!disabled ? onMouseEnter : null}
+            onClick={!disabled ? onClick : null}
+            title={disabled ? t('disabledOption') : null}
         >
             <div className={styles.menuOptionHeader}>
                 <div className={styles.title}>{title}</div>

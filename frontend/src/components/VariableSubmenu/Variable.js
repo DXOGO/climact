@@ -12,13 +12,13 @@ const Variable = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
+    const selectedVariable = useSelector((state) => state.variable);
     const isMobile = useSelector((state) => state.isMobile);
 
     const [hoveredVariable, setHoveredVariable] = useState(null);
     const [expandedVariable, setExpandedVariable] = useState(null);
 
     // Get the current selected variable from Redux
-    const selectedVariable = useSelector((state) => state.variable);
 
     const handleOptionChange = (variableName, option) => {
         dispatch(setVariable({ name: variableName, domain: option.domain, option: option.label, id: option.id }));
@@ -54,7 +54,7 @@ const Variable = () => {
                                 <RadioOption
                                     key={option.id}
                                     label={`${t(variable.name)}-${t(option.label)}`}
-                                    name={variable.name}
+                                    // name={variable.name}
                                     text={t(option.label)}
                                     checked={selectedVariable.name === variable.name && selectedVariable.option === option.label}
                                     onChange={() => handleOptionChange(variable.name, option)}
