@@ -20,20 +20,20 @@ const AboutProject = () => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          <p><strong>{t('coordinatorTitle')}:</strong>
+          <div><strong>{t('coordinatorTitle')}:</strong>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> David João da Silva Carvalho</p>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('cesam')}</p>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('dfis')}, {t('ua')}</p>
-          </p>
+          </div>
           <p><strong>{t('datesTitle')}:</strong> 01/01/2023 - 30/06/2024</p>
           <p><strong>{t('fundingEntityTitle')}:</strong> FCT</p>
-          <p><strong>{t('proponentInstitutionTitle')}:</strong>
+          <div><strong>{t('proponentInstitutionTitle')}:</strong>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('ua')}</p>
-          </p>
-          <p><strong>{t('participatingInstitutionsTitle')}:</strong>
+          </div>
+          <div><strong>{t('participatingInstitutionsTitle')}:</strong>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> Swedish Meteorological and Hydrological Institute, Sweden</p>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> Universidad de Vigo, Spain</p>
-          </p>
+          </div>
         </div>
 
         {/* Right column with project description */}

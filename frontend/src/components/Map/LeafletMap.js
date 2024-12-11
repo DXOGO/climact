@@ -16,10 +16,11 @@ const LeafletMap = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const timePeriod = useSelector((state) => state.timePeriod);
+  const futureScenario = useSelector((state) => state.futureScenario);
   const variable = useSelector((state) => state.variable);
   const isMobile = useSelector((state) => state.isMobile);
 
-  const variableKey = `${variable.id}_${timePeriod.id}`;
+  const variableKey = timePeriod.domain === 'historical' ? `${variable.id}_hist` : `${variable.id}_${futureScenario.id}_${timePeriod.id}`;
 
   const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
@@ -79,6 +80,7 @@ const LeafletMap = () => {
           handleTileLoading={handleTileLoading}
           loading={loading}
           t={t}
+          isMobile={isMobile}
         />
       </MapContainer>
       {/* div with a tip text */}
@@ -89,11 +91,9 @@ const LeafletMap = () => {
   );
 };
 
-const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading, t }) => {
+const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading, t, isMobile }) => {
 
   useMapClick(wmsUrl, variable, variableKey);
-
-  const isMobile = useSelector((state) => state.isMobile);
 
   return (
     <>
@@ -112,7 +112,7 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
       />
       {!loading && (
         <>
-          <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} t={t} />
+          <LegendControl variable={variable} url={wmsUrl} variableKey={variableKey} t={t} isMobile={isMobile} />
           {!isMobile && <CustomZoomControl />}
         </>
       )}
@@ -123,10 +123,8 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
 export default LeafletMap;
 
 // Leaflet legend control (form WMS GetLegendGraphic)
-const LegendControl = ({ variable, url, variableKey, t }) => {
+const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
   const map = useMap();
-
-  const isMobile = useSelector((state) => state.isMobile);
 
   const variableId = variable.id;
 
@@ -267,7 +265,7 @@ const getInfo = (variable) => {
       return ['seq-cubeYF-inv', 'default', '0,5'];
 
     case 'solar_energy':
-      return ['seq-cubeYF-inv', 'default', '1,2'];
+      return ['seq-cubeYF-inv', 'default', '1.5,2'];
 
     case 'high_days_fwi':
       return ['seq-Heat-inv', 'default', '10,50'];
@@ -285,22 +283,22 @@ const getInfo = (variable) => {
       return ['seq-Heat-inv', 'default', '5,60'];
 
     case 'NO2':
-      return ['seq-cubeYF-inv', 'default', '0,10'];
+      return ['seq-BlueHeat-inv', 'default', '0,10'];
 
     case 'O3':
-      return ['seq-cubeYF-inv', 'default', '0,30'];
+      return ['seq-BlueHeat-inv', 'default', '0,30'];
 
     case 'PM10':
-      return ['seq-cubeYF-inv', 'default', '0,20'];
+      return ['seq-BlueHeat-inv', 'default', '0,20'];
 
     case 'PM25':
-      return ['seq-cubeYF-inv', 'default', '0,20'];
+      return ['seq-BlueHeat-inv', 'default', '0,20'];
 
     case 'CO':
-      return ['seq-cubeYF-inv', 'default', '0,10'];
+      return ['seq-BlueHeat-inv', 'default', '0,10'];
 
     case 'SO2':
-      return ['seq-cubeYF-inv', 'default', '0,10'];
+      return ['seq-BlueHeat-inv', 'default', '0,10'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];

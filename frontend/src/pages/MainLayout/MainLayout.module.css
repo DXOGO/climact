@@ -104,7 +104,7 @@
   gap: 5px;
 }
 
-.menuOption:hover {
+.activeMenuOption:hover {
   background-color: rgba(44, 44, 54, 0.1);
 }
 
@@ -190,6 +190,11 @@
   justify-content: flex-end;
   align-items: center;
   gap: 60px;
+}
+
+.disabledMenuOption {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

@@ -1,19 +1,25 @@
 import {
-    SET_TEMPORAL_MEAN,
     SET_TIME_PERIOD,
+    SET_FUTURE_SCENARIO,
     SET_VARIABLE,
+    SET_TEMPORAL_MEAN,
     IS_MOBILE
 } from './types';
 
+const persistedTimePeriod = localStorage.getItem('selectedTimePeriod');
+const persistedFutureScenario = localStorage.getItem('selectedFutureScenario');
 const persistedVariable = localStorage.getItem('selectedVariable');
-const persisterTimePeriod = localStorage.getItem('selectedTimePeriod');
 
 const initialState = {
-    timePeriod: persisterTimePeriod ? JSON.parse(persisterTimePeriod) : {
-        scenario: 'Future SSP2-4.5',
+    timePeriod: persistedTimePeriod ? JSON.parse(persistedTimePeriod) : {
+        domain: 'future',
         period: '2046-2065',
-        id: 'ssp245_2046_2065'
+        id: '2046_2065'
     },
+    futureScenario: persistedFutureScenario ? JSON.parse(persistedFutureScenario) : {
+        scenario: 'Future SSP2-4.5',
+        id: 'ssp245'
+    },  
     variable: persistedVariable ? JSON.parse(persistedVariable) : {
         name: 'temperature',
         domain: 'TEMPS',
@@ -30,9 +36,17 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 timePeriod: {
-                    scenario: action.payload.scenario,
+                    domain: action.payload.domain,
                     period: action.payload.period,
                     id: action.payload.id
+                }
+            };
+            case SET_FUTURE_SCENARIO:
+            return {
+                ...state,
+                futureScenario: {
+                    scenario: action.payload.scenario,
+                    id: action.payload.id,
                 }
             };
         case SET_VARIABLE:

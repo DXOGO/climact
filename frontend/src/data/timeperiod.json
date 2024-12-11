@@ -1,49 +1,23 @@
 [
     {
-        "scenario": "Historical",
+        "domain": "historical",
         "period": [
             {
                 "label": "1995-2014",
-                "id": "hist"
+                "id": "1995_2014"
             }
         ]
     },
     {
-        "scenario": "Future SSP2-4.5",
+        "domain": "future",
         "period": [
             {
                 "label": "2046-2065",
-                "id": "ssp245_2046_2065"
+                "id": "2046_2065"
             },
             {
                 "label": "2081-2100",
-                "id": "ssp245_2081_2100"
-            }
-        ]
-    },
-    {
-        "scenario": "Future SSP3-7.0",
-        "period": [
-            {
-                "label": "2046-2065",
-                "id": "ssp370_2046_2065"
-            },
-            {
-                "label": "2081-2100",
-                "id": "ssp370_2081_2100"
-            }
-        ]
-    },
-    {
-        "scenario": "Future SSP5-8.5",
-        "period": [
-            {
-                "label": "2046-2065",
-                "id": "ssp585_2046_2065"
-            },
-            {
-                "label": "2081-2100",
-                "id": "ssp585_2081_2100"
+                "id": "2081_2100"
             }
         ]
     }

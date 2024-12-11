@@ -1,0 +1,29 @@
+.container {
+    padding: 0px 10px 0px 10px;
+}
+
+.subheading {
+    color: #68727D;
+    font-size: 14px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
+.optionGroup {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0px 10px 0px 5px;
+    }
+
+    .optionGroup {
+        margin-bottom: 20px;
+    }
+
+    .subheading {
+        font-size: 14px;
+    }
+}
