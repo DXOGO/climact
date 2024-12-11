@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './RadioOption.module.css';
 
-const RadioOption = ({ label, name, text, onChange, checked }) => {
+const RadioOption = ({ label, text, onChange, checked }) => {
     return (
         <div className={styles.radioOption}>
             <input
                 type="radio"
                 id={label}
-                name={name}
+                // name={name}
                 className={styles.radioInput}
                 onChange={onChange}
                 checked={checked}

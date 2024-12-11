@@ -15,7 +15,6 @@ import axios from 'axios';
 const GraphComponent = () => {
     const { t } = useTranslation();
 
-    const isMobile = useSelector(state => state.isMobile);
     const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
     useEffect(() => {
@@ -30,9 +29,12 @@ const GraphComponent = () => {
 
     const [chartOptions, setChartOptions] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null); // To store error messages
-    const timePeriod = useSelector(state => state.timePeriod);
-    const variable = useSelector(state => state.variable);
 
+    const timePeriod = useSelector((state) => state.timePeriod);
+    const futureScenario = useSelector((state) => state.futureScenario);
+    const variable = useSelector((state) => state.variable);
+    const isMobile = useSelector((state) => state.isMobile);
+    
     let title;
 
     // Set the graph title based on the selected variable
@@ -108,8 +110,7 @@ const GraphComponent = () => {
                 setErrorMessage(null); // Reset error message
                 setChartOptions(null);  // Reset chart options
 
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.id}`);
-
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.domain === 'historical' ? 'hist' : futureScenario.id + '_' + timePeriod.id}`);
 
                 if (response.status === 200 && response.data && response.data.length > 0) {
                     const data = response.data;
@@ -212,7 +213,7 @@ const GraphComponent = () => {
                         tooltip: {
                             useHTML: true, // Enable HTML for tooltips
                             formatter: function () {
-                                return `Average<br /><strong>${this.x}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
+                                return `Average<br /><strong>${this.category}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
                             },
                             backgroundColor: '#fff',
                             borderRadius: 5,
@@ -252,7 +253,7 @@ const GraphComponent = () => {
         };
 
         fetchData();
-    }, [variable, timePeriod, t, screenHeight, isMobile]);
+    }, [variable, timePeriod, futureScenario, t, screenHeight, isMobile]);
 
     return (
         errorMessage ? (
@@ -267,7 +268,7 @@ const GraphComponent = () => {
                         {title}
                     </h2>
                     <h4 className={styles.chartSubtitle}>
-                        {`${timePeriod.scenario}, ${timePeriod.period}`}
+                        {`${futureScenario.scenario}, ${timePeriod.period}`}
                     </h4>
                     <div className={styles.chartDescriptionInfo}>
                         <div className={styles.chartDescription}>

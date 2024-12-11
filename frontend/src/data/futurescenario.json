@@ -1,0 +1,19 @@
+[
+    {
+        "name": "scenario",
+        "options": [
+            {
+                "label": "Future SSP2-4.5",
+                "id": "ssp245"
+            },
+            {
+                "label": "Future SSP3-7.0",
+                "id": "ssp370"
+            },
+            {
+                "label": "Future SSP5-8.5",
+                "id": "ssp585"
+            }
+        ]
+    }
+]
