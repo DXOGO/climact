@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './pages/MainLayout/MainLayout';
 import AboutProject from './pages/AboutProject/AboutProject';
 import Header from './components/Header/Header';
-import { useDispatch } from 'react-redux';
-import { setIsMobile } from './redux/actions'; // Import the action
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsMobile } from './redux/actions'; 
 import './App.css';
 
 import WelcomeModal from './components/Modal/WelcomeModal';
@@ -12,6 +12,8 @@ import WelcomeModal from './components/Modal/WelcomeModal';
 function App() {
     const dispatch = useDispatch();
     
+    const isMobile = useSelector((state) => state.isMobile);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     useEffect(() => {
@@ -27,9 +29,9 @@ function App() {
         setIsModalOpen(false);
       };
 
-    const handleResize = useCallback(() => {
-        const isMobile = window.innerWidth <= 768;
-        dispatch(setIsMobile(isMobile));
+      const handleResize = useCallback(() => {
+        const mobile = window.innerWidth <= 768; // Define your mobile breakpoint
+        dispatch(setIsMobile(mobile));
     }, [dispatch]);
 
     useEffect(() => {
@@ -53,7 +55,7 @@ function App() {
                     <Route path="/project" element={<AboutProject />} />
                     <Route path="/" element={<MainLayout />} />
                 </Routes>
-                {isModalOpen && <WelcomeModal onClose={handleClose} />}
+                {!isMobile && isModalOpen && <WelcomeModal onClose={handleClose} />}
             </Router>
         </div>
     );

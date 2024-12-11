@@ -26,7 +26,6 @@ const initialState = {
         option: 'meanTemp',
         id: 'Tmean'
     },
-    temporalMean: 'annual',
     isMobile: window.innerWidth <= 768
 };
 
