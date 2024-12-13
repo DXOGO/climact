@@ -1,4 +1,18 @@
 {
+    "months": {
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Aug",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dec"
+    },
     "loadingMap": "Loading map...",
     "welcomeModalTitle": "Welcome to the website of the project ClimACT - Future Climate Atlas for Portugal",
     "welcomeModalText": "This webpage provides, freely and publicly, a Future Climate Atlas for mainland Portugal where the main project results can be consulted, explored and used by the scientific community, end-users, decision-makers, stakeholders and general public to consult and visualize future climate variables. The data provided in this website are expected to aid in the evaluation of climate change impacts in mainland Portugal in the sectors most vulnerable to climate change impacts: extreme weather, forest fires, air quality, human health, renewable energies, and agriculture",
@@ -91,7 +105,7 @@
     "exfwi" : "Number of days with exceptional FWI (FWI >= 64)",
     "exfwiGraphTitle": "Average days per month with exceptional FWI values",
     "graphInfoMain": "Each month average is the average of the 20 months contained in the 20 year period",
-    "graphInfoSecondary": "Example: the January average is the average of the 20 Januaries contained in the given time period, the same for February and the remaining months",
+    "graphInfoSecondary": "Example: the January mean is the average of the 20 Januaries contained in the given time period, the same for February and the remaining months",
     "data": "Data",
     "project": "Project",
     "coordinatorTitle": "Coordinators",
