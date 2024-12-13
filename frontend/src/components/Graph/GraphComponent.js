@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 const GraphComponent = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
@@ -115,9 +115,11 @@ const GraphComponent = () => {
                 if (response.status === 200 && response.data && response.data.length > 0) {
                     const data = response.data;
 
-
                     // For variables with line plot where x-axis is the month and y-axis is the value
-                    const months = data.map(item => item.month);
+                    const enMonths = data.map(item => item.month);
+                    const ptMonths = enMonths.map((month) => t(`months.${month}`));
+
+                    const months = i18n.language === 'en' ? enMonths : ptMonths;
                     const values = data.map(item => item.value);
 
                     const minValue = Math.min(...values);
