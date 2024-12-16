@@ -19,6 +19,8 @@ services:
     build:
       context: ${BACKEND_CONTEXT}
       dockerfile: Dockerfile.prod
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
       - NODE_ENV=${NODE_ENV_PROD}
     volumes:
