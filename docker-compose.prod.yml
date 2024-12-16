@@ -3,13 +3,13 @@ services:
     container_name: thredds
     image: unidata/thredds-docker:5.5
     ports:
-      - 8080:8080
+      - "${THREDDS_PORT}:${THREDDS_PORT}"
     volumes:
-      - /var/thredds/public:/usr/local/tomcat/content/thredds/public # For .nc files
-      - /var/thredds/web.xml:/usr/local/tomcat/webapps/thredds/WEB-INF/web.xml  # CORS config
-      - /var/thredds/catalog.xml:/usr/local/tomcat/content/thredds/catalog.xml  # Catalog config
-      - /var/thredds/threddsConfig.xml:/usr/local/tomcat/content/thredds/threddsConfig.xml  # Palette and styles
-      - /var/thredds/wmsConfig.xml:/usr/local/tomcat/content/thredds/wmsConfig.xml  # Palette and styles
+      - ${THREDDS_PUBLIC_DIR}:${THREDDS_PUBLIC_DIR_DOCKER} # For .nc files
+      - ${THREDDS_WEB_XML}:${THREDDS_WEB_XML_DOCKER}  # CORS config
+      - ${THREDDS_CATALOG_XML}:${THREDDS_CATALOG_XML_DOCKER}  # Catalog config
+      - ${THREDDS_CONFIG_XML}:${THREDDS_CONFIG_XML_DOCKER}  # Palette and styles
+      - ${THREDDS_WMS_CONFIG_XML}:${THREDDS_WMS_CONFIG_XML_DOCKER}  # Palette and styles
     restart: always
     networks:
       - thredds_network
@@ -17,37 +17,38 @@ services:
   backend:
     container_name: backend
     build:
-      context: ./backend
+      context: ${BACKEND_CONTEXT}
       dockerfile: Dockerfile.prod
-    ports:
-      - 3001:3001
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV_PROD}
     volumes:
       - ./backend:/app
-      - /app/node_modules
+      - backend_node_modules:/app/node_modules
     networks:
       - thredds_network
 
   nginx-frontend:
     container_name: frontend
     build:
-      context: .
-      dockerfile: frontend/Dockerfile.prod
+      context: ${FRONTEND_CONTEXT_PROD}
+      dockerfile: ${FRONTEND_DOCKERFILE_PROD}
       args:
-        REACT_APP_API_BASE_URL: "/api"
-        REACT_APP_THREDDS_URL: "/thredds"
+        REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL_PROD}
+        REACT_APP_THREDDS_URL: ${REACT_APP_THREDDS_URL_PROD}
     ports:
       - 80:80
       - 443:443
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV_PROD}
     volumes:
       - ./frontend/public/locales:/app/public/locales # translation files
-      - /etc/nginx/certs:/etc/nginx/certs
+      - ${NGINX_CERTS_DIR}:${NGINX_CERTS_DIR}
     networks:
       - thredds_network
-    restart: always
+    restart: unless-stopped
 
 networks:
   thredds_network:
+
+volumes:
+  backend_node_modules:
