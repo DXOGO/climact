@@ -94,18 +94,72 @@
     overflow: visible !important;
 }
 
+.legendContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0px 10px 20px 10px;
+    flex-wrap: wrap;
+}
+
+.legendTitle {
+    color: #2C2C36;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.legendItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 94%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.legendItemHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.2em;
+}
+
+.legendItem {
+    color: #2C2C36;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    min-width: 240px;
+}
+
+.legendColor {
+    width: 16px;
+    height: 10px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
 
 @media (max-width: 768px) {
     .graphContainer {
         padding: 20px 0px 10px 0px;
     }
     
+    .chartTitle {
+        width: 100%;
+    }
+
     .chartSubtitle {
         margin-bottom: 20px !important;
     }
     
     .realChart {
         overflow-x: scroll !important;
+        overflow-y: hidden !important;
     }
 
     .chartDescriptionInfo {

@@ -113,12 +113,233 @@
         "name": "climateClassification",
         "options": [
             {
-                "id": "KO",
-                "label": "ko"
+                "id": "koppen",
+                "label": "ko",
+                "domain": "KOPPEN",
+                "legend": [
+                    {
+                        "id": "Af",
+                        "info": "Af",
+                        "color": "#8dd3c7"
+                    },
+                    {
+                        "id": "Am",
+                        "info": "Am",
+                        "color": "#ffffb3"
+                    },
+                    {
+                        "id": "Aw",
+                        "info": "Aw",
+                        "color": "#bebada"
+                    },
+                    {
+                        "id": "Bwh",
+                        "info": "Bwh",
+                        "color": "#fb8072"
+                    },
+                    {
+                        "id": "Bwk",
+                        "info": "Bwk",
+                        "color": "#80b1d3"
+                    },
+                    {
+                        "id": "Bsh",
+                        "info": "Bsh",
+                        "color": "#fdb462"
+                    },
+                    {
+                        "id": "Bsk",
+                        "info": "Bsk",
+                        "color": "#b3de69"
+                    },
+                    {
+                        "id": "Csa",
+                        "info": "Csa",
+                        "color": "#fccde5"
+                    },
+                    {
+                        "id": "Csb",
+                        "info": "Csb",
+                        "color": "#d9d9d9"
+                    },
+                    {
+                        "id": "Csc",
+                        "info": "Csc",
+                        "color": "#bc80bd"
+                    },
+                    {
+                        "id": "Cwa",
+                        "info": "Cwa",
+                        "color": "#ccebc5"
+                    },
+                    {
+                        "id": "Cwb",
+                        "info": "Cwb",
+                        "color": "#ffed6f"
+                    },
+                    {
+                        "id": "Cwc",
+                        "info": "Cwc",
+                        "color": "#8dd3c7"
+                    },
+                    {
+                        "id": "Cfa",
+                        "info": "Cfa",
+                        "color": "#ffffb3"
+                    },
+                    {
+                        "id": "Cfb",
+                        "info": "Cfb",
+                        "color": "#bebada"
+                    },
+                    {
+                        "id": "Cfc",
+                        "info": "Cfc",
+                        "color": "#fb8072"
+                    },
+                    {
+                        "id": "Dsa",
+                        "info": "Dsa",
+                        "color": "#80b1d3"
+                    },
+                    {
+                        "id": "Dsb",
+                        "info": "Dsb",
+                        "color": "#fdb462"
+                    },
+                    {
+                        "id": "Dsc",
+                        "info": "Dsc",
+                        "color": "#b3de69"
+                    },
+                    {
+                        "id": "Dsd",
+                        "info": "Dsd",
+                        "color": "#fccde5"
+                    },
+                    {
+                        "id": "Dwa",
+                        "info": "Dwa",
+                        "color": "#d9d9d9"
+                    },
+                    {
+                        "id": "Dwb",
+                        "info": "Dwb",
+                        "color": "#bc80bd"
+                    },
+                    {
+                        "id": "Dwc",
+                        "info": "Dwc",
+                        "color": "#ccebc5"
+                    },
+                    {
+                        "id": "Dwd",
+                        "info": "Dwd",
+                        "color": "#ffed6f"
+                    },
+                    {
+                        "id": "Dfa",
+                        "info": "Dfa",
+                        "color": "#8dd3c7"
+                    },
+                    {
+                        "id": "Dfb",
+                        "info": "Dfb",
+                        "color": "#ffffb3"
+                    },
+                    {
+                        "id": "Dfc",
+                        "info": "Dfc",
+                        "color": "#bebada"
+                    },
+                    {
+                        "id": "Dfd",
+                        "info": "Dfd",
+                        "color": "#fb8072"
+                    },
+                    {
+                        "id": "Et",
+                        "info": "Et",
+                        "color": "#80b1d3"
+                    },
+                    {
+                        "id": "Ef",
+                        "info": "Ef",
+                        "color": "#fdb462"
+                    }
+                ]
             },
             {
-                "id": "KT",
-                "label": "kt"
+                "id": "trewartha",
+                "label": "kt",
+                "domain": "TREWARTHA",
+                "legend": [
+                    {
+                        "id": "Ar",
+                        "info": "Ar",
+                        "color": "#8dd3c7"
+                    },
+                    {
+                        "id": "Aw",
+                        "info": "Aw",
+                        "color": "#ffffb3"
+                    },
+                    {
+                        "id": "Bw",
+                        "info": "Bw",
+                        "color": "#bebada"
+                    },
+                    {
+                        "id": "Bs",
+                        "info": "Bs",
+                        "color": "#fb8072"
+                    },
+                    {
+                        "id": "Cs",
+                        "info": "Cs",
+                        "color": "#80b1d3"
+                    },
+                    {
+                        "id": "Cw",
+                        "info": "Cw",
+                        "color": "#fdb462"
+                    },
+                    {
+                        "id": "Cr",
+                        "info": "Cr",
+                        "color": "#b3de69"
+                    },
+                    {
+                        "id": "Do",
+                        "info": "Do",
+                        "color": "#fccde5"
+                    },
+                    {
+                        "id": "Dc",
+                        "info": "Dc",
+                        "color": "#d9d9d9"
+                    },
+                    {
+                        "id": "Eo",
+                        "info": "Eo",
+                        "color": "#ccebc5"
+                    },
+                    {
+                        "id": "Ec",
+                        "info": "Ec",
+                        "color": "#ffed6f"
+                    },
+                    {
+                        "id": "Ft",
+                        "info": "Ft",
+                        "color": "#8dd3c7"
+                    },
+                    {
+                        "id": "Fi",
+                        "info": "Fi",
+                        "color": "#ffafb0"
+                    }
+                ]
             }
         ]
     },
@@ -126,12 +347,19 @@
         "name": "thermalDiscomfort",
         "options": [
             {
-                "id": "TDI",
-                "label": "tdi"
+                "id": "tdi",
+                "label": "tdi",
+                "domain": "TD"
             },
             {
-                "id": "UTCI",
-                "label": "utci"
+                "id": "utci26",
+                "label": "utci26",
+                "domain": "TD"
+            },
+            {
+                "id": "utci32",
+                "label": "utci32",
+                "domain": "TD"
             }
         ]
     },
@@ -181,7 +409,7 @@
             {
                 "id": "UNEP",
                 "label": "unep"
-            }            
+            }
         ]
     },
     {
