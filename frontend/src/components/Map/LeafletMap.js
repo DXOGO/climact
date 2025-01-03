@@ -24,8 +24,6 @@ const LeafletMap = () => {
 
   const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
-  const selectedLayerInfo = getInfo(variable.id);
-
   const handleTileLoading = (layer) => {
     layer.on('load', () => {
       setLoading(false);
@@ -76,7 +74,6 @@ const LeafletMap = () => {
         <MapContent wmsUrl={wmsUrl}
           variable={variable}
           variableKey={variableKey}
-          selectedLayerInfo={selectedLayerInfo}
           handleTileLoading={handleTileLoading}
           loading={loading}
           t={t}
@@ -91,7 +88,7 @@ const LeafletMap = () => {
   );
 };
 
-const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading, t, isMobile }) => {
+const MapContent = ({ wmsUrl, variable, variableKey, handleTileLoading, loading, t, isMobile }) => {
 
   useMapClick(wmsUrl, variable, variableKey);
 
@@ -104,7 +101,6 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         format="image/png"
         transparent={true}
         version="1.3.0"
-        colorScaleRange={selectedLayerInfo[2]}
         tileSize={512}
         eventHandlers={{
           add: (e) => handleTileLoading(e.target),
@@ -134,20 +130,12 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
     legend.onAdd = () => {
       const div = L.DomUtil.create('div', 'info legend');
 
-      // Fetch legend information based on the layer
-      const legendInfo = getInfo(variableId);
-      const palette = legendInfo[0];
-      const styles = legendInfo[1];
-      const colorScaleRange = legendInfo[2];
-      const numColorBands = 250;
-
       // Construct the GetLegendGraphic URL
-      const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=${numColorBands}&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
+      const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=250&LAYER=${variableKey}&STYLES=default`;
 
       // Set the image as the legend
       div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px 15px 5px 5px; background-color: white !important; border-radius: 5px;"/>`;
 
-      // Add a white square on top of the legend to cover the text in all variables except koppen and trewartha
       const whiteSquare = L.DomUtil.create('div', 'white-square');
       whiteSquare.style.position = 'absolute';
       whiteSquare.style.top = '0';
@@ -179,9 +167,9 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
 
           const levelText = L.DomUtil.create('div', 'level-text');
           levelText.innerHTML = level;
+
           levelDiv.appendChild(levelText);
           verticalText.appendChild(levelDiv);
-
           whiteSquare.appendChild(verticalText);
         });
 
@@ -196,59 +184,29 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
         colorDiv.style.border = '1px solid black';
 
         if (variableId === 'koppen') {
-          // create custom legend square colors, check variables.json file for colors)
+          // create custom legend square colors for koppen, check variables.json file for colors)
 
-          const colorSquare = L.DomUtil.create('div', 'color-square');
-          colorSquare.style.width = '26px';
-          colorSquare.style.height = '25%';
-          colorSquare.style.backgroundColor = '#87E878';
-          colorDiv.appendChild(colorSquare);
-
-          const colorSquare2 = L.DomUtil.create('div', 'color-square');
-          colorSquare2.style.width = '26px';
-          colorSquare2.style.height = '25%';
-          colorSquare2.style.backgroundColor = '#8CC873';
-          colorDiv.appendChild(colorSquare2);
-
-          const colorSquare3 = L.DomUtil.create('div', 'color-square');
-          colorSquare3.style.width = '26px';
-          colorSquare3.style.height = '25%';
-          colorSquare3.style.backgroundColor = '#C5B53A';
-          colorDiv.appendChild(colorSquare3);
-
-          const colorSquare4 = L.DomUtil.create('div', 'color-square');
-          colorSquare4.style.width = '26px';
-          colorSquare4.style.height = '25%';
-          colorSquare4.style.backgroundColor = '#CADA35';
-          colorDiv.appendChild(colorSquare4);
+          const colors = ['#87E878', '#8CC873', '#C5B53A', '#CADA35'];
+          colors.forEach(color => {
+            const colorSquare = L.DomUtil.create('div', 'color-square');
+            colorSquare.style.width = '26px';
+            colorSquare.style.height = '25%';
+            colorSquare.style.backgroundColor = color;
+            colorDiv.appendChild(colorSquare);
+          });
 
           div.appendChild(colorDiv);
 
         } else {
-          // create custom legend square colors, check variables.json file for colors)
-          const colorSquare = L.DomUtil.create('div', 'color-square');
-          colorSquare.style.width = '26px';
-          colorSquare.style.height = '25%';
-          colorSquare.style.backgroundColor = '#32C86A';
-          colorDiv.appendChild(colorSquare);
-
-          const colorSquare3 = L.DomUtil.create('div', 'color-square');
-          colorSquare3.style.width = '26px';
-          colorSquare3.style.height = '25%';
-          colorSquare3.style.backgroundColor = '#78E664';
-          colorDiv.appendChild(colorSquare3);
-
-          const colorSquare4 = L.DomUtil.create('div', 'color-square');
-          colorSquare4.style.width = '26px';
-          colorSquare4.style.height = '25%';
-          colorSquare4.style.backgroundColor = '#A5F53C';
-          colorDiv.appendChild(colorSquare4);
-
-          const colorSquare5 = L.DomUtil.create('div', 'color-square');
-          colorSquare5.style.width = '26px';
-          colorSquare5.style.height = '25%';
-          colorSquare5.style.backgroundColor = '#F2DF1F';
-          colorDiv.appendChild(colorSquare5);
+          // create custom legend square colors for trewartha, check variables.json file for colors)
+          const colors = ['#32C86A', '#78E664', '#A5F53C', '#F2DF1F'];
+          colors.forEach(color => {
+            const colorSquare = L.DomUtil.create('div', 'color-square');
+            colorSquare.style.width = '26px';
+            colorSquare.style.height = '25%';
+            colorSquare.style.backgroundColor = color;
+            colorDiv.appendChild(colorSquare);
+          });
 
           div.appendChild(colorDiv);
         }
@@ -328,94 +286,6 @@ const CustomZoomControl = () => {
 
   return null;
 };
-
-const getInfo = (variable) => {
-  // Pallete, style, colorScaleRange 
-  // ! ALL DEFAULT BECAUSE PALLETES AND STYLES ARE BEING SET ON WMSCONFIG.XML AND THREDDSCONFIG.XML FILES
-  switch (variable) {
-    case 'Tmean':
-      return ['seq-Heat-inv', 'default', '5,30'];
-
-    case 'Tmax':
-      return ['seq-Heat-inv', 'default', '10,30'];
-
-    case 'Tmin':
-      return ['seq-Heat-inv', 'default', '5,25'];
-
-    case 'very_hot_days':
-      return ['seq-Heat-inv', 'default', '0,30'];
-
-    case 'hot_days':
-      return ['seq-Heat-inv', 'default', '0,130'];
-
-    case 'tropical_nights':
-      return ['seq-Heat-inv', 'default', '0,100'];
-
-    case 'frost_days':
-      return ['psu-viridis', 'default', '0,30'];
-
-    // case 'WS100m':
-    //   return ['default', 'default', '5,10'];
-
-    case 'wind_energy_100m':
-      return ['seq-cubeYF-inv', 'default', '0,5'];
-
-    case 'solar_energy':
-      return ['seq-cubeYF-inv', 'default', '1.5,2'];
-
-    case 'high_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'very_high_days_fwi':
-      return ['seq-Heat-inv', 'default', '30,70'];
-
-    case 'extreme_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'very_extreme_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'exceptional_days_fwi':
-      return ['seq-Heat-inv', 'default', '5,60'];
-
-    case 'NO2':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    case 'O3':
-      return ['seq-BlueHeat-inv', 'default', '0,30'];
-
-    case 'PM10':
-      return ['seq-BlueHeat-inv', 'default', '0,20'];
-
-    case 'PM25':
-      return ['seq-BlueHeat-inv', 'default', '0,20'];
-
-    case 'CO':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    case 'SO2':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    case 'tdi':
-      return ['seq-Heat-inv', 'default', '0,80'];
-
-    case 'utci26':
-      return ['seq-Heat-inv', 'default', '0,50'];
-
-    case 'utci32':
-      return ['seq-Heat-inv', 'default', '0,10'];
-
-    case 'koppen':
-      return ['x-Ncview-inv', 'default', '0,38'];
-
-    case 'trewartha':
-      return ['x-Occam-inv', 'default', '-5,25'];
-
-    default:
-      return ['default', 'default-scalar/default', '-50,50'];
-  }
-};
-
 
 const getLegendText = (variableId, t) => {
 
