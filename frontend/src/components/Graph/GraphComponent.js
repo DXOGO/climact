@@ -196,7 +196,7 @@ const GraphComponent = () => {
 
 
     if (variable.id === 'koppen' || variable.id === 'trewartha') {
-        return <ClimateClassificationComponent variable={variable} t={t} />
+        return <ClimateClassificationComponent variable={variable} t={t} i18n={i18n} />;
     }
 
     return (
@@ -234,7 +234,7 @@ const GraphComponent = () => {
         ));
 };
 
-const ClimateClassificationComponent = ({ variable, t }) => {
+const ClimateClassificationComponent = ({ variable, t, i18n }) => {
 
     // Find the relevant classification data from variables.json
     const classification = variables.find((item) => item.name === 'climateClassification');
@@ -243,23 +243,25 @@ const ClimateClassificationComponent = ({ variable, t }) => {
     return (
         <div className={styles.legendContainer}>
             <div className={styles.legendTitle}>
-                <p>
-                    {variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'} {t('ccTitle')}
-                </p>
+                {i18n.language === 'en' ?
+                    <p>{variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'} {t('ccTitle')}</p>
+                    :
+                    <p>{t('ccTitle')} {variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'}</p>
+                }
             </div>
             <div className={styles.legendItems}>
                 {option.legend.map((item) => (
                     <div key={item.id} className={styles.legendItem}>
-                    <div className={styles.legendItemHeader}>
-                        <div
-                            className={styles.legendColor}
-                            style={{ backgroundColor: item.color }}
-                        >
+                        <div className={styles.legendItemHeader}>
+                            <div
+                                className={styles.legendColor}
+                                style={{ backgroundColor: item.color }}
+                            >
 
+                            </div>
+                            <p><strong>{item.id}</strong></p>
                         </div>
-                        <p><strong>{item.id}</strong></p>
-                        </div>
-                        <p style={{marginTop: '4px'}}>{t(`climateClassificationLegend.${option.domain}.${item.id}`)}</p>
+                        <p style={{ marginTop: '4px' }}>{t(`climateClassificationLegend.${option.domain}.${item.id}`)}</p>
                     </div>
                 ))}
             </div>

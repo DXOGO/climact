@@ -139,7 +139,7 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
       const palette = legendInfo[0];
       const styles = legendInfo[1];
       const colorScaleRange = legendInfo[2];
-      const numColorBands = variableId === 'koppen' ? 30 : variableId === 'trewartha' ? 5 : 250;
+      const numColorBands = 250;
 
       // Construct the GetLegendGraphic URL
       const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=${numColorBands}&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
@@ -159,16 +159,17 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
       const verticalText = L.DomUtil.create('div', 'vertical-text');
 
       if (variableId === 'koppen' || variableId === 'trewartha') {
-        whiteSquare.style.width = '58%';
 
-        const levels = variableId == 'koppen' ? ['Csa', 'Dsa', 'Dsb'] : ['Cs', 'Cw', 'Cr', 'Do', 'Dc'];
+        whiteSquare.style.width = '58%'
+
+        const levels = variableId == 'koppen' ? ['Dsb', 'Dsa', 'Csb', 'Csa'] : ['Dc', 'Do', 'Cr', 'Cs'];
 
         verticalText.style.display = 'flex';
         verticalText.style.flexDirection = 'column';
 
         levels.forEach((level) => {
           const levelDiv = L.DomUtil.create('div', 'level-div');
-          levelDiv.style.height = variableId === 'koppen' ? '33.33%' : '20%';
+          levelDiv.style.height = '33.33%';
           levelDiv.style.display = 'flex';
           levelDiv.style.alignItems = 'center';
           levelDiv.style.justifyContent = 'flex-start';
@@ -182,48 +183,77 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
           verticalText.appendChild(levelDiv);
 
           whiteSquare.appendChild(verticalText);
-        }
-        );
+        });
+
+        const colorDiv = L.DomUtil.create('div', 'color-div');
+        colorDiv.style.position = 'absolute';
+        colorDiv.style.top = '0';
+        colorDiv.style.left = '0';
+        colorDiv.style.height = isMobile ? '190px' : '210px';
+        colorDiv.style.display = 'flex';
+        colorDiv.style.flexDirection = 'column';
+        colorDiv.style.margin = '5px 15px 5px 5px';
+        colorDiv.style.border = '1px solid black';
 
         if (variableId === 'koppen') {
-          // create custom legend square colors, specifically #0000FF for Dsb, #EA7B15 for Dsa, ##FF0001 for Csa
-          const colorDiv = L.DomUtil.create('div', 'color-div');
-          colorDiv.style.position = 'absolute';
-          colorDiv.style.top = '0';
-          colorDiv.style.left = '0';
-          colorDiv.style.height = isMobile ? '190px' : '210px';
-          colorDiv.style.display = 'flex';
-          colorDiv.style.flexDirection = 'column';
-          colorDiv.style.margin = '5px 15px 5px 5px';
-          colorDiv.style.border = '1px solid black';
-          
+          // create custom legend square colors, check variables.json file for colors)
+
           const colorSquare = L.DomUtil.create('div', 'color-square');
           colorSquare.style.width = '26px';
-          colorSquare.style.height = '33.3%';
-          colorSquare.style.backgroundColor = '#FF0001';
+          colorSquare.style.height = '25%';
+          colorSquare.style.backgroundColor = '#87E878';
           colorDiv.appendChild(colorSquare);
 
           const colorSquare2 = L.DomUtil.create('div', 'color-square');
           colorSquare2.style.width = '26px';
-          colorSquare2.style.height = '33.3%';
-          colorSquare2.style.backgroundColor = '#EA7B15';
+          colorSquare2.style.height = '25%';
+          colorSquare2.style.backgroundColor = '#8CC873';
           colorDiv.appendChild(colorSquare2);
 
           const colorSquare3 = L.DomUtil.create('div', 'color-square');
           colorSquare3.style.width = '26px';
-          colorSquare3.style.height = '33.3%';
-
-          colorSquare3.style.backgroundColor = '#0000FF';
+          colorSquare3.style.height = '25%';
+          colorSquare3.style.backgroundColor = '#C5B53A';
           colorDiv.appendChild(colorSquare3);
 
+          const colorSquare4 = L.DomUtil.create('div', 'color-square');
+          colorSquare4.style.width = '26px';
+          colorSquare4.style.height = '25%';
+          colorSquare4.style.backgroundColor = '#CADA35';
+          colorDiv.appendChild(colorSquare4);
+
           div.appendChild(colorDiv);
-          
+
+        } else {
+          // create custom legend square colors, check variables.json file for colors)
+          const colorSquare = L.DomUtil.create('div', 'color-square');
+          colorSquare.style.width = '26px';
+          colorSquare.style.height = '25%';
+          colorSquare.style.backgroundColor = '#32C86A';
+          colorDiv.appendChild(colorSquare);
+
+          const colorSquare3 = L.DomUtil.create('div', 'color-square');
+          colorSquare3.style.width = '26px';
+          colorSquare3.style.height = '25%';
+          colorSquare3.style.backgroundColor = '#78E664';
+          colorDiv.appendChild(colorSquare3);
+
+          const colorSquare4 = L.DomUtil.create('div', 'color-square');
+          colorSquare4.style.width = '26px';
+          colorSquare4.style.height = '25%';
+          colorSquare4.style.backgroundColor = '#A5F53C';
+          colorDiv.appendChild(colorSquare4);
+
+          const colorSquare5 = L.DomUtil.create('div', 'color-square');
+          colorSquare5.style.width = '26px';
+          colorSquare5.style.height = '25%';
+          colorSquare5.style.backgroundColor = '#F2DF1F';
+          colorDiv.appendChild(colorSquare5);
+
+          div.appendChild(colorDiv);
         }
-
-
       } else {
         whiteSquare.style.width = '30%';
-
         verticalText.innerHTML = getLegendText(variableId, t);
         verticalText.style.position = 'absolute';
         verticalText.style.right = '2px';
@@ -237,7 +267,6 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
 
         whiteSquare.appendChild(verticalText);
       }
-
 
       div.appendChild(whiteSquare);
 
@@ -377,10 +406,10 @@ const getInfo = (variable) => {
       return ['seq-Heat-inv', 'default', '0,10'];
 
     case 'koppen':
-      return ['x-Ncview', 'default', '8,18'];
+      return ['x-Ncview-inv', 'default', '0,38'];
 
     case 'trewartha':
-      return ['x-Ncview', 'default', '5,9'];
+      return ['x-Occam-inv', 'default', '-5,25'];
 
     default:
       return ['default', 'default-scalar/default', '-50,50'];

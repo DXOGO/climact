@@ -99,20 +99,19 @@
     flex-direction: column;
     height: 100%;
     padding: 0px 10px 20px 10px;
-    flex-wrap: wrap;
 }
 
 .legendTitle {
     color: #2C2C36;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .legendItems {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-wrap: wrap;
     height: 94%;
     overflow-y: auto;
     width: 100%;
