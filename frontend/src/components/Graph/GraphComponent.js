@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
+import variables from '../../data/variables.json';
 
 const GraphComponent = () => {
     const { t, i18n } = useTranslation();
@@ -34,84 +35,20 @@ const GraphComponent = () => {
     const futureScenario = useSelector((state) => state.futureScenario);
     const variable = useSelector((state) => state.variable);
     const isMobile = useSelector((state) => state.isMobile);
-    
-    let title;
-
-    // Set the graph title based on the selected variable
-    switch (variable.id) {
-        case 'Tmax':
-            title = t('maximumTemperatureGraphTitle');
-            break;
-        case 'Tmin':
-            title = t('minimumTemperatureGraphTitle');
-            break;
-        case 'Tmean':
-            title = t('meanTemperatureGraphTitle');
-            break;
-        case 'very_hot_days':
-            title = t('veryHotDaysGraphTitle');
-            break;
-        case 'hot_days':
-            title = t('hotDaysGraphTitle');
-            break;
-        case 'tropical_nights':
-            title = t('tropicalNightsGraphTitle');
-            break;
-        case 'frost_days':
-            title = t('frostDaysGraphTitle');
-            break;
-        case 'cold_days':
-            title = t('coldDaysGraphTitle');
-            break;
-        case 'wind_energy_100m':
-            title = t('windGraphTitle');
-            break;
-        case 'solar_energy':
-            title = t('solarGraphTitle');
-            break;
-        case 'high_days_fwi':
-            title = t('hfwiGraphTitle');
-            break;
-        case 'very_high_days_fwi':
-            title = t('vhfwiGraphTitle');
-            break;
-        case 'extreme_days_fwi':
-            title = t('efwiGraphTitle');
-            break;
-        case 'very_extreme_fwi':
-            title = t('vefwiGraphTitle');
-            break;
-        case 'exceptional_days_fwi':
-            title = t('exfwiGraphTitle');
-            break;
-        case 'NO2':
-            title = t('aqGraphTitlePt1') + ' NO2 ' + t('aqGraphTitlePt2');
-            break;
-        case 'O3':
-            title = t('aqGraphTitlePt1') + ' O3 ' + t('aqGraphTitlePt2');
-            break;
-        case 'PM10':
-            title = t('aqGraphTitlePt1') + ' PM10 ' + t('aqGraphTitlePt2');;
-            break;
-        case 'PM25':
-            title = t('aqGraphTitlePt1') + ' PM2.5 ' + t('aqGraphTitlePt2');
-            break;
-        case 'CO':
-            title = t('aqGraphTitlePt1') + ' CO ' + t('aqGraphTitlePt2');
-            break;
-        case 'SO2':
-            title = t('aqGraphTitlePt1') + ' SO2 ' + t('aqGraphTitlePt2');
-            break;
-    }
 
     useEffect(() => {
+        if (variable.id === 'koppen' || variable.id === 'trewartha') {
+            return; // Skip fetching data for these variables
+        }
+
         const fetchData = async () => {
             try {
                 setErrorMessage(null); // Reset error message
                 setChartOptions(null);  // Reset chart options
 
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.domain === 'historical' ? 'hist' : futureScenario.id + '_' + timePeriod.id}`);
+                const endpoint = `${process.env.REACT_APP_API_BASE_URL}/data/${variable.domain}/${variable.id}/${timePeriod.domain === 'historical' ? 'hist' : futureScenario.id + '_' + timePeriod.id}`;
 
+                const response = await axios.get(endpoint);
                 if (response.status === 200 && response.data && response.data.length > 0) {
                     const data = response.data;
 
@@ -257,6 +194,11 @@ const GraphComponent = () => {
         fetchData();
     }, [variable, timePeriod, futureScenario, t, screenHeight, isMobile]);
 
+
+    if (variable.id === 'koppen' || variable.id === 'trewartha') {
+        return <ClimateClassificationComponent variable={variable} t={t} i18n={i18n} />;
+    }
+
     return (
         errorMessage ? (
             <p className={styles.errorMessage}>
@@ -267,7 +209,7 @@ const GraphComponent = () => {
             <div className={styles.graphContainer}>
                 <div className={styles.chartHeader}>
                     <h2 className={styles.chartTitle}>
-                        {title}
+                        {getChartTitle(variable, t)}
                     </h2>
                     <h4 className={styles.chartSubtitle}>
                         {`${timePeriod.domain === 'historical' ? t('historical') : t('futureScenario') + ' ' + futureScenario.scenario.split(' ')[1]}, ${t('period')} ${timePeriod.period}`}
@@ -289,8 +231,127 @@ const GraphComponent = () => {
                     {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
                 </div>
             </div>
-        )
+        ));
+};
+
+const ClimateClassificationComponent = ({ variable, t, i18n }) => {
+
+    // Find the relevant classification data from variables.json
+    const classification = variables.find((item) => item.name === 'climateClassification');
+    const option = classification.options.find((opt) => opt.id === variable.id);
+
+    return (
+        <div className={styles.legendContainer}>
+            <div className={styles.legendTitle}>
+                {i18n.language === 'en' ?
+                    <p>{variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'} {t('ccTitle')}</p>
+                    :
+                    <p>{t('ccTitle')} {variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'}</p>
+                }
+            </div>
+            <div className={styles.legendItems}>
+                {option.legend.map((item) => (
+                    <div key={item.id} className={styles.legendItem}>
+                        <div className={styles.legendItemHeader}>
+                            <div
+                                className={styles.legendColor}
+                                style={{ backgroundColor: item.color }}
+                            >
+
+                            </div>
+                            <p><strong>{item.id}</strong></p>
+                        </div>
+                        <p style={{ marginTop: '4px' }}>{t(`climateClassificationLegend.${option.domain}.${item.id}`)}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
+
+const getChartTitle = (variable, t) => {
+    let title;
+
+    // Set the graph title based on the selected variable
+    switch (variable.id) {
+        case 'Tmax':
+            title = t('maximumTemperatureGraphTitle');
+            break;
+        case 'Tmin':
+            title = t('minimumTemperatureGraphTitle');
+            break;
+        case 'Tmean':
+            title = t('meanTemperatureGraphTitle');
+            break;
+        case 'very_hot_days':
+            title = t('veryHotDaysGraphTitle');
+            break;
+        case 'hot_days':
+            title = t('hotDaysGraphTitle');
+            break;
+        case 'tropical_nights':
+            title = t('tropicalNightsGraphTitle');
+            break;
+        case 'frost_days':
+            title = t('frostDaysGraphTitle');
+            break;
+        case 'cold_days':
+            title = t('coldDaysGraphTitle');
+            break;
+        case 'wind_energy_100m':
+            title = t('windGraphTitle');
+            break;
+        case 'solar_energy':
+            title = t('solarGraphTitle');
+            break;
+        case 'high_days_fwi':
+            title = t('hfwiGraphTitle');
+            break;
+        case 'very_high_days_fwi':
+            title = t('vhfwiGraphTitle');
+            break;
+        case 'extreme_days_fwi':
+            title = t('efwiGraphTitle');
+            break;
+        case 'very_extreme_fwi':
+            title = t('vefwiGraphTitle');
+            break;
+        case 'exceptional_days_fwi':
+            title = t('exfwiGraphTitle');
+            break;
+        case 'NO2':
+            title = t('aqGraphTitlePt1') + ' NO2 ' + t('aqGraphTitlePt2');
+            break;
+        case 'O3':
+            title = t('aqGraphTitlePt1') + ' O3 ' + t('aqGraphTitlePt2');
+            break;
+        case 'PM10':
+            title = t('aqGraphTitlePt1') + ' PM10 ' + t('aqGraphTitlePt2');;
+            break;
+        case 'PM25':
+            title = t('aqGraphTitlePt1') + ' PM2.5 ' + t('aqGraphTitlePt2');
+            break;
+        case 'CO':
+            title = t('aqGraphTitlePt1') + ' CO ' + t('aqGraphTitlePt2');
+            break;
+        case 'SO2':
+            title = t('aqGraphTitlePt1') + ' SO2 ' + t('aqGraphTitlePt2');
+            break;
+        case 'tdi':
+            title = t('tdiGraphTitle');
+            break;
+        case 'utci26':
+            title = t('utci26GraphTitle');
+            break;
+        case 'utci32':
+            title = t('utci32GraphTitle');
+            break;
+        default:
+            title = '';
+    }
+
+    return title;
+}
+
 
 export default GraphComponent;

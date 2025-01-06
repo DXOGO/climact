@@ -113,12 +113,58 @@
         "name": "climateClassification",
         "options": [
             {
-                "id": "KO",
-                "label": "ko"
+                "id": "koppen",
+                "label": "ko",
+                "domain": "KOPPEN",
+                "legend": [
+                    {
+                        "id": "Csa",
+                        "info": "Csa",
+                        "color": "#CADA35"
+                    },
+                    {
+                        "id": "Csb",
+                        "info": "Csb",
+                        "color": "#C5B53A"
+                    },
+                    {
+                        "id": "Dsa",
+                        "info": "Dsa",
+                        "color": "#8CC873"
+                    },
+                    {
+                        "id": "Dsb",
+                        "info": "Dsb",
+                        "color": "#87E878"
+                    }
+                ]
             },
             {
-                "id": "KT",
-                "label": "kt"
+                "id": "trewartha",
+                "label": "kt",
+                "domain": "TREWARTHA",
+                "legend": [
+                    {
+                        "id": "Cs",
+                        "info": "Cs",
+                        "color": "#F2DF1F"
+                    },
+                    {
+                        "id": "Cr",
+                        "info": "Cr",
+                        "color": "#A5F53C"
+                    },
+                    {
+                        "id": "Do",
+                        "info": "Do",
+                        "color": "#78E664"
+                    },
+                    {
+                        "id": "Dc",
+                        "info": "Dc",
+                        "color": "#32C86A"
+                    }
+                ]
             }
         ]
     },
@@ -126,12 +172,19 @@
         "name": "thermalDiscomfort",
         "options": [
             {
-                "id": "TDI",
-                "label": "tdi"
+                "id": "tdi",
+                "label": "tdi",
+                "domain": "TD"
             },
             {
-                "id": "UTCI",
-                "label": "utci"
+                "id": "utci26",
+                "label": "utci26",
+                "domain": "TD"
+            },
+            {
+                "id": "utci32",
+                "label": "utci32",
+                "domain": "TD"
             }
         ]
     },
@@ -181,7 +234,7 @@
             {
                 "id": "UNEP",
                 "label": "unep"
-            }            
+            }
         ]
     },
     {

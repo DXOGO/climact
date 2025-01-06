@@ -184,6 +184,8 @@ const MainLayout = () => {
 };
 
 const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive, disabled, t }) => {
+    const displayVariable = variable && variable.includes('climate classification') ? variable.split('climate classification')[0] : variable;
+
     return (
         <div
             className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''} ${disabled ? styles.disabledMenuOption : ''}`} onMouseEnter={!disabled ? onMouseEnter : null}
@@ -195,7 +197,7 @@ const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive
             </div>
             <div className={styles.subtext}>
                 <p>{subtitle}</p>
-                {variable && <p>{variable}</p>}
+                {displayVariable && <p>{displayVariable}</p>}
             </div>
         </div>
     );

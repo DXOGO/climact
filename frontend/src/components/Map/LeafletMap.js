@@ -24,8 +24,6 @@ const LeafletMap = () => {
 
   const wmsUrl = `${process.env.REACT_APP_THREDDS_URL}/wms/cesamAll/${variable.domain}/${variableKey}.nc`;
 
-  const selectedLayerInfo = getInfo(variable.id);
-
   const handleTileLoading = (layer) => {
     layer.on('load', () => {
       setLoading(false);
@@ -76,7 +74,6 @@ const LeafletMap = () => {
         <MapContent wmsUrl={wmsUrl}
           variable={variable}
           variableKey={variableKey}
-          selectedLayerInfo={selectedLayerInfo}
           handleTileLoading={handleTileLoading}
           loading={loading}
           t={t}
@@ -91,7 +88,7 @@ const LeafletMap = () => {
   );
 };
 
-const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTileLoading, loading, t, isMobile }) => {
+const MapContent = ({ wmsUrl, variable, variableKey, handleTileLoading, loading, t, isMobile }) => {
 
   useMapClick(wmsUrl, variable, variableKey);
 
@@ -104,7 +101,6 @@ const MapContent = ({ wmsUrl, variable, variableKey, selectedLayerInfo, handleTi
         format="image/png"
         transparent={true}
         version="1.3.0"
-        colorScaleRange={selectedLayerInfo[2]}
         tileSize={512}
         eventHandlers={{
           add: (e) => handleTileLoading(e.target),
@@ -134,45 +130,103 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
     legend.onAdd = () => {
       const div = L.DomUtil.create('div', 'info legend');
 
-      // Fetch legend information based on the layer
-      const legendInfo = getInfo(variableId);
-      const palette = legendInfo[0];
-      const styles = legendInfo[1];
-      const colorScaleRange = legendInfo[2];
-
       // Construct the GetLegendGraphic URL
-      const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=250&LAYER=${variableKey}&PALETTE=${palette}&STYLES=${styles}&COLORSCALERANGE=${colorScaleRange}`;
-      // const legendUrl = `${url}?REQUEST=GetLegendGraphic&COLORBARONLY=true&NUMCOLORBANDS=250&PALETTE=${palette}&WIDTH=60`;
+      const legendUrl = `${url}?REQUEST=GetLegendGraphic&NUMCOLORBANDS=250&LAYER=${variableKey}&STYLES=default`;
 
       // Set the image as the legend
       div.innerHTML += `<img src="${legendUrl}" alt="legend" style="height: ${isMobile ? '200px' : '220px'}; padding: 5px 15px 5px 5px; background-color: white !important; border-radius: 5px;"/>`;
-      // div.style.width = '69%';
 
-      // Add a white square on top of the legend to cover the text
       const whiteSquare = L.DomUtil.create('div', 'white-square');
       whiteSquare.style.position = 'absolute';
       whiteSquare.style.top = '0';
       whiteSquare.style.right = '0';
-      whiteSquare.style.width = '30%';
       whiteSquare.style.height = `${isMobile ? '200px' : '220px'}`;
       whiteSquare.style.backgroundColor = 'white';
       whiteSquare.style.display = 'flex';
-      div.appendChild(whiteSquare);
 
       const verticalText = L.DomUtil.create('div', 'vertical-text');
-      verticalText.innerHTML = getLegendText(variableId, t);
-      verticalText.style.position = 'absolute';
-      // verticalText.style.top = '30%';
-      verticalText.style.right = '2px';
-      verticalText.style.transform = 'translateY(50%) rotate(-90deg)';
-      verticalText.style.transformOrigin = 'right bottom';
-      // verticalText.style.backgroundColor = 'white';
-      verticalText.style.padding = '2px 0px';
-      verticalText.style.fontSize = '11px';
-      verticalText.style.color = 'black';
-      verticalText.style.whiteSpace = 'nowrap';
-      verticalText.style.top = '-20px';
-      whiteSquare.appendChild(verticalText);
+
+      if (variableId === 'koppen' || variableId === 'trewartha') {
+
+        whiteSquare.style.width = '58%'
+
+        const levels = variableId == 'koppen' ? ['Dsb', 'Dsa', 'Csb', 'Csa'] : ['Dc', 'Do', 'Cr', 'Cs'];
+
+        verticalText.style.display = 'flex';
+        verticalText.style.flexDirection = 'column';
+
+        levels.forEach((level) => {
+          const levelDiv = L.DomUtil.create('div', 'level-div');
+          levelDiv.style.height = '33.33%';
+          levelDiv.style.display = 'flex';
+          levelDiv.style.alignItems = 'center';
+          levelDiv.style.justifyContent = 'flex-start';
+          levelDiv.style.padding = '0px 4px';
+          levelDiv.style.fontSize = '11px';
+          levelDiv.style.color = 'black';
+
+          const levelText = L.DomUtil.create('div', 'level-text');
+          levelText.innerHTML = level;
+
+          levelDiv.appendChild(levelText);
+          verticalText.appendChild(levelDiv);
+          whiteSquare.appendChild(verticalText);
+        });
+
+        const colorDiv = L.DomUtil.create('div', 'color-div');
+        colorDiv.style.position = 'absolute';
+        colorDiv.style.top = '0';
+        colorDiv.style.left = '0';
+        colorDiv.style.height = isMobile ? '190px' : '210px';
+        colorDiv.style.display = 'flex';
+        colorDiv.style.flexDirection = 'column';
+        colorDiv.style.margin = '5px 15px 5px 5px';
+        colorDiv.style.border = '1px solid black';
+
+        if (variableId === 'koppen') {
+          // create custom legend square colors for koppen, check variables.json file for colors)
+
+          const colors = ['#87E878', '#8CC873', '#C5B53A', '#CADA35'];
+          colors.forEach(color => {
+            const colorSquare = L.DomUtil.create('div', 'color-square');
+            colorSquare.style.width = '26px';
+            colorSquare.style.height = '25%';
+            colorSquare.style.backgroundColor = color;
+            colorDiv.appendChild(colorSquare);
+          });
+
+          div.appendChild(colorDiv);
+
+        } else {
+          // create custom legend square colors for trewartha, check variables.json file for colors)
+          const colors = ['#32C86A', '#78E664', '#A5F53C', '#F2DF1F'];
+          colors.forEach(color => {
+            const colorSquare = L.DomUtil.create('div', 'color-square');
+            colorSquare.style.width = '26px';
+            colorSquare.style.height = '25%';
+            colorSquare.style.backgroundColor = color;
+            colorDiv.appendChild(colorSquare);
+          });
+
+          div.appendChild(colorDiv);
+        }
+      } else {
+        whiteSquare.style.width = '30%';
+        verticalText.innerHTML = getLegendText(variableId, t);
+        verticalText.style.position = 'absolute';
+        verticalText.style.right = '2px';
+        verticalText.style.transform = 'translateY(50%) rotate(-90deg)';
+        verticalText.style.transformOrigin = 'right bottom';
+        verticalText.style.padding = '2px 0px';
+        verticalText.style.fontSize = '11px';
+        verticalText.style.color = 'black';
+        verticalText.style.whiteSpace = 'nowrap';
+        verticalText.style.top = '-20px';
+
+        whiteSquare.appendChild(verticalText);
+      }
+
+      div.appendChild(whiteSquare);
 
       return div;
     };
@@ -233,101 +287,26 @@ const CustomZoomControl = () => {
   return null;
 };
 
-const getInfo = (variable) => {
-  // Pallete, style, colorScaleRange 
-  // ! ALL DEFAULT BECAUSE PALLETES AND STYLES ARE BEING SET ON WMSCONFIG.XML AND THREDDSCONFIG.XML FILES
-  switch (variable) {
-    case 'Tmean':
-      return ['seq-Heat-inv', 'default', '5,30'];
-
-    case 'Tmax':
-      return ['seq-Heat-inv', 'default', '10,30'];
-
-    case 'Tmin':
-      return ['seq-Heat-inv', 'default', '5,25'];
-
-    case 'very_hot_days':
-      return ['seq-Heat-inv', 'default', '0,30'];
-
-    case 'hot_days':
-      return ['seq-Heat-inv', 'default', '0,130'];
-
-    case 'tropical_nights':
-      return ['seq-Heat-inv', 'default', '0,100'];
-
-    case 'frost_days':
-      return ['psu-viridis', 'default', '0,30'];
-
-    // case 'WS100m':
-    //   return ['default', 'default', '5,10'];
-
-    case 'wind_energy_100m':
-      return ['seq-cubeYF-inv', 'default', '0,5'];
-
-    case 'solar_energy':
-      return ['seq-cubeYF-inv', 'default', '1.5,2'];
-
-    case 'high_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'very_high_days_fwi':
-      return ['seq-Heat-inv', 'default', '30,70'];
-
-    case 'extreme_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'very_extreme_days_fwi':
-      return ['seq-Heat-inv', 'default', '10,50'];
-
-    case 'exceptional_days_fwi':
-      return ['seq-Heat-inv', 'default', '5,60'];
-
-    case 'NO2':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    case 'O3':
-      return ['seq-BlueHeat-inv', 'default', '0,30'];
-
-    case 'PM10':
-      return ['seq-BlueHeat-inv', 'default', '0,20'];
-
-    case 'PM25':
-      return ['seq-BlueHeat-inv', 'default', '0,20'];
-
-    case 'CO':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    case 'SO2':
-      return ['seq-BlueHeat-inv', 'default', '0,10'];
-
-    default:
-      return ['default', 'default-scalar/default', '-50,50'];
-  }
-};
-
-
 const getLegendText = (variableId, t) => {
 
   switch (variableId) {
     case 'Tmean':
-      return t('yAxisTitleTemp');;
-
     case 'Tmax':
-      return t('yAxisTitleTemp');;
-
     case 'Tmin':
-      return t('yAxisTitleTemp');;
+      return t('yAxisTitleTemp');
 
     case 'very_hot_days':
-      return t('yAxisTitleNDays');
-
     case 'hot_days':
-      return t('yAxisTitleNDays');
-
     case 'tropical_nights':
-      return t('yAxisTitleNDays');
-
     case 'frost_days':
+    case 'tdi':
+    case 'utci26':
+    case 'utci32':
+    case 'high_days_fwi':
+    case 'very_high_days_fwi':
+    case 'extreme_days_fwi':
+    case 'very_extreme_days_fwi':
+    case 'exceptional_days_fwi':
       return t('yAxisTitleNDays');
 
     case 'wind_energy_100m':
@@ -335,39 +314,6 @@ const getLegendText = (variableId, t) => {
 
     case 'solar_energy':
       return t('yAxisTitleSolar');
-
-    case 'high_days_fwi':
-      return t('yAxisTitleNDays');
-
-    case 'very_high_days_fwi':
-      return t('yAxisTitleNDays');
-
-    case 'extreme_days_fwi':
-      return t('yAxisTitleNDays');
-
-    case 'very_extreme_days_fwi':
-      return t('yAxisTitleNDays');
-
-    case 'exceptional_days_fwi':
-      return t('yAxisTitleNDays');
-
-    case 'NO2':
-      return t('yAxisTitleNDays');
-
-    case 'O3':
-      return t('yAxisTitleNDays');
-
-    case 'PM10':
-      return t('yAxisTitleNDays');
-
-    case 'PM25':
-      return t('yAxisTitleNDays');
-
-    case 'CO':
-      return t('yAxisTitleNDays');
-
-    case 'SO2':
-      return t('yAxisTitleNDays');
 
     default:
       return '';
