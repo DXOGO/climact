@@ -26,6 +26,10 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         unitSymbol = '';
     }
 
+    const koppenMapping = { 8: 'Csa', 9: 'Csb', 17: 'Dsa', 18: 'Dsb' }
+    const trewarthaMapping = { 5: 'Cs', 7: 'Cr', 8: 'Do', 9: 'Dc' }
+
+
     const getFeatureInfo = useCallback(async (latlng) => {
         const size = map.getSize();
         const bounds = map.getBounds();
@@ -61,17 +65,35 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
     const handleMapClick = useCallback(async (e) => {
         const { lat, lng } = e.latlng;
         const info = await getFeatureInfo(e.latlng);
+
         setClickedPosition(info !== 'N/A' ? { lat, lng } : null);
-        setValue(info);
+        
+        if (domain === 'KOPPEN') {
+            const classification = koppenMapping[parseInt(info)] || 'N/A';
+            console.log("classification", classification)
+            setValue(classification);
+        } else if (domain === 'TREWARTHA') {
+            const classification = trewarthaMapping[parseInt(info)] || 'N/A';
+            setValue(classification);
+        } else {
+            setValue(info);
+        }
+
     }, [getFeatureInfo]);
 
     const handleMapDblClick = (e) => {
+        console.log("value", value)
         if (value === 'N/A') return;  // Prevent popup if value is 'N/A'
 
         const { lat, lng } = e.latlng;
+        const label = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? 'Classification' : 'Average';
+        const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? '' : unitSymbol;
+
         const popupContent = `
             <div style="background-color: #fff;">
-                <p style="margin-bottom: 4px; color: rgb(39, 49, 57); font-size: 11px"><strong>Average:</strong> ${value} ${unitSymbol}</p>
+                <p style="margin-bottom: 4px; color: rgb(39, 49, 57); font-size: 11px">
+                    <strong>${label}:</strong> ${value} ${unit}
+                </p>
                 <p style="margin: 0; color: #373C41; font-size: 11px">Latitude: ${lat.toFixed(2)}</p>
                 <p style="margin: 0; color: #373C41; font-size: 11px">Longitude: ${lng.toFixed(2)}</p>
             </div>
