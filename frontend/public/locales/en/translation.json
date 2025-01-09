@@ -22,6 +22,8 @@
     "disabledOption": "This option is unavailable for the selected time period",
     "textMap": "Map",
     "textGraph": "Graph",
+    "average": "Average",
+    "classification": "Classification",
     "noChartAvailable": "No chart available",
     "noMapAvailable": "No map available",
     "timePeriod": "Time period",

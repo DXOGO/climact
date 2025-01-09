@@ -86,7 +86,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         if (value === 'N/A') return;  // Prevent popup if value is 'N/A'
 
         const { lat, lng } = e.latlng;
-        const label = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? 'Classification' : 'Average';
+        const label = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? t('classification') : t('average');
         const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? '' : unitSymbol;
 
         const popupContent = `

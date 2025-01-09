@@ -22,6 +22,8 @@
     "disabledOption": "Esta opção está desativada para este período temporal",
     "textMap": "Mapa",
     "textGraph": "Gráfico",
+    "average": "Média",
+    "classification": "Classificação",
     "noChartAvailable": "Gráfico não disponível",
     "noMapAvailable": "Mapa não disponível",
     "timePeriod": "Período temporal",
