@@ -17,6 +17,11 @@
     cursor: pointer;
 }
 
+.activeVariableName {
+    display: flex;
+    font-weight: 600;
+}
+
 .variableName {
     display: flex;
     font-weight: 500;
@@ -36,4 +41,4 @@
     .variableItem {
         padding: 10px 10px;
     }
-} 
+}
