@@ -40,10 +40,9 @@ const Variable = () => {
                     className={variable.name === 'temperature' ? styles.variableTemp : styles.variableItem}
                     onMouseEnter={!isMobile ? () => setHoveredVariable(variable.name) : null}
                     onMouseLeave={!isMobile ? () => setHoveredVariable(null) : null}
-
                 >
                     <div
-                        className={styles.variableName}
+                        className={selectedVariable.name === variable.name && selectedVariable ? styles.activeVariableName: styles.variableName }
                         onClick={isMobile ? () => toggleExpandedVariable(variable.name) : null}
                     >
                         {t(variable.name)}
@@ -54,7 +53,6 @@ const Variable = () => {
                                 <RadioOption
                                     key={option.id}
                                     label={`${t(variable.name)}-${t(option.label)}`}
-                                    // name={variable.name}
                                     text={t(option.label)}
                                     checked={selectedVariable.name === variable.name && selectedVariable.option === option.label}
                                     onChange={() => handleOptionChange(variable.name, option)}
