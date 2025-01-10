@@ -184,7 +184,12 @@ const MainLayout = () => {
 };
 
 const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive, disabled, t }) => {
-    const displayVariable = variable && variable.includes('climate classification') ? variable.split('climate classification')[0] : variable;
+
+    const displayVariable = variable && (variable.includes('climate classification')
+        ? variable.split('climate classification')[0]
+        : variable.includes('Classificação climática de')
+            ? variable.split('Classificação climática de')[1]
+            : variable);
 
     return (
         <div
