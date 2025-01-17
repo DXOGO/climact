@@ -300,6 +300,7 @@ const getLegendText = (variableId, t) => {
     case 'tropical_nights':
     case 'frost_days':
     case 'tdi':
+    case 'tdi28':
     case 'utci26':
     case 'utci32':
     case 'high_days_fwi':
@@ -307,6 +308,12 @@ const getLegendText = (variableId, t) => {
     case 'extreme_days_fwi':
     case 'very_extreme_days_fwi':
     case 'exceptional_days_fwi':
+    case'PM25':
+    case 'PM10':
+    case 'O3':
+    case 'NO2':
+    case 'SO2':
+    case 'CO':
       return t('yAxisTitleNDays');
 
     case 'wind_energy_100m':

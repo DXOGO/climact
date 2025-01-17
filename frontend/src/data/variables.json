@@ -172,8 +172,8 @@
         "name": "thermalDiscomfort",
         "options": [
             {
-                "id": "tdi",
-                "label": "tdi",
+                "id": "tdi28",
+                "label": "tdi28",
                 "domain": "TD"
             },
             {
