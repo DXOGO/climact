@@ -320,20 +320,8 @@ const getChartTitle = (variable, t) => {
         case 'solar_energy':
             title = t('solarGraphTitle');
             break;
-        case 'high_days_fwi':
-            title = t('hfwiGraphTitle');
-            break;
-        case 'very_high_days_fwi':
-            title = t('vhfwiGraphTitle');
-            break;
-        case 'extreme_days_fwi':
-            title = t('efwiGraphTitle');
-            break;
-        case 'very_extreme_fwi':
-            title = t('vefwiGraphTitle');
-            break;
-        case 'exceptional_days_fwi':
-            title = t('exfwiGraphTitle');
+        case 'fwi_above24':
+            title = t('fwiAbove24GraphTitle');
             break;
         case 'NO2':
             title = t('aqGraphTitlePt1') + ' NO2 ' + t('aqGraphTitlePt2');
