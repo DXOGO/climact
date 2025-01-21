@@ -73,7 +73,7 @@ const GraphComponent = () => {
                     if (variable.domain === 'TEMPS') {
                         yAxisTitle = t('yAxisTitleTemp');
                         tooltipUnit = '°C';
-                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ') {
+                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ' || variable.domain === 'TD') {
                         yAxisTitle = t('yAxisTitleNDays');
                         tooltipUnit = ' days';
                     } else if (variable.domain === 'WIND') {
@@ -240,14 +240,24 @@ const ClimateClassificationComponent = ({ variable, t, i18n }) => {
     const classification = variables.find((item) => item.name === 'climateClassification');
     const option = classification.options.find((opt) => opt.id === variable.id);
 
+    let title; // Title of the climate classification legend
+    let kLink; // Link to the Köppen climate classification Wikipedia page
+    let tLink; // Link to the Trewartha climate classification Wikipedia page
+
+    if (i18n.language === 'en') {
+        title = `${variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'} ${t('ccTitle')}`;
+        kLink = 'https://en.wikipedia.org/wiki/Koppen_climate_classification';
+        tLink = 'https://en.wikipedia.org/wiki/Trewartha_climate_classification';
+    } else {
+        title = `${t('ccTitle')} ${variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'}`;
+        kLink = 'https://pt.wikipedia.org/wiki/Classifica%C3%A7%C3%A3o_clim%C3%A1tica_de_K%C3%B6ppen-Geiger';
+        tLink = 'https://pt.wikipedia.org/wiki/Classifica%C3%A7%C3%A3o_clim%C3%A1tica_de_Trewartha';
+    }
+
     return (
         <div className={styles.legendContainer}>
             <div className={styles.legendTitle}>
-                {i18n.language === 'en' ?
-                    <p>{variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'} {t('ccTitle')}</p>
-                    :
-                    <p>{t('ccTitle')} {variable.id === 'koppen' ? 'Köppen' : 'Köppen-Trewartha'}</p>
-                }
+                <p>{title}</p>
             </div>
             <div className={styles.legendItems}>
                 {option.legend.map((item) => (
@@ -256,14 +266,20 @@ const ClimateClassificationComponent = ({ variable, t, i18n }) => {
                             <div
                                 className={styles.legendColor}
                                 style={{ backgroundColor: item.color }}
-                            >
-
-                            </div>
+                            />
                             <p><strong>{item.id}</strong></p>
                         </div>
                         <p style={{ marginTop: '4px' }}>{t(`climateClassificationLegend.${option.domain}.${item.id}`)}</p>
                     </div>
                 ))}
+                <div className={styles.moreInfo}>
+                    <p style={{ marginTop: '8px', lineHeight: '1.2' }}>
+                        {variable.id === 'koppen' ? t('moreInfoKoppen') : t('moreInfoTrewartha')}
+                        <a className={styles.moreInfoLink} href={variable.id === 'koppen' ? tLink : kLink } target="_blank" rel="noopener noreferrer">
+                            link
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     );
@@ -304,20 +320,8 @@ const getChartTitle = (variable, t) => {
         case 'solar_energy':
             title = t('solarGraphTitle');
             break;
-        case 'high_days_fwi':
-            title = t('hfwiGraphTitle');
-            break;
-        case 'very_high_days_fwi':
-            title = t('vhfwiGraphTitle');
-            break;
-        case 'extreme_days_fwi':
-            title = t('efwiGraphTitle');
-            break;
-        case 'very_extreme_fwi':
-            title = t('vefwiGraphTitle');
-            break;
-        case 'exceptional_days_fwi':
-            title = t('exfwiGraphTitle');
+        case 'fwi_above24':
+            title = t('fwiAbove24GraphTitle');
             break;
         case 'NO2':
             title = t('aqGraphTitlePt1') + ' NO2 ' + t('aqGraphTitlePt2');
@@ -337,8 +341,8 @@ const getChartTitle = (variable, t) => {
         case 'SO2':
             title = t('aqGraphTitlePt1') + ' SO2 ' + t('aqGraphTitlePt2');
             break;
-        case 'tdi':
-            title = t('tdiGraphTitle');
+        case 'tdi28':
+            title = t('tdi28GraphTitle');
             break;
         case 'utci26':
             title = t('utci26GraphTitle');

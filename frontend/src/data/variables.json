@@ -172,8 +172,8 @@
         "name": "thermalDiscomfort",
         "options": [
             {
-                "id": "tdi",
-                "label": "tdi",
+                "id": "tdi28",
+                "label": "tdi28",
                 "domain": "TD"
             },
             {
@@ -256,28 +256,8 @@
         "name": "fireRiskIndex",
         "options": [
             {
-                "id": "high_days_fwi",
-                "label": "hfwi",
-                "domain": "FWI"
-            },
-            {
-                "id": "very_high_days_fwi",
-                "label": "vhfwi",
-                "domain": "FWI"
-            },
-            {
-                "id": "extreme_days_fwi",
-                "label": "efwi",
-                "domain": "FWI"
-            },
-            {
-                "id": "very_extreme_days_fwi",
-                "label": "vefwi",
-                "domain": "FWI"
-            },
-            {
-                "id": "exceptional_days_fwi",
-                "label": "exfwi",
+                "id": "fwi_above24",
+                "label": "fwiAbove24",
                 "domain": "FWI"
             }
         ]
