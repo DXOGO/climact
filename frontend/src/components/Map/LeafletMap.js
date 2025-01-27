@@ -268,6 +268,9 @@ const CustomZoomControl = () => {
       border-radius: 5px;
       font-size: 18px;
       margin: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     `;
 
     zoomOut.style.cssText = `
@@ -279,6 +282,9 @@ const CustomZoomControl = () => {
       border-radius: 5px;
       font-size: 18px;
       margin: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     `;
 
     return () => map.removeControl(zoomControl);
