@@ -43,20 +43,9 @@
         "name": "heatWaves",
         "options": [
             {
-                "id": "HWN",
-                "label": "hwAverageNumber"
-            },
-            {
-                "id": "HWI",
-                "label": "hwAverageIntensity"
-            },
-            {
-                "id": "HWD",
-                "label": "hwAverageDuration"
-            },
-            {
-                "id": "HWDI",
-                "label": "hwDurationIndex"
+                "id": "hw_int",
+                "label": "hwIntensity",
+                "domain": "HW"
             }
         ]
     },

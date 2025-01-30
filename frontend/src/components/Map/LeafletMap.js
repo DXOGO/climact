@@ -299,6 +299,7 @@ const getLegendText = (variableId, t) => {
     case 'Tmean':
     case 'Tmax':
     case 'Tmin':
+    case 'hw_int':
       return t('yAxisTitleTemp');
 
     case 'very_hot_days':

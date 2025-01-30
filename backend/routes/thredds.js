@@ -13,9 +13,9 @@ const fileMapping = {
     FWI: path.join(__dirname, '../data/climatologias_FWI.xlsx'),
     AQ: path.join(__dirname, '../data/climatologias_AQ.xlsx'),
     TD: path.join(__dirname, '../data/climatologias_TD.xlsx'),
+    HW: path.join(__dirname, '../data/climatologias_HW.xlsx'),
 
     WS100m: path.join(__dirname, '../data/climatologias_WS100m.xlsx') //! currently not in app
-    // Add more mappings as new files are introduced
 };
 
 // Mapping of periods to column letters for each domain
@@ -37,6 +37,7 @@ const periodMapping = {
     FWI: {...monthMapping},
     AQ: {...monthMapping},
     TD: {...monthMapping},
+    HW: {...monthMapping},
 
     WS100m: {...monthMapping} //! currently not in app
 };

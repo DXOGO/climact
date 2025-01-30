@@ -70,7 +70,7 @@ const GraphComponent = () => {
                     let yAxisTitle = '';
                     let tooltipUnit = '';
 
-                    if (variable.domain === 'TEMPS') {
+                    if (variable.domain === 'TEMPS' || variable.domain === 'HW') {
                         yAxisTitle = t('yAxisTitleTemp');
                         tooltipUnit = '°C';
                     } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ' || variable.domain === 'TD') {
@@ -298,6 +298,9 @@ const getChartTitle = (variable, t) => {
             break;
         case 'Tmean':
             title = t('meanTemperatureGraphTitle');
+            break;
+        case 'hw_int':
+            title = t('hwIntensityGraphTitle');
             break;
         case 'very_hot_days':
             title = t('veryHotDaysGraphTitle');
