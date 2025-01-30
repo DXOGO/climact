@@ -16,7 +16,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
     const domain = variable.domain;
     let unitSymbol;
 
-    if (domain === 'TEMPS') {
+    if (domain === 'TEMPS' || domain === 'HW') {
         unitSymbol = '°C';
     } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD') {
         unitSymbol = t('daysPerYear');
