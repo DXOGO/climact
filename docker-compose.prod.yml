@@ -16,9 +16,10 @@ services:
 
   backend:
     container_name: backend
-    build:
-      context: ${BACKEND_CONTEXT}
-      dockerfile: Dockerfile.prod
+    image: ${BACKEND_IMAGE_PROD}
+    # build:
+    #   context: ${BACKEND_CONTEXT}
+    #   dockerfile: Dockerfile.prod
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
@@ -31,12 +32,13 @@ services:
 
   nginx-frontend:
     container_name: frontend
-    build:
-      context: ${FRONTEND_CONTEXT_PROD}
-      dockerfile: ${FRONTEND_DOCKERFILE_PROD}
-      args:
-        REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL_PROD}
-        REACT_APP_THREDDS_URL: ${REACT_APP_THREDDS_URL_PROD}
+    image: ${FRONTEND_IMAGE_PROD}
+    # build:
+    #   context: ${FRONTEND_CONTEXT_PROD}
+    #   dockerfile: ${FRONTEND_DOCKERFILE_PROD}
+    #   args:
+    #     REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL_PROD}
+    #     REACT_APP_THREDDS_URL: ${REACT_APP_THREDDS_URL_PROD}
     ports:
       - 80:80
       - 443:443
