@@ -64,16 +64,16 @@ const GraphComponent = () => {
 
                     // Calculate a reasonable tick interval based on the data range
                     const range = maxValue - minValue;
-                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : (range > 1 ? 1 : 0.2)));
+                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : (range > 1 ? 1 : 0.5)));
 
                     // Set y-axis label and tooltip units based on variable domain
                     let yAxisTitle = '';
                     let tooltipUnit = '';
 
-                    if (variable.domain === 'TEMPS' || variable.domain === 'HW') {
+                    if (variable.domain === 'TEMPS' || variable.id === 'hw_int') {
                         yAxisTitle = t('yAxisTitleTemp');
                         tooltipUnit = '°C';
-                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ' || variable.domain === 'TD') {
+                    } else if (variable.domain === 'NDAYS' || variable.domain === 'FWI' || variable.domain === 'AQ' || variable.domain === 'TD' || variable.id === 'hw_dur') {
                         yAxisTitle = t('yAxisTitleNDays');
                         tooltipUnit = ' days';
                     } else if (variable.domain === 'WIND') {
@@ -136,7 +136,13 @@ const GraphComponent = () => {
                         series: [{
                             name: `${variable.name} (${timePeriod.scenario})`,
                             data: values,
-                            color: '#44A3DA',
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
+                                stops: [
+                                    [0, '#44A3DA'],
+                                    [1, '#0A47A9']
+                                ]
+                            },
                         }],
                         plotOptions: {
                             line: {
@@ -301,6 +307,9 @@ const getChartTitle = (variable, t) => {
             break;
         case 'hw_int':
             title = t('hwIntensityGraphTitle');
+            break;
+        case 'hw_dur':
+            title = t('hwDurationGraphTitle');
             break;
         case 'very_hot_days':
             title = t('veryHotDaysGraphTitle');

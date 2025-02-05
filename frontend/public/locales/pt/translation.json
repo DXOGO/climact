@@ -58,6 +58,8 @@
     "heatWaves": "Ondas de calor",
     "hwIntensity": "Intensidade média (temperatura)",
     "hwIntensityGraphTitle": "Intensidade média por mês de ondas de calor (temperatura) para Portugal continental",
+    "hwDuration": "Duração média (dias)",
+    "hwDurationGraphTitle": "Duração média por mês de ondas de calor (dias) para Portugal continental",
     "precipitation": "Precipitação",
     "annualTotalPrecip": "Total anual",
     "extremePrecip": "Número de dias de precipitação extrema (Pr>50 mm)",

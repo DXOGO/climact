@@ -211,7 +211,7 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
           div.appendChild(colorDiv);
         }
       } else {
-        whiteSquare.style.width = '30%';
+        whiteSquare.style.width = '32%';
         verticalText.innerHTML = getLegendText(variableId, t);
         verticalText.style.position = 'absolute';
         verticalText.style.right = '2px';
@@ -302,6 +302,7 @@ const getLegendText = (variableId, t) => {
     case 'hw_int':
       return t('yAxisTitleTemp');
 
+    case 'hw_dur':
     case 'very_hot_days':
     case 'hot_days':
     case 'tropical_nights':
