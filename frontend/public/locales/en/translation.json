@@ -58,6 +58,8 @@
     "heatWaves": "Heat waves",
     "hwIntensity": "Average intensity (temperature)",
     "hwIntensityGraphTitle": "Monthly mean heat wave intensity (temperature) averaged for all mainland Portugal",
+    "hwDuration": "Average duration (days)",
+    "hwDurationGraphTitle": "Monthly mean heat wave duration (days) averaged for all mainland Portugal",
     "precipitation": "Precipitation",
     "annualTotalPrecip": "Annual total ",
     "extremePrecip": "Number of extreme precipitation days (Pr>50 mm)",

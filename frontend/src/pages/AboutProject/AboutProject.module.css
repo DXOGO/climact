@@ -20,7 +20,9 @@
 .leftColumn {
     width: 25%;
     padding-right: 20px;
-    border-right: 2px solid rgb(97, 109, 123, 0.4);
+    border-right: 2px solid;
+    border-image: linear-gradient(to bottom, #44a3da, #0a47a9 100%);
+    border-image-slice: 1;
     line-height: 2;
     font-size: 12px;
 }

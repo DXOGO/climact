@@ -46,6 +46,11 @@
                 "id": "hw_int",
                 "label": "hwIntensity",
                 "domain": "HW"
+            },
+            {
+                "id": "hw_dur",
+                "label": "hwDuration",
+                "domain": "HW"
             }
         ]
     },
