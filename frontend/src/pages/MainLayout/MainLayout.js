@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, use } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
@@ -13,28 +13,27 @@ import dfis from "../../assets/dfis-light.png";
 import TimePeriod from '../../components/TimePeriodSubmenu/TimePeriod';
 import Variable from '../../components/VariableSubmenu/Variable';
 import FutureScenario from '../../components/FutureScenarioSubmenu/FutureScenario';
-// import TemporalMean from '../../components/TemporalMeanSubmenu/TemporalMean';
 import LeafletMap from '../../components/Map/LeafletMap';
 import GraphComponent from '../../components/Graph/GraphComponent';
 
 const MainLayout = () => {
     const { t } = useTranslation();
 
+    // Redux selectors to get state values
     const timePeriod = useSelector((state) => state.timePeriod);
     const futureScenario = useSelector((state) => state.futureScenario);
     const variable = useSelector((state) => state.variable);
     const isMobile = useSelector((state) => state.isMobile);
 
+    // State variables for managing UI state
     const [showMap, setShowMap] = useState(false); // For showing the map dropdown on mobile
     const [showGraph, setShowGraph] = useState(false); // For showing the graph dropdown on mobile
-
-    const [activeMenu, setActiveMenu] = useState(null);
-    const [title, setTitle] = useState('');
-
+    const [activeMenu, setActiveMenu] = useState(null); // For managing active menu
+    const [title, setTitle] = useState(''); // For setting the title of the active menu
     const [mapKey, setMapKey] = useState(0); // To trigger re-render of LeafletMap
     const middleColumnRef = useRef(null); // Ref for middleColumn
 
-    // Resize observer to detect width changes
+    // Resize observer to detect width changes and trigger re-render of LeafletMap
     useEffect(() => {
         const middleColumn = middleColumnRef.current;
         if (!middleColumn) return;
@@ -50,21 +49,19 @@ const MainLayout = () => {
         };
     }, []);
 
+    // Handlers for menu interactions
     const handleMouseEnter = (menu) => { setActiveMenu(menu); };
-
     const handleMouseLeave = () => { setActiveMenu(null); };
-
     const handleClick = (menu, title) => {
         setActiveMenu(menu);
         setTitle(title);
     };
-
     const handleBack = () => {
         setActiveMenu(null);
         setTitle('');
     };
 
-
+    // Disable future scenario menu if the time period is historical
     const isFutureScenarioDisabled = timePeriod.domain === 'historical';
 
     return (
@@ -183,8 +180,10 @@ const MainLayout = () => {
     );
 };
 
+// MenuOption component for rendering individual menu options
 const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive, disabled, t }) => {
 
+    // Display variable with specific formatting
     const displayVariable = variable && (variable.includes('climate classification')
         ? variable.split('climate classification')[0]
         : variable.includes('Classificação climática de')
