@@ -30,8 +30,9 @@
 }
 
 .radioInput:checked+.radioLabel .customRadio {
-    border-color: #2C2C36;
-}
+    border: 1.5px solid transparent;
+    background: linear-gradient(#E5E6EF, #E5E6EF) padding-box,
+                linear-gradient(to right, #44a3da, #0a47a9) border-box;}
 
 .radioInput:checked+.radioLabel .customRadio::before {
     content: "";
@@ -42,7 +43,7 @@
     height: 8px;
     width: 8px;
     border-radius: 50%;
-    background-color: #2C2C36;
+    background: linear-gradient(90deg, #44a3da, #0a47a9);
 }
 
 @media (max-width: 768px) {
