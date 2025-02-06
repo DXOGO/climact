@@ -119,6 +119,27 @@ const MapContent = ({ wmsUrl, variable, variableKey, handleTileLoading, loading,
 export default LeafletMap;
 
 // Leaflet legend control (form WMS GetLegendGraphic)
+/**
+ * LegendControl component to add a custom legend to a Leaflet map.
+ *
+ * @param {Object} props - The properties object.
+ * @param {Object} props.variable - The variable object containing the id.
+ * @param {string} props.url - The base URL for the legend graphic.
+ * @param {string} props.variableKey - The key for the variable layer.
+ * @param {function} props.t - Translation function for localization.
+ * @param {boolean} props.isMobile - Flag indicating if the device is mobile.
+ *
+ * @returns {null} - This component does not render anything directly.
+ *
+ * @example
+ * <LegendControl
+ *   variable={{ id: 'koppen' }}
+ *   url="http://example.com/legend"
+ *   variableKey="koppen_layer"
+ *   t={translateFunction}
+ *   isMobile={false}
+ * />
+ */
 const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
   const map = useMap();
 
