@@ -108,6 +108,50 @@
     margin-bottom: 20px;
 }
 
+.spiContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.spiTitle {
+    color: #2C2C36;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.spiSubtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #68727D;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.spiDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailTitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2C2C36;
+    margin-bottom: 0px;
+}
+
+.detailText {
+    font-size: 12px;
+    font-weight: 400;
+    color: #68727D;
+}
+
 .legendItems {
     display: flex;
     flex-direction: column;

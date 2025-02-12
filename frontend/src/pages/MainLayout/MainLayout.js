@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MdKeyboardArrowLeft, MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { useTranslation } from 'react-i18next';
 import styles from './MainLayout.module.css';
 
 import fct from "../../assets/fct-light.png";
@@ -19,27 +19,24 @@ import GraphComponent from '../../components/Graph/GraphComponent';
 const MainLayout = () => {
     const { t } = useTranslation();
 
-    // Redux selectors to get state values
     const timePeriod = useSelector((state) => state.timePeriod);
     const futureScenario = useSelector((state) => state.futureScenario);
     const variable = useSelector((state) => state.variable);
     const isMobile = useSelector((state) => state.isMobile);
 
-    // State variables for managing UI state
-    const [showMap, setShowMap] = useState(false); // For showing the map dropdown on mobile
-    const [showGraph, setShowGraph] = useState(false); // For showing the graph dropdown on mobile
-    const [activeMenu, setActiveMenu] = useState(null); // For managing active menu
-    const [title, setTitle] = useState(''); // For setting the title of the active menu
-    const [mapKey, setMapKey] = useState(0); // To trigger re-render of LeafletMap
-    const middleColumnRef = useRef(null); // Ref for middleColumn
+    const [showMap, setShowMap] = useState(false);
+    const [showGraph, setShowGraph] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(null);
+    const [title, setTitle] = useState('');
+    const [mapKey, setMapKey] = useState(0);
+    const middleColumnRef = useRef(null);
 
-    // Resize observer to detect width changes and trigger re-render of LeafletMap
     useEffect(() => {
         const middleColumn = middleColumnRef.current;
         if (!middleColumn) return;
 
         const resizeObserver = new ResizeObserver(() => {
-            setMapKey(prevKey => prevKey + 1); // Increment mapKey to re-render LeafletMap
+            setMapKey(prevKey => prevKey + 1);
         });
 
         resizeObserver.observe(middleColumn);
@@ -49,7 +46,6 @@ const MainLayout = () => {
         };
     }, []);
 
-    // Handlers for menu interactions
     const handleMouseEnter = (menu) => { setActiveMenu(menu); };
     const handleMouseLeave = () => { setActiveMenu(null); };
     const handleClick = (menu, title) => {
@@ -61,7 +57,6 @@ const MainLayout = () => {
         setTitle('');
     };
 
-    // Disable future scenario menu if the time period is historical
     const isFutureScenarioDisabled = timePeriod.domain === 'historical';
 
     return (
@@ -85,7 +80,9 @@ const MainLayout = () => {
                             <MenuOption
                                 title={t('variable')}
                                 subtitle={t(variable.name)}
-                                variable={t(variable.option)}
+                                variable={variable.name === "agriculture"
+                                    ? `${extractAbbreviation(t(variable.subvariable))} - ${t(variable.option)}`
+                                    : t(variable.option)}
                                 isActive={activeMenu === 'variable'}
                                 onMouseEnter={() => handleMouseEnter('variable')} />
                         </div>
@@ -101,17 +98,6 @@ const MainLayout = () => {
                     </div>
                     <div className={styles.rightColumn}>
                         <GraphComponent />
-                    </div>
-                </div>
-                <div className={styles.logos}>
-                    <div className={styles.logosLeft}>
-                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={{ height: '84px', width: 'auto' }} />
-                        <img src={dfis} alt="Departamento de Física" style={{ height: '88px', width: 'auto' }} />
-                        <img src={ua} alt="Universidade de Aveiro" style={{ height: '40px', width: 'auto' }} />
-                    </div>
-                    <div className={styles.logosRight}>
-                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={{ height: '40px', width: 'auto' }} />
-                        <img src={pt} alt="República Portuguesa" style={{ height: '40px', width: 'auto' }} />
                     </div>
                 </div>
             </>
@@ -134,7 +120,9 @@ const MainLayout = () => {
                                 <MenuOption
                                     title={t('variable')}
                                     subtitle={t(variable.name)}
-                                    variable={t(variable.option)}
+                                    variable={variable.name === "agriculture"
+                                        ? `${extractAbbreviation(t(variable.subvariable))} - ${t(variable.option)}`
+                                        : t(variable.option)}
                                     onClick={() => handleClick('variable', t('variable'))} />
                             </div>
                         ) : (
@@ -150,29 +138,10 @@ const MainLayout = () => {
                         )}
                     </div>
                     <div className={styles.middleColumn}>
-                        <div className={styles.mobileDropdown}>
-                            {t('textMap')}
-                            {showMap ? <MdExpandLess size={28} onClick={() => setShowMap(false)} /> : <MdExpandMore size={28} onClick={() => setShowMap(true)} />}
-                        </div>
-                        {showMap && <LeafletMap />}
+                        <LeafletMap />
                     </div>
                     <div className={styles.rightColumn}>
-                        <div className={styles.mobileDropdown}>
-                            {t('textGraph')}
-                            {showGraph ? <MdExpandLess size={28} onClick={() => setShowGraph(false)} /> : <MdExpandMore size={28} onClick={() => setShowGraph(true)} />}
-                        </div>
-                        {showGraph && <GraphComponent />}
-                    </div>
-                </div>
-                <div className={styles.logos}>
-                    <div className={styles.logosLeft}>
-                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '88px', width: 'auto' } : { height: 'auto', width: '110px' }} />
-                        <img src={dfis} alt="Departamento de Física" style={!isMobile ? { height: '98px', width: 'auto' } : { height: 'auto', width: '80px' }} />
-                        <img src={ua} alt="Universidade de Aveiro" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
-                    </div>
-                    <div className={styles.logosRight}>
-                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
-                        <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <GraphComponent />
                     </div>
                 </div>
             </>
@@ -180,19 +149,11 @@ const MainLayout = () => {
     );
 };
 
-// MenuOption component for rendering individual menu options
 const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive, disabled, t }) => {
-
-    // Display variable with specific formatting
-    const displayVariable = variable && (variable.includes('climate classification')
-        ? variable.split('climate classification')[0]
-        : variable.includes('Classificação climática de')
-            ? variable.split('Classificação climática de')[1]
-            : variable);
-
     return (
         <div
-            className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''} ${disabled ? styles.disabledMenuOption : ''}`} onMouseEnter={!disabled ? onMouseEnter : null}
+            className={`${styles.menuOption} ${isActive ? styles.activeMenuOption : ''} ${disabled ? styles.disabledMenuOption : ''}`}
+            onMouseEnter={!disabled ? onMouseEnter : null}
             onClick={!disabled ? onClick : null}
             title={disabled ? t('disabledOption') : null}
         >
@@ -201,10 +162,15 @@ const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive
             </div>
             <div className={styles.subtext}>
                 <p>{subtitle}</p>
-                {displayVariable && <p>{displayVariable}</p>}
+                {variable && <p>{variable}</p>}
             </div>
         </div>
     );
+};
+
+const extractAbbreviation = (text) => {
+    const match = text.match(/\(([^)]+)\)/);
+    return match ? match[1] : text; // If there's a match, return the content inside parentheses; otherwise, return the full text
 };
 
 export default MainLayout;

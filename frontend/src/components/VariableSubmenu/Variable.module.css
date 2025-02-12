@@ -12,14 +12,34 @@
     cursor: pointer;
 }
 
+.subvariableItem {
+    padding: 12px 0px 4px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 .variableTemp {
     padding: 0px 10px 10px 10px;
     cursor: pointer;
 }
 
 .activeVariableName {
+    font-weight: 500;
+    background: linear-gradient(90deg, #44a3da 0%, #0a47a9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.activeSubvariableName {
+    font-weight: 500;
+    color: #68727D;
+}
+
+.subvariableOptions {
     display: flex;
-    font-weight: 600;
+    flex-direction: column;
+    margin-left: 10px;
 }
 
 .variableName {
@@ -27,11 +47,28 @@
     font-weight: 500;
 }
 
+.subvariableName {
+    display: flex;
+    font-weight: 500;
+}
+
 .variableOptions {
     margin-top: 10px;
-    /* background-color: #fff; */
     border-radius: 5px;
 }
+
+/* .variableOptions {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+    will-change: max-height, opacity;
+}
+
+.variableOptions.visible {
+    max-height: 800px;
+    opacity: 1;
+} */
 
 @media (max-width: 768px) {
     .variableSubmenu {

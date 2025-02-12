@@ -29,7 +29,7 @@ const GraphComponent = () => {
     }, []);
 
     useEffect(() => {
-        if (variable.id === 'koppen' || variable.id === 'trewartha') return;
+        if (variable.id === 'koppen' || variable.id === 'trewartha' || variable.domain === 'SPI') return;
 
         const fetchData = async () => {
             try {
@@ -146,6 +146,8 @@ const GraphComponent = () => {
 
     if (variable.id === 'koppen' || variable.id === 'trewartha') {
         return <ClimateClassificationComponent variable={variable} t={t} i18n={i18n} />;
+    } else if (variable.domain === 'SPI' || variable.domain === 'SPEI') {
+        return <SPIComponent variable={variable} t={t} />;
     }
 
     return (
@@ -213,6 +215,36 @@ const ClimateClassificationComponent = ({ variable, t, i18n }) => {
         </div>
     );
 };
+
+/**
+ * SPIComponent - A component to render SPI/SPEI classification.
+ */
+const SPIComponent = ({ variable, t }) => {
+    const title = 'SPI/SPEI Classification';
+    const subtitle = variable.domain === 'SPI' ? t('spiTitle') : t('speiTitle');
+
+    return (
+        <div className={styles.spiContainer}>
+            <div className={styles.spiTitle}><p>{title}</p></div>
+            <div className={styles.spiSubtitle}><p>{subtitle}</p></div>
+            <div className={styles.spiDetails}>
+                <div className={styles.detailItem}>
+                    <p className={styles.detailTitle}>{t('dur')}</p>
+                    <p className={styles.detailText}>{t('durText')}</p>
+                </div>
+                <div className={styles.detailItem}>
+                    <p className={styles.detailTitle}>{t('int')}</p>
+                    <p className={styles.detailText}>{t('intText')}</p>
+                </div>
+                <div className={styles.detailItem}>
+                    <p className={styles.detailTitle}>{t('nEvents')}</p>
+                    <p className={styles.detailText}>{t('nEventsText')}</p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 
 /**
  * getChartTitle - Returns the chart title based on the selected variable.
