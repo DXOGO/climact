@@ -45,17 +45,19 @@ export const setFutureScenario = ({ scenario, id }) => {
  * 
  * @param {Object} payload - The payload object.
  * @param {string} payload.name - The name of the variable.
+ * @param {string} [payload.subvariable] - The subvariable name (optional).
  * @param {string} payload.domain - The domain of the variable.
  * @param {string} payload.option - The option for the variable.
  * @param {string} payload.id - The identifier for the variable.
  * @returns {Object} The action object.
  */
-export const setVariable = ({ name, domain, option, id }) => {
+export const setVariable = ({ name, subvariable = null, domain, option, id }) => {
     return {
         type: SET_VARIABLE,
-        payload: { name, domain, option, id }
+        payload: { name, subvariable, domain, option, id }
     };
 };
+
 
 /**
  * Action creator for setting the temporal mean.

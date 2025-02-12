@@ -83,6 +83,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 variable: {
                     name: action.payload.name,
+                    subvariable: action.payload.subvariable || null,
                     domain: action.payload.domain,
                     option: action.payload.option,
                     id: action.payload.id

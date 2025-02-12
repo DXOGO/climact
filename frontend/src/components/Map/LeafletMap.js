@@ -323,6 +323,8 @@ const getLegendText = (variableId, t) => {
     case 'hw_int':
       return t('yAxisTitleTemp');
 
+    case 'SPI12_dur':
+    case 'SPI12_n_events':
     case 'hw_dur':
     case 'very_hot_days':
     case 'hot_days':

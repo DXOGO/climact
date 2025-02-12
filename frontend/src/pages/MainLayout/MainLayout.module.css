@@ -112,6 +112,10 @@
 .title {
   margin: 0;
   color: #68727D;
+  /* background: linear-gradient(90deg, #44a3da 0%, #0a47a9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
   font-size: 14px;
   font-weight: 500;
   flex-grow: 1;

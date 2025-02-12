@@ -220,14 +220,56 @@
     },
     {
         "name": "agriculture",
-        "options": [
+        "subvariables": [
             {
-                "id": "DI",
-                "label": "di"
+                "name": "standardizedPrecipitationIndex",
+                "options": [
+                    {
+                        "id": "SPI12_dur",
+                        "label": "dur",
+                        "domain": "SPI"
+                    },
+                    {
+                        "id": "SPI12_int",
+                        "label": "int",
+                        "domain": "SPI"
+                    },
+                    {
+                        "id": "SPI12_n_events",
+                        "label": "nEvents",
+                        "domain": "SPI"
+                    }
+                ]
             },
             {
-                "id": "UNEP",
-                "label": "unep"
+                "name": "standardizedPrecipitationEvapotranspirationIndex",
+                "options": [
+                    {
+                        "id": "SPEI12_dur",
+                        "label": "dur",
+                        "domain": "SPEI"
+                    },
+                    {
+                        "id": "SPEI12_int",
+                        "label": "int",
+                        "domain": "SPEI"
+                    },
+                    {
+                        "id": "SPEI12_n_events",
+                        "label": "nEvents",
+                        "domain": "SPEI"
+                    }
+                ]
+            },
+            {
+                "name": "aridityIndex",
+                "options": [
+                    {
+                        "id": "ADI",
+                        "label": "adi",
+                        "domain": "ADI"
+                    }
+                ]
             }
         ]
     },
