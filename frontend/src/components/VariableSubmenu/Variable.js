@@ -40,71 +40,74 @@ const Variable = () => {
 
     return (
         <div className={styles.variableSubmenu}>
-            {variables.map((variable) => (
-                <div
-                    key={variable.name}
-                    className={variable.name === 'temperature' ? styles.variableTemp : styles.variableItem}
-                    onMouseEnter={!isMobile ? () => setHoveredVariable(variable.name) : null}
-                    onMouseLeave={!isMobile ? () => setHoveredVariable(null) : null}
-                >
+            <div className={styles.variableList}>
+                {variables.map((variable) => (
                     <div
-                        className={selectedVariable.name === variable.name ? styles.activeVariableName : styles.variableName}
-                        onClick={isMobile ? () => toggleExpandedVariable(variable.name) : null}
+                        key={variable.name}
+                        className={variable.name === 'temperature' ? styles.variableTemp : styles.variableItem}
+                        onMouseEnter={!isMobile ? () => setHoveredVariable(variable.name) : null}
+                        onMouseLeave={!isMobile ? () => setHoveredVariable(null) : null}
                     >
-                        {t(variable.name)}
-                    </div>
-
-                    {/* Handle Agriculture with Subvariables */}
-                    {variable.name === "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && (
-                        variable.subvariables.map((subvar) => (
-                            <div
-                                key={subvar.name}
-                                className={styles.subvariableItem}
-                                onMouseEnter={!isMobile ? () => setHoveredSubvariable(subvar.name) : null}
-                                onMouseLeave={!isMobile ? () => setHoveredSubvariable(null) : null}
-                            >
-                                <div
-                                    className={selectedVariable.subvariable === subvar.name ? styles.activeVariableName : styles.variableName}
-                                    onClick={isMobile ? () => toggleExpandedSubvariable(subvar.name) : null}
-                                >
-                                    {t(subvar.name)}
-                                </div>
-                                {(hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name) && (
-                                    <div className={`${styles.variableOptions} ${styles.visible}`}>
-                                        {/* <div className={`${styles.variableOptions} ${hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name ? styles.visible : ''}`}> */}
-                                        {subvar.options.map((option) => (
-                                            <RadioOption
-                                                key={option.id}
-                                                label={`${t(subvar.name)}-${t(option.label)}`}
-                                                text={t(option.label)}
-                                                checked={selectedVariable.name === variable.name && selectedVariable.subvariable === subvar.name && selectedVariable.option === option.label}
-                                                onChange={() => handleOptionChange(variable.name, subvar.name, option)}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    )}
-
-                    {/* Handle Normal Variables (without Subvariables) */}
-                    {/* {variable.name !== "agriculture" && (
-                        <div className={`${styles.variableOptions} ${hoveredVariable === variable.name || expandedVariable === variable.name ? styles.visible : ''}`}> */}
-                    {variable.name !== "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && variable.options && (
-                        <div className={`${styles.variableOptions} ${styles.visible}`}>
-                            {variable.options.map((option) => (
-                                <RadioOption
-                                    key={option.id}
-                                    label={`${t(variable.name)}-${t(option.label)}`}
-                                    text={t(option.label)}
-                                    checked={selectedVariable.name === variable.name && selectedVariable.option === option.label}
-                                    onChange={() => handleOptionChange(variable.name, null, option)}
-                                />
-                            ))}
+                        <div
+                            className={selectedVariable.name === variable.name ? styles.activeVariableName : styles.variableName}
+                            onClick={isMobile ? () => toggleExpandedVariable(variable.name) : null}
+                        >
+                            {t(variable.name)}
                         </div>
-                    )}
-                </div>
-            ))}
+
+                        {/* Handle Agriculture with Subvariables */}
+                        {variable.name === "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && (
+                            <div className={styles.subvariableList}>
+                                {variable.subvariables.map((subvar) => (
+                                    <div
+                                        key={subvar.name}
+                                        className={styles.subvariableItem}
+                                        onMouseEnter={!isMobile ? () => setHoveredSubvariable(subvar.name) : null}
+                                    // onMouseLeave={!isMobile ? () => setHoveredSubvariable(null) : null}
+                                    >
+                                        <div
+                                            className={selectedVariable.subvariable === subvar.name ? styles.activeVariableName : styles.variableName}
+                                            onClick={isMobile ? () => toggleExpandedSubvariable(subvar.name) : null}
+                                        >
+                                            {t(subvar.name)}
+                                        </div>
+                                        {/* <div className={`${styles.variableOptions} ${styles.visible}`}> */}
+                                        {/* {(hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name) && ( */}
+                                        <div className={`${styles.variableOptions} ${hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name ? styles.visible : ''}`}>
+                                            {subvar.options.map((option) => (
+                                                <RadioOption
+                                                    key={option.id}
+                                                    label={`${t(subvar.name)}-${t(option.label)}`}
+                                                    text={t(option.label)}
+                                                    checked={selectedVariable.name === variable.name && selectedVariable.subvariable === subvar.name && selectedVariable.option === option.label}
+                                                    onChange={() => handleOptionChange(variable.name, subvar.name, option)}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Handle Normal Variables (without Subvariables) */}
+                        {variable.name !== "agriculture" && (
+                            <div className={`${styles.variableOptions} ${hoveredVariable === variable.name || expandedVariable === variable.name ? styles.visible : ''}`}>
+                                {/* {variable.name !== "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && variable.options && ( */}
+                                {/* <div className={`${styles.variableOptions} ${styles.visible}`}> */}
+                                {variable.options.map((option) => (
+                                    <RadioOption
+                                        key={option.id}
+                                        label={`${t(variable.name)}-${t(option.label)}`}
+                                        text={t(option.label)}
+                                        checked={selectedVariable.name === variable.name && selectedVariable.option === option.label}
+                                        onChange={() => handleOptionChange(variable.name, null, option)}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
