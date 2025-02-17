@@ -7,20 +7,27 @@
     scrollbar-color: #68727D #fff;
 }
 
-.variableItem {
-    padding: 12px 10px;
+.variableList {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.subvariableList {
     cursor: pointer;
+}
+
+.variableItem {
+    padding: 12px 0px;
 }
 
 .subvariableItem {
-    padding: 12px 0px 4px 8px;
-    cursor: pointer;
-    font-size: 14px;
+    padding: 12px 0px 0px 8px;
+    margin-bottom: 4px;
 }
 
 .variableTemp {
-    padding: 0px 10px 10px 10px;
-    cursor: pointer;
+    padding: 0px 10px 10px 0px;
 }
 
 .activeVariableName {
@@ -52,12 +59,12 @@
     font-weight: 500;
 }
 
-.variableOptions {
+/* .variableOptions {
     margin-top: 10px;
     border-radius: 5px;
-}
+} */
 
-/* .variableOptions {
+.variableOptions {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -68,7 +75,7 @@
 .variableOptions.visible {
     max-height: 800px;
     opacity: 1;
-} */
+}
 
 @media (max-width: 768px) {
     .variableSubmenu {
