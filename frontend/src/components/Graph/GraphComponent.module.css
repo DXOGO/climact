@@ -108,19 +108,19 @@
     margin-bottom: 20px;
 }
 
-.spiContainer {
+.container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.spiTitle {
+.title {
     color: #2C2C36;
     font-size: 16px;
     font-weight: 500;
 }
 
-.spiSubtitle {
+.subtitle {
     font-size: 14px;
     font-weight: 500;
     color: #68727D;
@@ -128,10 +128,11 @@
     line-height: 1.2;
 }
 
-.spiDetails {
+.details {
     display: flex;
     flex-direction: column;
     width: 100%;
+    line-height: 1.2;
 }
 
 .detailItem {
@@ -150,6 +151,30 @@
     font-size: 12px;
     font-weight: 400;
     color: #68727D;
+}
+
+.unepText1 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #68727D;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.unepText2 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #68727D;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.unepText3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #68727D;
+    margin-top: 10px;
+    text-align: justify;
 }
 
 .legendItems {

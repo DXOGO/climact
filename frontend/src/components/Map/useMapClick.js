@@ -18,8 +18,10 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     if (domain === 'TEMPS' || variable.id === 'hw_int') {
         unitSymbol = '°C';
-    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur' || variable.id === 'SPI12_dur') {
+    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur') {
         unitSymbol = t('daysPerYear');
+    } else if (variable.id === 'SPI12_dur') {
+        unitSymbol = t('monthsPerYear');
     } else if (domain === 'SOLAR' || domain === 'WIND') {
         unitSymbol = 'kW.h/m2';
     } else if (variable.id === 'SPI12_n_events') {

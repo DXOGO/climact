@@ -148,6 +148,8 @@ const GraphComponent = () => {
         return <ClimateClassificationComponent variable={variable} t={t} i18n={i18n} />;
     } else if (variable.domain === 'SPI' || variable.domain === 'SPEI') {
         return <SPIComponent variable={variable} t={t} />;
+    } else if (variable.domain === 'UNEP') {
+        return <UNEPComponent variable={variable} t={t} />;
     }
 
     return (
@@ -220,14 +222,14 @@ const ClimateClassificationComponent = ({ variable, t, i18n }) => {
  * SPIComponent - A component to render SPI/SPEI classification.
  */
 const SPIComponent = ({ variable, t }) => {
-    const title = 'SPI/SPEI Classification';
-    const subtitle = variable.domain === 'SPI' ? t('spiTitle') : t('speiTitle');
+    const title = t('spiTitle');
+    const subtitle = variable.domain === 'SPI' ? t('spiSubtitle') : t('speiSubtitle');
 
     return (
-        <div className={styles.spiContainer}>
-            <div className={styles.spiTitle}><p>{title}</p></div>
-            <div className={styles.spiSubtitle}><p>{subtitle}</p></div>
-            <div className={styles.spiDetails}>
+        <div className={styles.container}>
+            <div className={styles.title}><p>{title}</p></div>
+            <div className={styles.subtitle}><p>{subtitle}</p></div>
+            <div className={styles.details}>
                 <div className={styles.detailItem}>
                     <p className={styles.detailTitle}>{t('dur')}</p>
                     <p className={styles.detailText}>{t('durText')}</p>
@@ -245,6 +247,27 @@ const SPIComponent = ({ variable, t }) => {
     );
 }
 
+/**
+ * UNEPComponent - A component to render UNEP classification.
+ */
+const UNEPComponent = ({ variable, t }) => {
+    const title = t('unepTitle');
+    const aridityText2 = t('aridityText2').split(':');
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.title}><p>{title}</p></div>
+            <div className={styles.details}>
+                <p className={styles.unepText1}>{t('aridityText1')}</p>
+                <div>
+                    <p className={styles.unepText2}>{aridityText2[0]}:</p>
+                    <p className={styles.unepText2}>{aridityText2[1]}</p>
+                </div>
+                <p className={styles.unepText3}>{t('aridityText3')}</p>
+            </div>
+        </div>
+    );
+}
 
 /**
  * getChartTitle - Returns the chart title based on the selected variable.
