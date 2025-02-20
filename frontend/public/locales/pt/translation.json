@@ -84,6 +84,14 @@
     "aridityText1": "Um índice de aridez (AI) é um indicador numérico do grau de seca do clima num determinado local. A Sociedade Meteorológica Americana definiu-o em meteorologia e climatologia como 'o grau em que um clima carece de humidade efetiva e promotora de vida'. A aridez é diferente da seca porque a aridez é permanente, enquanto a seca é temporária. Os indicadores de aridez servem para identificar, localizar ou delimitar regiões que sofrem de um défice de água disponível, uma condição que pode afetar severamente o uso efetivo da terra para atividades como agricultura ou pecuária. Aqui, é utilizado o amplamente conhecido Índice de Aridez do Programa das Nações Unidas para o Meio Ambiente (PNUMA).", 
     "aridityText2": "É calculado da seguinte forma: IA = P/PET, onde P é a precipitação total anual e PET a evapotranspiração potencial total anual. A PET foi calculada seguindo a equação de Penman-Monteith, proposta pela Organização das Nações Unidas para a Alimentação e Agricultura (FAO)",
     "aridityText3": "O AI da UNEP é dividido em diferentes categorias, que definem vários graus de aridez, conforme segue:",
+    "aridityClassificationLegend": {
+        "ha": "Hiper-árido",
+        "a": "Árido",
+        "sa": "Semi-árido",
+        "dsh": "Sub-húmido seco",
+        "h": "Húmido",
+        "hh": "Hiper-húmido"
+    },
     "precipitation": "Precipitação",
     "annualTotalPrecip": "Total anual",
     "extremePrecip": "Número de dias de precipitação extrema (Pr>50 mm)",

@@ -32,7 +32,14 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     const koppenMapping = { 8: 'Csa', 9: 'Csb', 17: 'Dsa', 18: 'Dsb' }
     const trewarthaMapping = { 5: 'Cs', 7: 'Cr', 8: 'Do', 9: 'Dc' }
-
+    const unepMapping = (value) => {
+        if (value < 0.05) return t('aridityClassificationLegend.ha');
+        if (value < 0.2) return t('aridityClassificationLegend.a');
+        if (value < 0.5) return t('aridityClassificationLegend.sa');
+        if (value < 0.65) return t('aridityClassificationLegend.dsh');
+        if (value <= 0.75) return t('aridityClassificationLegend.h');
+        return t('aridityClassificationLegend.hh');
+    }
 
     const getFeatureInfo = useCallback(async (latlng) => {
         const size = map.getSize();
@@ -59,7 +66,12 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
             const response = await fetch(`${wmsUrl}?${params}`);
             const text = await response.text();
             const valueLine = text.split('\n').find(line => line.includes('Value:'));
-            return valueLine ? parseFloat(valueLine.split(':')[1].trim()).toFixed(1) : 'N/A';
+            if (valueLine) {
+                const value = parseFloat(valueLine.split(':')[1].trim());
+                return (domain === 'UNEP' || domain === 'SOLAR' || domain === 'WIND') ? value.toFixed(2) : value.toFixed(1);
+            } else {
+                return 'N/A';
+            }
         } catch (error) {
             console.error('Error fetching feature info:', error);
             return 'Error';
@@ -79,6 +91,9 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         } else if (domain === 'TREWARTHA') {
             const classification = trewarthaMapping[parseInt(info)] || 'N/A';
             setValue(classification);
+        } else if (domain === 'UNEP') {
+            const classification = unepMapping(parseFloat(info)) || 'N/A';
+            setValue(classification);
         } else {
             setValue(info);
         }
@@ -90,8 +105,8 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         if (value === 'N/A') return;  // Prevent popup if value is 'N/A'
 
         const { lat, lng } = e.latlng;
-        const label = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? t('classification') : t('average');
-        const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? '' : unitSymbol;
+        const label = (domain === 'KOPPEN' || domain === 'TREWARTHA' || domain === 'UNEP' ) ? t('classification') : t('average');
+        const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA'|| domain === 'UNEP') ? '' : unitSymbol;
 
         const popupContent = `
             <div style="background-color: #fff;">

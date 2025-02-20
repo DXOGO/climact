@@ -250,7 +250,11 @@ const SPIComponent = ({ variable, t }) => {
 /**
  * UNEPComponent - A component to render UNEP classification.
  */
-const UNEPComponent = ({ variable, t }) => {
+const UNEPComponent = ({ t }) => {
+    const legend = variables.find(item => item.name === 'agriculture')
+        .subvariables.find(item => item.name === 'aridityIndex')
+        .options.find(item => item.id === 'UNEP').legend;
+
     const title = t('unepTitle');
     const aridityText2 = t('aridityText2').split(':');
 
@@ -259,15 +263,36 @@ const UNEPComponent = ({ variable, t }) => {
             <div className={styles.title}><p>{title}</p></div>
             <div className={styles.details}>
                 <p className={styles.unepText1}>{t('aridityText1')}</p>
-                <div>
-                    <p className={styles.unepText2}>{aridityText2[0]}:</p>
-                    <p className={styles.unepText2}>{aridityText2[1]}</p>
-                </div>
+                <p className={styles.unepText2}>{aridityText2[0]}:</p>
+                <p className={styles.unepText2}>{aridityText2[1]}</p>
                 <p className={styles.unepText3}>{t('aridityText3')}</p>
+                <div className={styles.unepItems} style={{ marginTop: '10px' }}>
+                    {legend.map(item => (
+                        <div key={item.id} className={styles.legendItem} style={{width: '33%'}}>
+                            <div className={styles.legendItemHeader}>
+                                <div className={styles.legendColor} style={{ backgroundColor: item.color }} />
+                                <p><strong>{t(`aridityClassificationLegend.${item.id}`)}</strong></p>
+                            </div>
+                            <p style={{ marginTop: '4px' }}>{getUNEPInterval(item.id)}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
 }
+
+const getUNEPInterval = (id) => {
+    switch (id) {
+        case 'ha': return 'AI < 0.05';
+        case 'a': return '0.05 ≤ AI < 0.2';
+        case 'sa': return '0.2 ≤ AI < 0.5';
+        case 'dsh': return '0.5 ≤ AI < 0.65';
+        case 'h': return '0.65 ≤ AI < 0.75';
+        case 'hh': return 'AI ≥ 0.75';
+        default: return '';
+    }
+};
 
 /**
  * getChartTitle - Returns the chart title based on the selected variable.

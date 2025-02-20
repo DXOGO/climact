@@ -81,6 +81,14 @@
     "aridityText1": "An aridity index (AI) is a numerical indicator of the degree of dryness of the climate at a given location. The American Meteorological Society defined it in meteorology and climatology, as 'the degree to which a climate lacks effective, life-promoting moisture'. Aridity is different from drought because aridity is permanent whereas drought is temporary. Aridity indicators serve to identify, locate or delimit regions that suffer from a deficit of available water, a condition that can severely affect the effective use of the land for such activities as agriculture or stock-farming. Here, the widely known United Nations Environmental Programme (UNEP) Aridity Index is used.",
     "aridityText2": "It is computed as following: AI = P/PET, where P is the annual total precipitation and PET the annual total potential evapotranspiration. PET was computed following the Penman–Monteith equation, proposed by the United Nations Food and Agriculture Organization (FAO).",
     "aridityText3": "The UNEP AI is divided in different categories, which define various degrees of aridity, as follows:",
+    "aridityClassificationLegend": {
+        "ha": "Hyper-arid",
+        "a": "Arid",
+        "sa": "Semi-arid",
+        "dsh": "Dry sub-humid",
+        "h": "Humid",
+        "hh": "Hyper-humid"
+    },
     "precipitation": "Precipitation",
     "annualTotalPrecip": "Annual total ",
     "extremePrecip": "Number of extreme precipitation days (Pr>50 mm)",
