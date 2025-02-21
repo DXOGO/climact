@@ -18,7 +18,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     if (domain === 'TEMPS' || variable.id === 'hw_int') {
         unitSymbol = '°C';
-    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur') {
+    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur' || variable.id === 'hw_ndays') {
         unitSymbol = t('daysPerYear');
     } else if (variable.id === 'SPI12_dur') {
         unitSymbol = t('monthsPerYear');
@@ -26,6 +26,8 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         unitSymbol = 'kW.h/m2';
     } else if (variable.id === 'SPI12_n_events') {
         unitSymbol = t('nEventsMap');
+    } else if (variable.id === 'hw_nwaves') {
+        unitSymbol = t('wavesPerYear');
     } else {
         unitSymbol = '';
     }

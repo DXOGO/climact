@@ -71,18 +71,18 @@ const Variable = () => {
                                         >
                                             {t(subvar.name)}
                                         </div>
-                                        {/* <div className={`${styles.variableOptions} ${styles.visible}`}> */}
-                                        {/* {(hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name) && ( */}
-                                        <div className={`${styles.variableOptions} ${hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name ? styles.visible : ''}`}>
-                                            {subvar.options.map((option) => (
-                                                <RadioOption
-                                                    key={option.id}
-                                                    label={`${t(subvar.name)}-${t(option.label)}`}
-                                                    text={t(option.label)}
-                                                    checked={selectedVariable.name === variable.name && selectedVariable.subvariable === subvar.name && selectedVariable.option === option.label}
-                                                    onChange={() => handleOptionChange(variable.name, subvar.name, option)}
-                                                />
-                                            ))}
+                                        <div className={`${styles.variableOptions} ${styles.visible}`}>
+                                            {(hoveredSubvariable === subvar.name || expandedSubvariable === subvar.name) && (
+                                                subvar.options.map((option) => (
+                                                    <RadioOption
+                                                        key={option.id}
+                                                        label={`${t(subvar.name)}-${t(option.label)}`}
+                                                        text={t(option.label)}
+                                                        checked={selectedVariable.name === variable.name && selectedVariable.subvariable === subvar.name && selectedVariable.option === option.label}
+                                                        onChange={() => handleOptionChange(variable.name, subvar.name, option)}
+                                                    />
+                                                ))
+                                            )}
                                         </div>
                                     </div>
                                 ))}
@@ -90,10 +90,8 @@ const Variable = () => {
                         )}
 
                         {/* Handle Normal Variables (without Subvariables) */}
-                        {variable.name !== "agriculture" && (
-                            <div className={`${styles.variableOptions} ${hoveredVariable === variable.name || expandedVariable === variable.name ? styles.visible : ''}`}>
-                                {/* {variable.name !== "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && variable.options && ( */}
-                                {/* <div className={`${styles.variableOptions} ${styles.visible}`}> */}
+                        {variable.name !== "agriculture" && (hoveredVariable === variable.name || expandedVariable === variable.name) && variable.options && (
+                            <div className={`${styles.variableOptions} ${styles.visible}`}>
                                 {variable.options.map((option) => (
                                     <RadioOption
                                         key={option.id}
@@ -110,6 +108,6 @@ const Variable = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Variable;

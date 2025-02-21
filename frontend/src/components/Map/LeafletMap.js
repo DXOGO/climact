@@ -362,6 +362,7 @@ const getLegendText = (variableId, t) => {
       return t('yAxisTitleNEvents');
       
     case 'hw_dur':
+    case 'hw_ndays':
     case 'very_hot_days':
     case 'hot_days':
     case 'tropical_nights':
@@ -378,6 +379,9 @@ const getLegendText = (variableId, t) => {
     case 'SO2':
     case 'CO':
       return t('yAxisTitleNDays');
+    
+    case 'hw_nwaves':
+      return t('yAxisTitleNWaves');
 
     case 'wind_energy_100m':
       return t('yAxisTitleWind');

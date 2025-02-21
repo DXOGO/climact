@@ -53,28 +53,50 @@ const GraphComponent = () => {
                     let yAxisTitle = '';
                     let tooltipUnit = '';
 
-                    switch (variable.domain) {
-                        case 'TEMPS':
+                    switch (variable.id) {
+                        case 'Tmean':
+                        case 'Tmax':
+                        case 'Tmin':
                         case 'hw_int':
                             yAxisTitle = t('yAxisTitleTemp');
                             tooltipUnit = '°C';
                             break;
-                        case 'NDAYS':
-                        case 'FWI':
-                        case 'AQ':
-                        case 'TD':
+
+                        case 'frost_days':
+                        case 'hot_days':
+                        case 'tropical_nights':
+                        case 'very_hot_days':
+                        case 'fwi_above24':
+                        case 'PM25':
+                        case 'PM10':
+                        case 'NO2':
+                        case 'O3':
+                        case 'CO':
+                        case 'SO2':
+                        case 'tdi28':
+                        case 'utci26':
+                        case 'utci32':
                         case 'hw_dur':
+                        case 'hw_ndays':
                             yAxisTitle = t('yAxisTitleNDays');
-                            tooltipUnit = ' days';
+                            tooltipUnit =t('days');
                             break;
-                        case 'WIND':
+
+                        case 'hw_nwaves':
+                            yAxisTitle = t('yAxisTitleNWaves');
+                            tooltipUnit = t('waves');
+                            break;
+
+                        case 'wind_energy_100m':
                             yAxisTitle = t('yAxisTitleWind');
-                            tooltipUnit = ' kW.h/m2';
+                            tooltipUnit = 'kW.h/m2';
                             break;
-                        case 'SOLAR':
+
+                        case 'solar_energy':
                             yAxisTitle = t('yAxisTitleSolar');
-                            tooltipUnit = ' kW.h/m2';
+                            tooltipUnit = 'kW.h/m2';
                             break;
+                            
                         default:
                             break;
                     }
@@ -119,7 +141,7 @@ const GraphComponent = () => {
                         tooltip: {
                             useHTML: true,
                             formatter: function () {
-                                return `Average<br /><strong>${this.category}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
+                                return `Average<br /><strong>${this.category}</strong>: ${this.y.toFixed(1)} ${tooltipUnit}`;
                             },
                             backgroundColor: '#fff',
                             borderRadius: 5,
@@ -304,6 +326,8 @@ const getChartTitle = (variable, t) => {
         case 'Tmean': return t('meanTemperatureGraphTitle');
         case 'hw_int': return t('hwIntensityGraphTitle');
         case 'hw_dur': return t('hwDurationGraphTitle');
+        case 'hw_ndays': return t('hwNDaysGraphTitle');
+        case 'hw_nwaves': return t('hwNWavesGraphTitle');
         case 'very_hot_days': return t('veryHotDaysGraphTitle');
         case 'hot_days': return t('hotDaysGraphTitle');
         case 'tropical_nights': return t('tropicalNightsGraphTitle');

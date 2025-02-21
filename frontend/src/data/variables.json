@@ -51,6 +51,16 @@
                 "id": "hw_dur",
                 "label": "hwDuration",
                 "domain": "HW"
+            },
+            {
+                "id": "hw_ndays",
+                "label": "hwNDays",
+                "domain": "HW"
+            },
+            {
+                "id": "hw_nwaves",
+                "label": "hwNWaves",
+                "domain": "HW"
             }
         ]
     },
