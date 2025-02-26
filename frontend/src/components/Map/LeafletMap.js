@@ -163,16 +163,16 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
       whiteSquare.style.right = '0';
       whiteSquare.style.height = `${isMobile ? '200px' : '220px'}`;
       whiteSquare.style.backgroundColor = 'white';
+      whiteSquare.style.borderRadius = '5px';
       whiteSquare.style.display = 'flex';
 
       const verticalText = L.DomUtil.create('div', 'vertical-text');
 
       if (variableId === 'koppen' || variableId === 'trewartha') {
 
-        whiteSquare.style.width = '58%'
-
         const levels = variableId == 'koppen' ? ['Dsb', 'Dsa', 'Csb', 'Csa'] : ['Dc', 'Do', 'Cr', 'Cs'];
 
+        whiteSquare.style.width = '58%'
         verticalText.style.display = 'flex';
         verticalText.style.flexDirection = 'column';
 
@@ -231,6 +231,35 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
 
           div.appendChild(colorDiv);
         }
+      } else if (variableId === 'UNEP') {
+
+        div.style.width = '120px';
+
+        const levels = [t('aridityClassificationLegend.hh'), t('aridityClassificationLegend.h'), t('aridityClassificationLegend.dsh'), t('aridityClassificationLegend.sa'), t('aridityClassificationLegend.a'), t('aridityClassificationLegend.ha')];
+
+        whiteSquare.style.width = '74%';
+        verticalText.style.display = 'flex';
+        verticalText.style.flexDirection = 'column';
+
+        levels.forEach((level) => {
+          const levelDiv = L.DomUtil.create('div', 'level-div');
+          levelDiv.style.height = '16.67%';
+          levelDiv.style.display = 'flex';
+          levelDiv.style.alignItems = 'center';
+          levelDiv.style.justifyContent = 'flex-start';
+          levelDiv.style.padding = '0px 4px';
+          levelDiv.style.fontSize = '11px';
+          levelDiv.style.color = 'black';
+
+          const levelText = L.DomUtil.create('div', 'level-text');
+          levelText.innerHTML = level;
+
+          levelDiv.appendChild(levelText);
+          verticalText.appendChild(levelDiv);
+        });
+
+        whiteSquare.appendChild(verticalText);
+
       } else {
         whiteSquare.style.width = '32%';
         verticalText.innerHTML = getLegendText(variableId, t);
@@ -324,8 +353,16 @@ const getLegendText = (variableId, t) => {
       return t('yAxisTitleTemp');
 
     case 'SPI12_dur':
+      return t('yAxisTitleNMonths');
+    
+    case 'SPI12_int':
+      return t('yAxisTitleSPI');
+      
     case 'SPI12_n_events':
+      return t('yAxisTitleNEvents');
+      
     case 'hw_dur':
+    case 'hw_ndays':
     case 'very_hot_days':
     case 'hot_days':
     case 'tropical_nights':
@@ -342,6 +379,9 @@ const getLegendText = (variableId, t) => {
     case 'SO2':
     case 'CO':
       return t('yAxisTitleNDays');
+    
+    case 'hw_nwaves':
+      return t('yAxisTitleNWaves');
 
     case 'wind_energy_100m':
       return t('yAxisTitleWind');

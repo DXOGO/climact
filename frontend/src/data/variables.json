@@ -51,6 +51,16 @@
                 "id": "hw_dur",
                 "label": "hwDuration",
                 "domain": "HW"
+            },
+            {
+                "id": "hw_ndays",
+                "label": "hwNDays",
+                "domain": "HW"
+            },
+            {
+                "id": "hw_nwaves",
+                "label": "hwNWaves",
+                "domain": "HW"
             }
         ]
     },
@@ -112,24 +122,20 @@
                 "domain": "KOPPEN",
                 "legend": [
                     {
-                        "id": "Csa",
-                        "info": "Csa",
-                        "color": "#CADA35"
-                    },
-                    {
-                        "id": "Csb",
-                        "info": "Csb",
-                        "color": "#C5B53A"
+                        "id": "Dsb",
+                        "color": "#87E878"
                     },
                     {
                         "id": "Dsa",
-                        "info": "Dsa",
                         "color": "#8CC873"
                     },
                     {
-                        "id": "Dsb",
-                        "info": "Dsb",
-                        "color": "#87E878"
+                        "id": "Csb",
+                        "color": "#C5B53A"
+                    },
+                    {
+                        "id": "Csa",
+                        "color": "#CADA35"
                     }
                 ]
             },
@@ -139,24 +145,20 @@
                 "domain": "TREWARTHA",
                 "legend": [
                     {
-                        "id": "Cs",
-                        "info": "Cs",
-                        "color": "#F2DF1F"
-                    },
-                    {
-                        "id": "Cr",
-                        "info": "Cr",
-                        "color": "#A5F53C"
+                        "id": "Dc",
+                        "color": "#32C86A"
                     },
                     {
                         "id": "Do",
-                        "info": "Do",
                         "color": "#78E664"
                     },
                     {
-                        "id": "Dc",
-                        "info": "Dc",
-                        "color": "#32C86A"
+                        "id": "Cr",
+                        "color": "#A5F53C"
+                    },
+                    {
+                        "id": "Cs",
+                        "color": "#F2DF1F"
                     }
                 ]
             }
@@ -222,6 +224,42 @@
         "name": "agriculture",
         "subvariables": [
             {
+                "name": "aridityIndex",
+                "options": [
+                    {
+                        "id": "UNEP",
+                        "label": "unep",
+                        "domain": "UNEP",
+                        "legend":[
+                            {
+                                "id": "hh",
+                                "color": "#000099"
+                            },
+                            {
+                                "id": "sa",
+                                "color": "#E1B600"
+                            },
+                            {
+                                "id": "h",
+                                "color": "#0065D2"
+                            },
+                            {
+                                "id": "a",
+                                "color": "#FF5800"
+                            },
+                            {
+                                "id": "dsh",
+                                "color": "#67CA75"
+                            },
+                            {
+                                "id": "ha",
+                                "color": "#990000"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "name": "standardizedPrecipitationIndex",
                 "options": [
                     {
@@ -258,16 +296,6 @@
                         "id": "SPEI12_n_events",
                         "label": "nEvents",
                         "domain": "SPEI"
-                    }
-                ]
-            },
-            {
-                "name": "aridityIndex",
-                "options": [
-                    {
-                        "id": "ADI",
-                        "label": "adi",
-                        "domain": "ADI"
                     }
                 ]
             }

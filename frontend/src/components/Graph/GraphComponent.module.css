@@ -108,30 +108,34 @@
     margin-bottom: 20px;
 }
 
-.spiContainer {
+.container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: 96%;
 }
 
-.spiTitle {
+.title {
     color: #2C2C36;
     font-size: 16px;
     font-weight: 500;
 }
 
-.spiSubtitle {
+.subtitle {
     font-size: 14px;
-    font-weight: 500;
-    color: #68727D;
+    color: #2C2C36;
+    text-align: justify;
     margin-bottom: 10px;
     line-height: 1.2;
 }
 
-.spiDetails {
+.details {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
+    line-height: 1.2;
+    color: #2C2C36;
 }
 
 .detailItem {
@@ -152,11 +156,40 @@
     color: #68727D;
 }
 
+.unepText1 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.unepText2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.unepText3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: justify;
+}
+
 .legendItems {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
+}
+
+.unepItems {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .legendItemHeader {
@@ -174,12 +207,12 @@
     align-items: flex-start;
     margin-right: 20px;
     margin-bottom: 10px;
-    min-width: 240px;
 }
 
 .legendColor {
     width: 16px;
     height: 10px;
+    border-radius: 2px;
     margin-right: 5px;
     margin-bottom: 3px;
 }

@@ -53,28 +53,50 @@ const GraphComponent = () => {
                     let yAxisTitle = '';
                     let tooltipUnit = '';
 
-                    switch (variable.domain) {
-                        case 'TEMPS':
+                    switch (variable.id) {
+                        case 'Tmean':
+                        case 'Tmax':
+                        case 'Tmin':
                         case 'hw_int':
                             yAxisTitle = t('yAxisTitleTemp');
                             tooltipUnit = '°C';
                             break;
-                        case 'NDAYS':
-                        case 'FWI':
-                        case 'AQ':
-                        case 'TD':
+
+                        case 'frost_days':
+                        case 'hot_days':
+                        case 'tropical_nights':
+                        case 'very_hot_days':
+                        case 'fwi_above24':
+                        case 'PM25':
+                        case 'PM10':
+                        case 'NO2':
+                        case 'O3':
+                        case 'CO':
+                        case 'SO2':
+                        case 'tdi28':
+                        case 'utci26':
+                        case 'utci32':
                         case 'hw_dur':
+                        case 'hw_ndays':
                             yAxisTitle = t('yAxisTitleNDays');
-                            tooltipUnit = ' days';
+                            tooltipUnit =t('days');
                             break;
-                        case 'WIND':
+
+                        case 'hw_nwaves':
+                            yAxisTitle = t('yAxisTitleNWaves');
+                            tooltipUnit = t('waves');
+                            break;
+
+                        case 'wind_energy_100m':
                             yAxisTitle = t('yAxisTitleWind');
-                            tooltipUnit = ' kW.h/m2';
+                            tooltipUnit = 'kW.h/m2';
                             break;
-                        case 'SOLAR':
+
+                        case 'solar_energy':
                             yAxisTitle = t('yAxisTitleSolar');
-                            tooltipUnit = ' kW.h/m2';
+                            tooltipUnit = 'kW.h/m2';
                             break;
+                            
                         default:
                             break;
                     }
@@ -119,7 +141,7 @@ const GraphComponent = () => {
                         tooltip: {
                             useHTML: true,
                             formatter: function () {
-                                return `Average<br /><strong>${this.category}</strong>: ${this.y.toFixed(1)}${tooltipUnit}`;
+                                return `Average<br /><strong>${this.category}</strong>: ${this.y.toFixed(1)} ${tooltipUnit}`;
                             },
                             backgroundColor: '#fff',
                             borderRadius: 5,
@@ -148,6 +170,8 @@ const GraphComponent = () => {
         return <ClimateClassificationComponent variable={variable} t={t} i18n={i18n} />;
     } else if (variable.domain === 'SPI' || variable.domain === 'SPEI') {
         return <SPIComponent variable={variable} t={t} />;
+    } else if (variable.domain === 'UNEP') {
+        return <UNEPComponent variable={variable} t={t} />;
     }
 
     return (
@@ -220,14 +244,14 @@ const ClimateClassificationComponent = ({ variable, t, i18n }) => {
  * SPIComponent - A component to render SPI/SPEI classification.
  */
 const SPIComponent = ({ variable, t }) => {
-    const title = 'SPI/SPEI Classification';
-    const subtitle = variable.domain === 'SPI' ? t('spiTitle') : t('speiTitle');
+    const title = t('spiTitle');
+    const subtitle = variable.domain === 'SPI' ? t('spiSubtitle') : t('speiSubtitle');
 
     return (
-        <div className={styles.spiContainer}>
-            <div className={styles.spiTitle}><p>{title}</p></div>
-            <div className={styles.spiSubtitle}><p>{subtitle}</p></div>
-            <div className={styles.spiDetails}>
+        <div className={styles.container}>
+            <div className={styles.title}><p>{title}</p></div>
+            <div className={styles.subtitle}><p>{subtitle}</p></div>
+            <div className={styles.details}>
                 <div className={styles.detailItem}>
                     <p className={styles.detailTitle}>{t('dur')}</p>
                     <p className={styles.detailText}>{t('durText')}</p>
@@ -245,6 +269,52 @@ const SPIComponent = ({ variable, t }) => {
     );
 }
 
+/**
+ * UNEPComponent - A component to render UNEP classification.
+ */
+const UNEPComponent = ({ t }) => {
+    const legend = variables.find(item => item.name === 'agriculture')
+        .subvariables.find(item => item.name === 'aridityIndex')
+        .options.find(item => item.id === 'UNEP').legend;
+
+    const title = t('unepTitle');
+    const aridityText2 = t('aridityText2').split(':');
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.title}><p>{title}</p></div>
+            <div className={styles.details}>
+                <p className={styles.unepText1}>{t('aridityText1')}</p>
+                <p className={styles.unepText2}>{aridityText2[0]}:</p>
+                <p className={styles.unepText2}>{aridityText2[1]}</p>
+                <p className={styles.unepText3}>{t('aridityText3')}</p>
+                <div className={styles.unepItems} style={{ marginTop: '10px' }}>
+                    {legend.map(item => (
+                        <div key={item.id} className={styles.legendItem} style={{width: '33%'}}>
+                            <div className={styles.legendItemHeader}>
+                                <div className={styles.legendColor} style={{ backgroundColor: item.color }} />
+                                <p><strong>{t(`aridityClassificationLegend.${item.id}`)}</strong></p>
+                            </div>
+                            <p style={{ marginTop: '4px' }}>{getUNEPInterval(item.id)}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const getUNEPInterval = (id) => {
+    switch (id) {
+        case 'ha': return 'AI < 0.05';
+        case 'a': return '0.05 ≤ AI < 0.2';
+        case 'sa': return '0.2 ≤ AI < 0.5';
+        case 'dsh': return '0.5 ≤ AI < 0.65';
+        case 'h': return '0.65 ≤ AI < 0.75';
+        case 'hh': return 'AI ≥ 0.75';
+        default: return '';
+    }
+};
 
 /**
  * getChartTitle - Returns the chart title based on the selected variable.
@@ -256,6 +326,8 @@ const getChartTitle = (variable, t) => {
         case 'Tmean': return t('meanTemperatureGraphTitle');
         case 'hw_int': return t('hwIntensityGraphTitle');
         case 'hw_dur': return t('hwDurationGraphTitle');
+        case 'hw_ndays': return t('hwNDaysGraphTitle');
+        case 'hw_nwaves': return t('hwNWavesGraphTitle');
         case 'very_hot_days': return t('veryHotDaysGraphTitle');
         case 'hot_days': return t('hotDaysGraphTitle');
         case 'tropical_nights': return t('tropicalNightsGraphTitle');
