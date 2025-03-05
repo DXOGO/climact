@@ -261,7 +261,13 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
         whiteSquare.appendChild(verticalText);
 
       } else {
-        whiteSquare.style.width = '32%';
+
+        if (variableId === 'rr_anual') {
+          whiteSquare.style.width = '30%';
+        } else {
+          whiteSquare.style.width = '32%';
+        }
+
         verticalText.innerHTML = getLegendText(variableId, t);
         verticalText.style.position = 'absolute';
         verticalText.style.right = '2px';
@@ -354,13 +360,13 @@ const getLegendText = (variableId, t) => {
 
     case 'SPI12_dur':
       return t('yAxisTitleNMonths');
-    
+
     case 'SPI12_int':
       return t('yAxisTitleSPI');
-      
+
     case 'SPI12_n_events':
       return t('yAxisTitleNEvents');
-      
+
     case 'hw_dur':
     case 'hw_ndays':
     case 'very_hot_days':
@@ -378,8 +384,21 @@ const getLegendText = (variableId, t) => {
     case 'NO2':
     case 'SO2':
     case 'CO':
+    case 'avg_dry_days':
+    case 'avg_wet_days':
+    case 'CDD':
+    case 'CWD':
+    case 'LDP':
+    case 'RR50':
+    case 'RR20':
+    case 'RR10':
       return t('yAxisTitleNDays');
-    
+
+    case 'rr_anual':
+    case 'RX1day':
+    case 'RX5day':
+      return t('yAxisTitlePrecip');
+
     case 'hw_nwaves':
       return t('yAxisTitleNWaves');
 
