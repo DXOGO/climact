@@ -8,6 +8,7 @@ const router = express.Router();
 const fileMapping = {
     TEMPS: path.join(__dirname, '../data/climatologias_TEMPS.xlsx'),
     NDAYS: path.join(__dirname, '../data/climatologias_NDAYS.xlsx'),
+    PRECIP: path.join(__dirname, '../data/climatologias_PRECIP.xlsx'),
     WIND: path.join(__dirname, '../data/climatologias_WIND.xlsx'),
     SOLAR: path.join(__dirname, '../data/climatologias_SOLAR.xlsx'),
     FWI: path.join(__dirname, '../data/climatologias_FWI.xlsx'),
@@ -32,6 +33,7 @@ const monthMapping = {
 const periodMapping = {
     TEMPS: {...monthMapping},
     NDAYS: {...monthMapping},
+    PRECIP: {...monthMapping},
     WIND: {...monthMapping},
     SOLAR: {...monthMapping},
     FWI: {...monthMapping},

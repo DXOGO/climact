@@ -48,7 +48,12 @@ const GraphComponent = () => {
                     const minValue = Math.min(...values);
                     const maxValue = Math.max(...values);
                     const range = maxValue - minValue;
-                    const tickInterval = range >= 100 ? 50 : (range >= 20 ? 5 : (range > 10 ? 2 : (range > 1 ? 1 : 0.5)));
+                    const tickInterval = range >= 100 ? 50 
+                        : range >= 50 ? 25 
+                        : range >= 20 ? 5 
+                        : range > 10 ? 2 
+                        : range > 1 ? 1 
+                        : 0.5;
 
                     let yAxisTitle = '';
                     let tooltipUnit = '';
@@ -62,6 +67,13 @@ const GraphComponent = () => {
                             tooltipUnit = '°C';
                             break;
 
+                        case 'rr_anual':
+                        case 'RX1day':
+                        case 'RX5day':
+                            yAxisTitle = t('yAxisTitlePrecip');
+                            tooltipUnit = 'mm';
+                            break;
+                        
                         case 'frost_days':
                         case 'hot_days':
                         case 'tropical_nights':
@@ -78,6 +90,14 @@ const GraphComponent = () => {
                         case 'utci32':
                         case 'hw_dur':
                         case 'hw_ndays':
+                        case 'avg_dry_days':
+                        case 'avg_wet_days':
+                        case 'CDD':
+                        case 'CWD':
+                        case 'LDP':
+                        case 'RR50':
+                        case 'RR20':
+                        case 'RR10':
                             yAxisTitle = t('yAxisTitleNDays');
                             tooltipUnit =t('days');
                             break;
@@ -324,6 +344,17 @@ const getChartTitle = (variable, t) => {
         case 'Tmax': return t('maximumTemperatureGraphTitle');
         case 'Tmin': return t('minimumTemperatureGraphTitle');
         case 'Tmean': return t('meanTemperatureGraphTitle');
+        case 'rr_anual': return t('annualTotalPrecipGraphTitle');
+        case 'RR50': return t('extremePrecipGraphTitle');
+        case 'RR20': return t('veryHeavyPrecipGraphTitle');
+        case 'RR10': return t('heavyPrecipGraphTitle');
+        case 'avg_wet_days': return t('wetDaysGraphTitle');
+        case 'avg_dry_days': return t('dryDaysGraphTitle');
+        case 'RX1day': return t('rx1dayGraphTittle');
+        case 'RX5day': return t('rx5dayGraphTittle');
+        case 'CDD': return t('cddGraphTitle');
+        case 'CWD': return t('cwdGraphTitle');
+        case 'LPD': return t('lpdGraphTitle');
         case 'hw_int': return t('hwIntensityGraphTitle');
         case 'hw_dur': return t('hwDurationGraphTitle');
         case 'hw_ndays': return t('hwNDaysGraphTitle');

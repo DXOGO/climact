@@ -68,49 +68,60 @@
         "name": "precipitation",
         "options": [
             {
-                "id": "PRCPTOT",
-                "label": "annualTotalPrecip"
+                "id": "rr_anual",
+                "label": "annualTotalPrecip",
+                "domain": "PRECIP"
             },
             {
-                "id": "R50MM",
-                "label": "extremePrecip"
+                "id": "RR50",
+                "label": "extremePrecip",
+                "domain": "PRECIP"
             },
             {
-                "id": "R20MM",
-                "label": "veryHeavyPrecip"
+                "id": "RR20",
+                "label": "veryHeavyPrecip",
+                "domain": "PRECIP"
             },
             {
-                "id": "R10MM",
-                "label": "veryWetDays"
+                "id": "RR10",
+                "label": "heavyPrecip",
+                "domain": "PRECIP"
             },
             {
-                "id": "R1MM",
-                "label": "wetDays"
+                "id": "avg_wet_days",
+                "label": "wetDays",
+                "domain": "PRECIP"
             },
             {
-                "id": "R0MM",
-                "label": "dryDays"
+                "id": "avg_dry_days",
+                "label": "dryDays",
+                "domain": "PRECIP"
             },
             {
                 "id": "RX1day",
-                "label": "rx1day"
+                "label": "rx1day",
+                "domain": "PRECIP"
             },
             {
                 "id": "RX5day",
-                "label": "rx5day"
+                "label": "rx5day",
+                "domain": "PRECIP"
             },
             {
                 "id": "CWD",
-                "label": "cwd"
+                "label": "cwd",
+                "domain": "PRECIP"
             },
             {
-                "id": "CCD",
-                "label": "ccd"
+                "id": "CDD",
+                "label": "cdd",
+                "domain": "PRECIP"
             },
             {
                 "id": "LDP",
-                "label": "ldp"
-            }
+                "label": "ldp",
+                "domain": "PRECIP"
+             }
         ]
     },
     {

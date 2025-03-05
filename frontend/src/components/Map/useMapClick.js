@@ -18,7 +18,9 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     if (domain === 'TEMPS' || variable.id === 'hw_int') {
         unitSymbol = '°C';
-    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur' || variable.id === 'hw_ndays') {
+    } else if (variable.id === 'rr_anual' || variable.id === 'RX1day' || variable.id === 'RX5day') {
+        unitSymbol = 'mm';
+    } else if (domain === 'NDAYS' || domain === 'FWI' || domain === 'AQ' || domain === 'TD' || variable.id === 'hw_dur' || variable.id === 'hw_ndays' || variable.id === 'avg_dry_days' || variable.id === 'avg_wet_days' || variable.id === 'CDD' || variable.id === 'CWD' || variable.id === 'LDP' || variable.id === 'RR50' || variable.id === 'RR20' || variable.id === 'RR10') {
         unitSymbol = t('daysPerYear');
     } else if (variable.id === 'SPI12_dur') {
         unitSymbol = t('monthsPerYear');
