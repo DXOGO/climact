@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { MapContainer, WMSTileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -262,7 +262,7 @@ const LegendControl = ({ variable, url, variableKey, t, isMobile }) => {
 
       } else {
 
-        if (variableId === 'rr_anual') {
+        if (variableId === 'rr_anual' || variableId === 'RX5day') {
           whiteSquare.style.width = '30%';
         } else {
           whiteSquare.style.width = '32%';
