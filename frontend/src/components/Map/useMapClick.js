@@ -11,6 +11,7 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
 
     const [clickedPosition, setClickedPosition] = useState(null);
     const [value, setValue] = useState(null);
+    const [specialValue, setSpecialValue] = useState(null);
     const map = useMap();
 
     const domain = variable.domain;
@@ -37,6 +38,8 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
     const koppenMapping = { 8: 'Csa', 9: 'Csb', 17: 'Dsa', 18: 'Dsb' }
     const trewarthaMapping = { 5: 'Cs', 7: 'Cr', 8: 'Do', 9: 'Dc' }
     const unepMapping = (value) => {
+        setSpecialValue(value);
+
         if (value < 0.05) return t('aridityClassificationLegend.ha');
         if (value < 0.2) return t('aridityClassificationLegend.a');
         if (value < 0.5) return t('aridityClassificationLegend.sa');
@@ -90,13 +93,13 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
         
         if (domain === 'KOPPEN') {
             const classification = koppenMapping[parseInt(info)] || 'N/A';
-            console.log("classification", classification)
             setValue(classification);
         } else if (domain === 'TREWARTHA') {
             const classification = trewarthaMapping[parseInt(info)] || 'N/A';
             setValue(classification);
         } else if (domain === 'UNEP') {
             const classification = unepMapping(parseFloat(info)) || 'N/A';
+            setSpecialValue(parseFloat(info));
             setValue(classification);
         } else {
             setValue(info);
@@ -105,12 +108,11 @@ const useMapClick = (wmsUrl, variable, variableKey) => {
     }, [getFeatureInfo]);
 
     const handleMapDblClick = (e) => {
-        console.log("value", value)
         if (value === 'N/A') return;  // Prevent popup if value is 'N/A'
 
         const { lat, lng } = e.latlng;
         const label = (domain === 'KOPPEN' || domain === 'TREWARTHA' || domain === 'UNEP' ) ? t('classification') : t('average');
-        const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA'|| domain === 'UNEP') ? '' : unitSymbol;
+        const unit = (domain === 'KOPPEN' || domain === 'TREWARTHA') ? '' : (domain === 'UNEP') ? `(${specialValue})` : unitSymbol;
 
         const popupContent = `
             <div style="background-color: #fff;">
