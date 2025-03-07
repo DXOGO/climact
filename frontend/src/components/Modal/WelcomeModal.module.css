@@ -4,8 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); 
-    backdrop-filter: blur(10px); 
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
     display: flex;
@@ -19,22 +19,12 @@
 .welcomeModalContent {
     background-color: #FCFCFC;
     padding: 30px 20px 20px 20px;
-    border-radius: 10px;
-    border: 1px solid #C8D0D6;
+    border-radius: 8px;
     max-width: 1100px;
-    /* height: 50%; */
     max-height: 820px;
-    /* min-height: 680px;
-    max-height: 1080px;
-    max-width: 1920px;
-    height: calc(100vh - 105px);
-    width: calc(100vw - 50px);
-    margin-top: 55px; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
     position: fixed;
 }
 
@@ -43,48 +33,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     width: 100%;
-    margin-bottom: 40px;
 }
 
 .welcomeModalTitle {
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 600;
     color: #2c2c36;
     width: 90%;
-    text-align: center;
-}
-
-.welcomeModalSubtitle {
-    font-size: 16px;
-    font-weight: 500;
-    color: #2c2c36;
-    width: 80%;
-    text-align: center;
+    text-align: left;
 }
 
 .welcomeModalText {
     font-size: 14px;
     font-weight: 400;
+    line-height: 1.8;
     color: #2c2c36;
     width: 90%;
     text-align: justify;
-}
-
-.welcomeModalInfo {
-    display: flex;
-    flex-direction: row;
-    text-align: justify;
-    width: 94%;
-}
-
-.welcomeModalSmall {
-    font-size: 12px;
-    font-weight: 500;
-    color: #68727D;
-    margin-bottom: 40px;
-    width: 96%;
 }
 
 .logos {
@@ -96,7 +63,7 @@
     align-items: flex-start;
     gap: 40px;
     width: 90%;
-    padding: 40px 0px 0px 0px;
+    padding: 60px 0px 20px 0px;
     margin: 0;
 }
 
@@ -117,14 +84,17 @@
 
 
 .modalButton {
-    padding: 10px 14px 7px 14px;
+    padding: 12px 14px 9px 14px;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     color: #fff;
-    border-radius: 5px;
-    background-color: #2C2C36;
+    border-radius: 6px;
     font-family: 'Epilogue';
+    background: none;
     font-weight: 500;
     text-decoration: none;
+    /* linear gradient background color */
+    background: linear-gradient(to right, #44a3da, #0a47a9);
+
 }
