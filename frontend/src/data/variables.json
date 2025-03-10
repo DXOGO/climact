@@ -116,12 +116,7 @@
                 "id": "CDD",
                 "label": "cdd",
                 "domain": "PRECIP"
-            },
-            {
-                "id": "LDP",
-                "label": "ldp",
-                "domain": "PRECIP"
-             }
+            }
         ]
     },
     {
