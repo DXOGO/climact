@@ -48,12 +48,12 @@ const GraphComponent = () => {
                     const minValue = Math.min(...values);
                     const maxValue = Math.max(...values);
                     const range = maxValue - minValue;
-                    const tickInterval = range >= 100 ? 50 
-                        : range >= 50 ? 25 
-                        : range >= 20 ? 5 
-                        : range > 10 ? 2 
-                        : range > 1 ? 1 
-                        : 0.5;
+                    const tickInterval = range >= 100 ? 50
+                        : range >= 50 ? 25
+                            : range >= 20 ? 5
+                                : range > 10 ? 2
+                                    : range > 1 ? 1
+                                        : 0.5;
 
                     let yAxisTitle = '';
                     let tooltipUnit = '';
@@ -73,7 +73,7 @@ const GraphComponent = () => {
                             yAxisTitle = t('yAxisTitlePrecip');
                             tooltipUnit = 'mm';
                             break;
-                        
+
                         case 'frost_days':
                         case 'hot_days':
                         case 'tropical_nights':
@@ -99,7 +99,7 @@ const GraphComponent = () => {
                         case 'RR20':
                         case 'RR10':
                             yAxisTitle = t('yAxisTitleNDays');
-                            tooltipUnit =t('days');
+                            tooltipUnit = t('days');
                             break;
 
                         case 'hw_nwaves':
@@ -116,7 +116,7 @@ const GraphComponent = () => {
                             yAxisTitle = t('yAxisTitleSolar');
                             tooltipUnit = 'kW.h/m2';
                             break;
-                            
+
                         default:
                             break;
                     }
@@ -219,6 +219,11 @@ const GraphComponent = () => {
                 </div>
                 <div className={styles.realChart}>
                     {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
+                    {variable.domain === 'AQ' && (
+                        <div className={styles.aqInfo}>
+                            <p>{t('aqMoreInfo')}</p>
+                        </div>
+                    )}
                 </div>
             </div>
         )
@@ -310,7 +315,7 @@ const UNEPComponent = ({ t }) => {
                 <p className={styles.unepText3}>{t('aridityText3')}</p>
                 <div className={styles.unepItems} style={{ marginTop: '10px' }}>
                     {legend.map(item => (
-                        <div key={item.id} className={styles.legendItem} style={{width: '33%'}}>
+                        <div key={item.id} className={styles.legendItem} style={{ width: '33%' }}>
                             <div className={styles.legendItemHeader}>
                                 <div className={styles.legendColor} style={{ backgroundColor: item.color }} />
                                 <p><strong>{t(`aridityClassificationLegend.${item.id}`)}</strong></p>
@@ -367,12 +372,12 @@ const getChartTitle = (variable, t) => {
         case 'wind_energy_100m': return t('windGraphTitle');
         case 'solar_energy': return t('solarGraphTitle');
         case 'fwi_above24': return t('fwiAbove24GraphTitle');
-        case 'NO2': return `${t('aqGraphTitlePt1')} NO2 ${t('aqGraphTitlePt2')}`;
-        case 'O3': return `${t('aqGraphTitlePt1')} O3 ${t('aqGraphTitlePt2')}`;
-        case 'PM10': return `${t('aqGraphTitlePt1')} PM10 ${t('aqGraphTitlePt2')}`;
-        case 'PM25': return `${t('aqGraphTitlePt1')} PM2.5 ${t('aqGraphTitlePt2')}`;
-        case 'CO': return `${t('aqGraphTitlePt1')} CO ${t('aqGraphTitlePt2')}`;
-        case 'SO2': return `${t('aqGraphTitlePt1')} SO2 ${t('aqGraphTitlePt2')}`;
+        case 'NO2': return `${t('aqGraphTitle')} NO2`;
+        case 'O3': return `${t('aqGraphTitle')} O3`;
+        case 'PM10': return `${t('aqGraphTitle')} PM10`;
+        case 'PM25': return `${t('aqGraphTitle')} PM2.5`;
+        case 'CO': return `${t('aqGraphTitle')} CO`;
+        case 'SO2': return `${t('aqGraphTitle')} SO2`;
         case 'tdi28': return t('tdi28GraphTitle');
         case 'utci26': return t('utci26GraphTitle');
         case 'utci32': return t('utci32GraphTitle');

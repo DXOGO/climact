@@ -94,6 +94,17 @@
     overflow: visible !important;
 }
 
+.aqInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #68727D;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: justify;
+    margin-top: 40px;
+}
+
 .legendContainer {
     display: flex;
     flex-direction: column;
@@ -113,6 +124,8 @@
     flex-direction: column;
     align-items: flex-start;
     height: 96%;
+    padding: 0px 10px 0px 0px;
+    overflow-y: scroll;;
 }
 
 .title {
