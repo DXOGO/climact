@@ -318,7 +318,7 @@ const UNEPComponent = ({ t }) => {
                         <div key={item.id} className={styles.legendItem} style={{ width: '33%' }}>
                             <div className={styles.legendItemHeader}>
                                 <div className={styles.legendColor} style={{ backgroundColor: item.color }} />
-                                <p><strong>{t(`aridityClassificationLegend.${item.id}`)}</strong></p>
+                                <p style={{ whiteSpace: 'nowrap' }}><strong>{t(`aridityClassificationLegend.${item.id}`)}</strong></p>
                             </div>
                             <p style={{ marginTop: '4px' }}>{getUNEPInterval(item.id)}</p>
                         </div>

@@ -100,6 +100,17 @@ const MainLayout = () => {
                         <GraphComponent />
                     </div>
                 </div>
+                <div className={styles.logos}>
+                    <div className={styles.logosLeft}>
+                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '84px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={dfis} alt="Departamento de Física" style={!isMobile ? { height: '88px', width: 'auto' } : { height: 'auto', width: '80px' }} />
+                        <img src={ua} alt="Universidade de Aveiro" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                    </div>
+                    <div className={styles.logosRight}>
+                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                    </div>
+                </div>
             </>
         ) : (
             <>
@@ -142,6 +153,17 @@ const MainLayout = () => {
                     </div>
                     <div className={styles.rightColumn}>
                         <GraphComponent />
+                    </div>
+                </div>
+                <div className={styles.logos}>
+                    <div className={styles.logosLeft}>
+                        <img src={cesam} alt="Centro de Estudos do Ambiente e do Mar" style={!isMobile ? { height: '84px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={dfis} alt="Departamento de Física" style={!isMobile ? { height: '88px', width: 'auto' } : { height: 'auto', width: '80px' }} />
+                        <img src={ua} alt="Universidade de Aveiro" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                    </div>
+                    <div className={styles.logosRight}>
+                        <img src={fct} alt="Fundação para a Ciência e a Tecnologia" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
+                        <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : { height: 'auto', width: '110px' }} />
                     </div>
                 </div>
             </>
