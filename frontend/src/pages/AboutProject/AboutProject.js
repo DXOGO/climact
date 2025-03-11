@@ -55,7 +55,6 @@ const AboutProject = () => {
           <img src={pt} alt="República Portuguesa" style={!isMobile ? { height: '40px', width: 'auto' } : {height: 'auto', width: '110px'}} />
         </div>
       </div>
-
     </div>
   );
 };

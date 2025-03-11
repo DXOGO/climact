@@ -245,7 +245,7 @@
 
 @media (max-width: 768px) {
     .graphContainer {
-        padding: 20px 0px 10px 0px;
+        padding: 0px 0px 10px 0px;
     }
     
     .chartTitle {
