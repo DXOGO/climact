@@ -33,8 +33,8 @@ const AboutProject = () => {
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('cesam')}</p>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('dfis')}, {t('ua')}</p>
           </div>
-          <p><strong>{t('datesTitle')}:</strong> 01/01/2023 - 30/06/2024</p>
-          <p><strong>{t('fundingEntityTitle')}:</strong> FCT</p>
+          <p><strong>{t('datesTitle')}:</strong> 12/03/2023 - 11/03/2025</p>
+          <><strong>{t('fundingEntityTitle')}:</strong> {t('fct')}</>
           <div><strong>{t('proponentInstitutionTitle')}:</strong>
             <p style={{ lineHeight: '1.2em', marginTop: '0px', marginBottom: '8px' }}> {t('ua')}</p>
           </div>

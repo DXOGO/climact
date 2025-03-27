@@ -94,6 +94,14 @@ const MainLayout = () => {
                         </div>
                     </div>
                     <div className={styles.middleColumn} ref={middleColumnRef}>
+                        {/* {variable.domain !== 'KOPPEN' && variable.domain !== 'TREWARTHA' && variable.domain !== 'UNEP' && variable.domain !== 'SPEI' && variable.domain !== 'SPI' && ( */}
+                            <div className={styles.chartHeader}>
+                                <h2 className={styles.chartTitle}>{getMapTitle(variable, t)}</h2>
+                                <h4 className={styles.chartSubtitle}>
+                                    {`${timePeriod.domain === 'historical' ? t('historical') : t('futureScenario') + ' ' + futureScenario.scenario.split(' ')[1]}, ${t('period')} ${timePeriod.period}`}
+                                </h4>
+                            </div>
+                        {/* )} */}
                         <LeafletMap key={mapKey} />
                     </div>
                     <div className={styles.rightColumn}>
@@ -149,6 +157,14 @@ const MainLayout = () => {
                         )}
                     </div>
                     <div className={styles.middleColumn}>
+                        {/* {variable.domain !== 'KOPPEN' && variable.domain !== 'TREWARTHA' && variable.domain !== 'UNEP' && variable.domain !== 'SPEI' && variable.domain !== 'SPI' && ( */}
+                            <div className={styles.chartHeader}>
+                                <h2 className={styles.chartTitle}>{getMapTitle(variable, t)}</h2>
+                                <h4 className={styles.chartSubtitle}>
+                                    {`${timePeriod.domain === 'historical' ? t('historical') : t('futureScenario') + ' ' + futureScenario.scenario.split(' ')[1]}, ${t('period')} ${timePeriod.period}`}
+                                </h4>
+                            </div>
+                        {/* )} */}
                         <LeafletMap />
                     </div>
                     <div className={styles.rightColumn}>
@@ -193,6 +209,50 @@ const MenuOption = ({ title, subtitle, variable, onMouseEnter, onClick, isActive
 const extractAbbreviation = (text) => {
     const match = text.match(/\(([^)]+)\)/);
     return match ? match[1] : text; // If there's a match, return the content inside parentheses; otherwise, return the full text
+};
+
+/**
+ * getChartTitle - Returns the chart title based on the selected variable.
+ */
+const getMapTitle = (variable, t) => {
+    switch (variable.id) {
+        case 'Tmax': return t('maximumTemperatureMapTitle');
+        case 'Tmin': return t('minimumTemperatureMapTitle');
+        case 'Tmean': return t('meanTemperatureMapTitle');
+        case 'rr_anual': return t('annualTotalPrecipMapTitle');
+        case 'RR50': return t('extremePrecipMapTitle');
+        case 'RR20': return t('veryHeavyPrecipMapTitle');
+        case 'RR10': return t('heavyPrecipMapTitle');
+        case 'avg_wet_days': return t('wetDaysMapTitle');
+        case 'avg_dry_days': return t('dryDaysMapTitle');
+        case 'RX1day': return t('rx1dayGraphTittle');
+        case 'RX5day': return t('rx5dayGraphTittle');
+        case 'CDD': return t('cddMapTitle');
+        case 'CWD': return t('cwdMapTitle');
+        case 'LPD': return t('lpdMapTitle');
+        case 'hw_int': return t('hwIntensityMapTitle');
+        case 'hw_dur': return t('hwDurationMapTitle');
+        case 'hw_ndays': return t('hwNDaysMapTitle');
+        case 'hw_nwaves': return t('hwNWavesMapTitle');
+        case 'very_hot_days': return t('veryHotDaysMapTitle');
+        case 'hot_days': return t('hotDaysMapTitle');
+        case 'tropical_nights': return t('tropicalNightsMapTitle');
+        case 'frost_days': return t('frostDaysMapTitle');
+        case 'cold_days': return t('coldDaysMapTitle');
+        case 'wind_energy_100m': return t('windMapTitle');
+        case 'solar_energy': return t('solarMapTitle');
+        case 'fwi_above24': return t('fwiAbove24MapTitle');
+        case 'NO2': return `${t('aqMapTitle')} NO2`;
+        case 'O3': return `${t('aqMapTitle')} O3`;
+        case 'PM10': return `${t('aqMapTitle')} PM10`;
+        case 'PM25': return `${t('aqMapTitle')} PM2.5`;
+        case 'CO': return `${t('aqMapTitle')} CO`;
+        case 'SO2': return `${t('aqMapTitle')} SO2`;
+        case 'tdi28': return t('tdi28MapTitle');
+        case 'utci26': return t('utci26MapTitle');
+        case 'utci32': return t('utci32MapTitle');
+        default: return '';
+    }
 };
 
 export default MainLayout;
