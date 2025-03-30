@@ -31,7 +31,6 @@ const Variable = () => {
 
     const toggleExpandedVariable = (variableName) => {
         setExpandedVariable(expandedVariable === variableName ? null : variableName);
-        // setExpandedSubvariable(null);
     };
 
     const toggleExpandedSubvariable = (subvariableName) => {
@@ -63,7 +62,6 @@ const Variable = () => {
                                         key={subvar.name}
                                         className={styles.subvariableItem}
                                         onMouseEnter={!isMobile ? () => setHoveredSubvariable(subvar.name) : null}
-                                    // onMouseLeave={!isMobile ? () => setHoveredSubvariable(null) : null}
                                     >
                                         <div
                                             className={selectedVariable.subvariable === subvar.name ? styles.activeVariableName : styles.variableName}
